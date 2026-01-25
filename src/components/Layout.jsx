@@ -23,7 +23,7 @@ const THEME = {
 };
 
 const RESUME_URL =
-  "https://drive.google.com/file/d/18eW_YrSpYpFFItp9andOmexTMAuwRGRd/view?usp=sharing";
+  "https://drive.google.com/file/d/1Anvr3PH1z86O1tP4N6GHabY6VlWxXM6I/view?usp=sharing";
 const GITHUB = "https://github.com/virginiaceccatelli";
 const LINKEDIN = "https://www.linkedin.com/in/virginia-ceccatelli/";
 const EMAIL = "virginia.ceccatelli@mail.mcgill.ca";
