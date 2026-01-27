@@ -60,10 +60,10 @@ export default function Home() {
               <img
                 src={profileImg}
                 alt={NAME}
-                className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-2 border-pink-500/30 shadow-2xl"
+                className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-2 border-zinc-500/30 shadow-2xl"
               />
               <div>
-                <h1 className="text-5xl md:text-6xl font-bold leading-tight bg-gradient-to-r from-white via-pink-100 to-rose-100 bg-clip-text text-transparent">
+                <h1 className="text-5xl md:text-6xl font-bold leading-tight bg-gradient-to-r from-white via-zinc-100 to-rose-100 bg-clip-text text-transparent">
                   {NAME}
                 </h1>
               </div>
