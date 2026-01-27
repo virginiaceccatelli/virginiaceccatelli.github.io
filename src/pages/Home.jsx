@@ -50,7 +50,6 @@ export default function Home() {
 
   return (
     <div className="relative">
-      {/* Hero Section */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-16 md:pt-32 md:pb-24">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6 animate-fade-in">
