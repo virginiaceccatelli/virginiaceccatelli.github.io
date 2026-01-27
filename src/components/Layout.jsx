@@ -22,8 +22,7 @@ const THEME = {
   rule: "border-white/10",
 };
 
-const RESUME_URL =
-  "https://drive.google.com/file/d/18eW_YrSpYpFFItp9andOmexTMAuwRGRd/view?usp=sharing";
+const RESUME_URL ="https://drive.google.com/file/d/1Anvr3PH1z86O1tP4N6GHabY6VlWxXM6I/view?usp=sharing";
 const GITHUB = "https://github.com/virginiaceccatelli";
 const LINKEDIN = "https://www.linkedin.com/in/virginia-ceccatelli/";
 const EMAIL = "virginia.ceccatelli@mail.mcgill.ca";
@@ -124,7 +123,7 @@ export default function Layout({ children }) {
                 size="sm"
                 className="hidden sm:flex border-white/15 text-zinc-100 bg-white/[0.03] hover:bg-white/[0.06]"
               >
-                <a href={RESUME_URL} target="_blank" rel="noreferrer" className="flex items-center gap-2">
+                <a href={"https://drive.google.com/file/d/1Anvr3PH1z86O1tP4N6GHabY6VlWxXM6I/view?usp=sharing"} target="_blank" rel="noreferrer" className="flex items-center gap-2">
                   <FileDown className="h-4 w-4" />
                   <span className="font-display text-[12px] tracking-[0.18em] uppercase">Resume</span>
                 </a>
@@ -157,7 +156,7 @@ export default function Layout({ children }) {
               })}
 
               <a
-                href={RESUME_URL}
+                href={"https://drive.google.com/file/d/1Anvr3PH1z86O1tP4N6GHabY6VlWxXM6I/view?usp=sharing"}
                 target="_blank"
                 rel="noreferrer"
                 className="mt-2 flex items-center justify-between py-2 font-mono text-[12px] tracking-[0.18em] uppercase text-zinc-300 hover:text-zinc-100 transition-colors"
