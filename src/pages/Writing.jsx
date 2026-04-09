@@ -37,7 +37,7 @@ export default function Writing() {
       tags: ["Policy", "Cybersecurity"],
       year: "2025",
       type: "Policy Report",
-      link: "https://65bead61-ada5-408e-9924-c7be6e498634.filesusr.com/ugd/d98a02_77af6c01d90f4c0f8e7df233cab6cd35.pdf",
+      link: "https://www.andaluscommittee.com/us-sub-saharan-africa-cybersecurity",
       icon: FileText,
       color: "text-zinc-400",
     },
