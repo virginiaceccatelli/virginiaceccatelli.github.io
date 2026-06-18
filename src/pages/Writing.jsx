@@ -12,6 +12,16 @@ const THEME = {
 export default function Writing() {
   const writings = [
     {
+      title: "SpeechJBB: Probing Safety Alignment and Comprehension in Large Audio Language Models under Code-Switched Speech",
+      description: "Introduces an audio-based code-switching jailbreak dataset for multilingual speech safety evaluation, showing how code-switched and perturbed multilingual speech can expose weaknesses in large audio language model safety alignment.",
+      tags: ["AI Safety", "Speech", "Code-Switching", "LALMs"],
+      year: "2026",
+      type: "Preprint",
+      link: "https://arxiv.org/abs/2606.06037",
+      icon: FileText,
+      color: "text-zinc-400",
+    },
+    {
       title: "Sky Diplomacy: The Geopolitical Impact of the Proliferation of Iranian-Russian Military Drone Trade on Global Alliances and Security",
       description: "Focusing on the historical context of Iranian trade with Russia and China, as well as recent developments, the study analyzes how armed UAV drones are contributing to the shifting world order, wherein Russia and China are increasingly taking on a leading role, and how this is impacting the West from various points of view.",
       tags: ["UAV", "Policy", "Security"],
@@ -27,17 +37,17 @@ export default function Writing() {
       tags: ["Robotics", "Computer Vision", "Convolutional Neural Networks"],
       year: "2025",
       type: "Research Paper",
-      link: "https://65bead61-ada5-408e-9924-c7be6e498634.filesusr.com/ugd/d98a02_77af6c01d90f4c0f8e7df233cab6cd35.pdf",
+      link: "https://github.com/virginiaceccatelli/vision_control",
       icon: FileText,
       color: "text-zinc-400",
     },
     {
       title: "Securing the Digital Frontier: U.S.-Sub-Saharan Africa Cybersecurity Partnerships in the Shadow of China’s Digital Silk Road",
       description: "This policy report, released by the Andalus Committee's New York Office, examines the United States' opportunities to strengthen cybersecurity cooperation with Kenya and Ethiopia as both nations navigate rapid digital transformation in East Africa.",
-      tags: ["Policy", "Cybersecurity"],
+      tags: ["Policy", "Cybersecurity", "Digital Silk Road"],
       year: "2025",
       type: "Policy Report",
-      link: "https://www.andaluscommittee.com/us-sub-saharan-africa-cybersecurity",
+      link: "https://65bead61-ada5-408e-9924-c7be6e498634.filesusr.com/ugd/d98a02_77af6c01d90f4c0f8e7df233cab6cd35.pdf",
       icon: FileText,
       color: "text-zinc-400",
     },

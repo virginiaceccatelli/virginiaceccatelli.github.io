@@ -1,4 +1,4 @@
-import { Github, ExternalLink, Code, Brain, Network } from "lucide-react";
+import { Github, ExternalLink, Code, Brain, Network, Mic, Newspaper } from "lucide-react";
 import { Card } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
 import { Button } from "../components/ui/button";
@@ -14,6 +14,33 @@ const GITHUB = "https://github.com/virginiaceccatelli";
 
 export default function Projects() {
   const projects = [
+    {
+      title: "SpeechJBB: Code-Switched Speech Safety Evaluation",
+      blurb: "Audio jailbreak benchmark probing safety alignment and comprehension in large audio language models under code-switched and perturbed multilingual speech.",
+      tags: ["AI Safety", "LALMs", "Speech", "Code-Switching"],
+      repo: null,
+      demo: "https://arxiv.org/abs/2606.06037",
+      icon: Mic,
+      color: "text-zinc-400",
+    },
+    {
+      title: "MS-VoxNews Dataset",
+      blurb: "Multilingual corpus for joint summarization and translation of long-form spoken news in low-resource languages.",
+      tags: ["Dataset", "Speech", "Summarization", "Translation"],
+      repo: null,
+      demo: "https://huggingface.co/datasets/McGill-NLP/speech-translation-and-summarization",
+      icon: Newspaper,
+      color: "text-zinc-400",
+    },
+    {
+      title: "Trajectory-Based Uncertainty Quantification for LMs",
+      blurb: "Research framework combining mechanistic interpretability with residual-stream geometry to anticipate uncertainty and hallucinations before generation.",
+      tags: ["Mechanistic Interpretability", "Uncertainty", "LLMs"],
+      repo: null,
+      demo: "",
+      icon: Brain,
+      color: "text-zinc-400",
+    },
     {
       title: "Reinforcement-Learning Data Preprocessing Pipeline Automation",
       blurb: "RL-driven data quality checks: outlier detection, imputation, and financial validity rules.",
@@ -52,7 +79,7 @@ export default function Projects() {
             My Projects
           </h1>
           <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
-            A collection of my recent work in AI, robotics, and network security
+            A collection of my recent work in AI safety, robotics, data systems, and network security
           </p>
           <a
             href={GITHUB}
@@ -106,7 +133,7 @@ export default function Projects() {
                   <Button asChild size="sm">
                     <a href={project.demo} target="_blank" rel="noreferrer" className="flex items-center gap-2">
                       <ExternalLink className="h-4 w-4" />
-                      Live Demo
+                      View
                     </a>
                   </Button>
                 )}

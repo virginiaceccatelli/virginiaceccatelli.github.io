@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, ShieldCheck, GraduationCap, Code, Brain, ScanEye} from "lucide-react";
+import { ArrowRight, ShieldCheck, GraduationCap, ScanEye, ServerCog } from "lucide-react";
 import profileImg from "../assets/foto.png";
 import { Button } from "../components/ui/button";
 import { Badge } from "../components/ui/badge";
@@ -14,36 +14,36 @@ const THEME = {
 
 export default function Home() {
   const NAME = "Virginia Ceccatelli";
-  const TAGLINE = "Cybersecurity | AI Governance | Emerging Technologies";
+  const TAGLINE = "AI Safety | Systems Security | Cybersecurity Policy";
   const ROLE = "Computer Science Student at McGill University";
   const LOCATION = "Montreal, Canada";
 
   const focusAreas = [
-    "Network Defense",
-    "Pentesting & Web Sec",
-    "Threat Modeling",
+    "Mechanistic Interpretability",
+    "Uncertainty Quantification",
+    "Multilingual Speech Safety",
     "AI Safety & Security",
-    "Privacy & Governance",
-    "Secure Systems",
+    "Systems Security",
+    "Cybersecurity Policy",
   ];
 
   const highlights = [
     {
       icon: GraduationCap,
-      title: "3.7 GPA",
-      description: "McGill University",
+      title: "3.76 GPA",
+      description: "McGill CS + Economics",
       color: "text-zinc-300",
     },
     {
       icon: ScanEye,
-      title: "AI Safety Researcher",
-      description: "MILA Quebec AI Institute",
+      title: "Systems Security Researcher",
+      description: "UCL S2Lab",
       color: "text-zinc-300",
     },
     {
-      icon: ShieldCheck,
-      title: "Cybersecurity Focus",
-      description: "Network Security & AI Governance",
+      icon: ServerCog,
+      title: "ML Intern",
+      description: "WIIT Premium Cloud",
       color: "text-zinc-300",
     },
   ];
@@ -133,15 +133,15 @@ export default function Home() {
         <div className="grid md:grid-cols-3 gap-8">
           <div className="text-center">
             <div className="text-4xl font-bold text-zinc-200 mb-2">McGill</div>
-            <div className="text-zinc-400">Bachelor</div>
+            <div className="text-zinc-400">Computer Science + Economics</div>
+          </div>
+          <div className="text-center">
+            <div className="text-4xl font-bold text-zinc-300 mb-2">UCL</div>
+            <div className="text-zinc-400">S2Lab Systems Security</div>
           </div>
           <div className="text-center">
             <div className="text-4xl font-bold text-zinc-300 mb-2">MILA</div>
-            <div className="text-zinc-400">AI Safety Research</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-zinc-300 mb-2">CS</div>
-            <div className="text-zinc-400">Computer Science Major</div>
+            <div className="text-zinc-400">Multilingual AI Safety</div>
           </div>
         </div>
       </section>

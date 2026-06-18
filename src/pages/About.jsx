@@ -15,10 +15,10 @@ const THEME = {
 export default function About() {
   const achievements = [
     { icon: Award, text: "Computer Science Major, Economics Minor" },
+    { icon: Award, text: "Distinction, top 25% - McGill University" },
     { icon: Award, text: "Dean's List, top 10% - IE University" },
-    { icon: Users, text: "Girls Who Code Python Instructor" },
-    { icon: Users, text: "Girls Who Code VP Internal - McGill" },
-    { icon: Users, text: "Member of Women In Tech Club - McGill" },
+    { icon: Users, text: "Vice President - Girls Who Code McGill" },
+    { icon: Users, text: "50+ volunteer instructors recruited" },
     { icon: BookOpen, text: "Andalus Committee NYC Researcher" },
   ];
 
@@ -41,7 +41,7 @@ export default function About() {
             About Me
           </h1>
           <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
-            Computer Science student passionate about cybersecurity, AI governance, and emerging technologies
+            Computer Science student working across AI safety, systems security, and cybersecurity policy
           </p>
         </div>
 
@@ -58,12 +58,12 @@ export default function About() {
             <CardContent>
               <div className="space-y-4 text-zinc-300 leading-relaxed">
               <p>
-                I'm a Computer Science student with a strong interest in cybersecurity, computer networks,
-                and AI governance. Originally trained in International Relations at IE University, I developed a strong interest in
+                I'm a Computer Science student with a strong interest in AI safety, systems security,
+                and cybersecurity policy. Originally trained in International Relations at IE University, I developed a strong interest in
                 the societal dimensions of technology, particularly how global events intersect with
                 cybersecurity threats. This curiosity led me to shift focus and pursue a BA in Computer
                 Science with a Minor in Economics at McGill University, where I've been able to explore the
-                technical underpinnings of cybersecurity, machine learning, and systems programming.
+                technical underpinnings of machine learning, networks, compiler design, and systems programming.
               </p>
               <p>
                 The decision to pivot was not only academic, but it was a personal commitment to
@@ -71,20 +71,21 @@ export default function About() {
                 technologies and a quickly changing digital landscape.
               </p>
               <p>
-                I applied statistical modeling and data analysis to examine links between spikes in ransomware
-                attacks originating from North Korea, China, Russia, and Iran, and political elections in the
-                West. More recently, I led the development of a Reinforcement Learning Algorithm to automate data cleaning, improving the accuracy and
-                completeness of financial datasets, and reducing manual preprocessing time. I also designed a ground segmentation and motion
-                planning system for hospital robots at the McGill Prometheus Lab.
+                My research has moved between technical security and policy questions: I studied ransomware
+                activity around elections, developed a vision-based ground segmentation and motion-planning
+                pipeline for autonomous indoor navigation, and contributed to multilingual speech safety work
+                at MILA, including SpeechJBB and the MS-VoxNews dataset.
               </p>
               <p>
-                Currently, I'm working as an AI Safety Researcher at MILA Quebec AI Institute, investigating
-                audio-based jailbreaking vulnerabilities in multilingual voice-enabled LLM systems, exploring how code-switching
-                attack vectors can bypass safety guardrails in speech-to-text pipelines.
+                Currently, I'm working with UCL S2Lab on trajectory-based uncertainty quantification for
+                language models, combining mechanistic interpretability with residual-stream geometry to
+                anticipate uncertainty and hallucinations before output generation. I am also joining WIIT
+                Premium Cloud as a Machine Learning Intern focused on cloud-native infrastructure for large
+                language model workloads.
               </p>
               <p>
                 I'm eager to develop my skills and gain more experience in the field of cybersecurity and AI safety. I bring a deep motivation to understand emerging security
-                threats and make technology more secure, equitable, and intelligent.
+                threats and make technology more secure, equitable, and reliable.
               </p>
               </div>
             </CardContent>
@@ -114,8 +115,8 @@ export default function About() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
-                  <div className="text-3xl font-bold text-zinc-200 mb-2">3.7 GPA</div>
-                  <p className="text-sm text-zinc-400 mb-4">McGill University</p>
+                  <div className="text-3xl font-bold text-zinc-200 mb-2">3.76 GPA</div>
+                  <p className="text-sm text-zinc-400 mb-4">McGill University, Distinction</p>
                   <div className="space-y-2">
                     <p className="text-sm font-medium text-zinc-300 mb-2">Course Highlights:</p>
                     {courseHighlights.map((course, idx) => (
