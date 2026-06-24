@@ -17,7 +17,7 @@ export default function About() {
     { icon: Award, text: "Computer Science Major, Economics Minor" },
     { icon: Award, text: "Distinction, top 25% - McGill University" },
     { icon: Award, text: "Dean's List, top 10% - IE University" },
-    { icon: Users, text: "Vice President - Girls Who Code McGill" },
+    { icon: Users, text: "Former Vice President - Girls Who Code McGill" },
     { icon: Users, text: "50+ volunteer instructors recruited" },
     { icon: BookOpen, text: "Andalus Committee NYC Researcher" },
   ];
@@ -41,7 +41,7 @@ export default function About() {
             About Me
           </h1>
           <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
-            Computer Science student working across AI safety, systems security, and cybersecurity policy
+            McGill Computer Science alum working across AI safety, systems security, and cybersecurity policy
           </p>
         </div>
 
@@ -58,10 +58,10 @@ export default function About() {
             <CardContent>
               <div className="space-y-4 text-zinc-300 leading-relaxed">
               <p>
-                I'm a Computer Science student with a strong interest in AI safety, systems security,
-                and cybersecurity policy. Originally trained in International Relations at IE University, I developed a strong interest in
+                I'm a McGill University Computer Science alum with a strong interest in AI safety,
+                systems security, and cybersecurity policy. Originally trained in International Relations at IE University, I developed a strong interest in
                 the societal dimensions of technology, particularly how global events intersect with
-                cybersecurity threats. This curiosity led me to shift focus and pursue a BA in Computer
+                cybersecurity threats. This curiosity led me to shift focus and complete a BA in Computer
                 Science with a Minor in Economics at McGill University, where I've been able to explore the
                 technical underpinnings of machine learning, networks, compiler design, and systems programming.
               </p>
@@ -115,7 +115,7 @@ export default function About() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
-                  <div className="text-3xl font-bold text-zinc-200 mb-2">3.76 GPA</div>
+                  <div className="text-3xl font-bold text-zinc-200 mb-2">3.8 GPA</div>
                   <p className="text-sm text-zinc-400 mb-4">McGill University, Distinction</p>
                   <div className="space-y-2">
                     <p className="text-sm font-medium text-zinc-300 mb-2">Course Highlights:</p>

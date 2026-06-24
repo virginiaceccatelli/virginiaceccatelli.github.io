@@ -58,7 +58,7 @@ export default function Experience() {
       title: "Researcher",
       company: "Andalus Committee (New York Office)",
       location: "New York, USA",
-      period: "July 2025 - Current",
+      period: "July 2025 - July 2026",
       description: [
         "Authored a policy paper on developing U.S.-Africa cybersecurity partnerships within the emerging Digital Silk Road",
         "Explored opportunities for Global North-South collaboration on cybersecurity and emerging technologies",
@@ -72,7 +72,7 @@ export default function Experience() {
       title: "Vice President",
       company: "Girls Who Code",
       location: "Montreal, Canada",
-      period: "August 2024 - Current",
+      period: "August 2024 - May 2026",
       description: [
         "Directed internal operations for McGill's Girls Who Code chapter",
         "Developed a Python curriculum and recruited more than 50 volunteer instructors for weekly classes across Montreal high schools",
@@ -133,8 +133,9 @@ export default function Experience() {
       degree: "Bachelor's, Major in Computer Science; Minor in Economics",
       location: "Montreal, Canada",
       period: "2024 - 2026",
-      gpa: "3.76 GPA, Distinction",
+      gpa: "3.8 GPA, Distinction",
       highlights: [
+        "Operating Systems",
         "Applied Machine Learning (Graduate)",
         "Computer Networks (Graduate)",
         "Compiler Design (Graduate)",
@@ -144,6 +145,7 @@ export default function Experience() {
     },
     {
       institution: "IE University",
+      note: "Transferred to McGill after second year",
       degree: "Bachelor's, International Relations",
       location: "Madrid, Spain",
       period: "2022 - 2024",
@@ -154,7 +156,6 @@ export default function Experience() {
         "Quantitative Methods",
         "International Political Economy",
         "Foreign Aid",
-        "Transferred to McGill after second year",
       ],
       icon: GraduationCap,
       color: "text-zinc-300",
@@ -280,7 +281,10 @@ export default function Experience() {
                   </div>
                   <div className="flex-1">
                     <h3 className="text-xl font-semibold mb-1">{edu.degree}</h3>
-                    <p className="text-zinc-400 font-medium mb-2">{edu.institution}</p>
+                    <p className="text-zinc-400 font-medium mb-2">
+                      {edu.institution}
+                      {edu.note && <span className="text-zinc-500"> · {edu.note}</span>}
+                    </p>
                     <div className="flex flex-wrap items-center gap-4 text-sm text-zinc-400 mb-4">
                       <span className="flex items-center gap-1">
                         <Calendar className="h-4 w-4" />

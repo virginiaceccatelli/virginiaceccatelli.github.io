@@ -15,7 +15,7 @@ const THEME = {
 export default function Home() {
   const NAME = "Virginia Ceccatelli";
   const TAGLINE = "AI Safety | Systems Security | Cybersecurity Policy";
-  const ROLE = "Computer Science Student at McGill University";
+  const ROLE = "McGill University Computer Science Alumni";
   const LOCATION = "Montreal, Canada";
 
   const focusAreas = [
@@ -30,7 +30,7 @@ export default function Home() {
   const highlights = [
     {
       icon: GraduationCap,
-      title: "3.76 GPA",
+      title: "3.8 GPA",
       description: "McGill CS + Economics",
       color: "text-zinc-300",
     },

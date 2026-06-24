@@ -1,8 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
-import { FileDown, Github, Linkedin, Mail, Menu, X } from "lucide-react";
+import { BookOpen, FileDown, Github, Linkedin, Mail, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 
 const THEME = {
   // Dark “ink” background with subtle depth
@@ -25,6 +25,7 @@ const THEME = {
 const RESUME_URL = "https://drive.google.com/file/d/1_WXtF8ZR1PibWy0pU4sSbGDKIx6uDuSD/view?usp=sharing";
 const GITHUB = "https://github.com/virginiaceccatelli";
 const LINKEDIN = "https://www.linkedin.com/in/virginia-ceccatelli/";
+const SCHOLAR = "https://scholar.google.com/citations?user=kk8BWhAAAAAJ&hl=en";
 const EMAIL = "virginia.ceccatelli@mail.mcgill.ca";
 
 export default function Layout({ children }) {
@@ -109,6 +110,15 @@ export default function Layout({ children }) {
                 <Linkedin className="h-5 w-5 text-zinc-200" />
               </a>
               <a
+                href={SCHOLAR}
+                target="_blank"
+                rel="noreferrer"
+                className={`p-2 rounded-lg ${THEME.transition} ${THEME.surface} ${THEME.surfaceHover}`}
+                aria-label="Google Scholar"
+              >
+                <BookOpen className="h-5 w-5 text-zinc-200" />
+              </a>
+              <a
                 href={`mailto:${EMAIL}`}
                 className={`p-2 rounded-lg ${THEME.transition} ${THEME.surface} ${THEME.surfaceHover}`}
                 aria-label="Email"
@@ -170,7 +180,7 @@ export default function Layout({ children }) {
       </header>
 
       {/* Main Content: subtle route-friendly animation */}
-      <motion.main
+      <Motion.main
         className="relative"
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
@@ -178,7 +188,7 @@ export default function Layout({ children }) {
         transition={{ duration: 0.28, ease: "easeOut" }}
       >
         {children}
-      </motion.main>
+      </Motion.main>
 
       {/* Footer: thin rules, mono labels */}
       <footer className="mt-20 border-t border-white/10 glass">
@@ -212,6 +222,15 @@ export default function Layout({ children }) {
                   className="text-zinc-300 hover:text-zinc-100 transition-colors"
                 >
                   <Linkedin className="h-5 w-5" />
+                </a>
+                <a
+                  href={SCHOLAR}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-zinc-300 hover:text-zinc-100 transition-colors"
+                  aria-label="Google Scholar"
+                >
+                  <BookOpen className="h-5 w-5" />
                 </a>
               </div>
             </div>
