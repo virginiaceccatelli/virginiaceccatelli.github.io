@@ -3,9 +3,9 @@ import { Card } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
 
 const THEME = {
-  surface: "bg-zinc-800/50 backdrop-blur-sm",
-  surfaceBorder: "border-zinc-700/50",
-  surfaceHover: "hover:bg-zinc-700/30",
+  surface: "bg-transparent",
+  surfaceBorder: "border-black/20",
+  surfaceHover: "hover:bg-black hover:text-[#f4f1ea]",
   transition: "transition-all duration-300",
 };
 
@@ -208,35 +208,39 @@ export default function Experience() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
-      <div className="max-w-5xl mx-auto space-y-16">
+    <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+      <div className="mx-auto space-y-16">
         {/* Header */}
-        <div className="text-center space-y-4">
-          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white via-pink-100 to-rose-100 bg-clip-text text-transparent leading-tight pb-1">
+        <div className="grid border-y border-black/20 py-6 md:grid-cols-[0.65fr_1.35fr]">
+          <p className="section-kicker mb-4 md:mb-0">Archive / Skills</p>
+          <div className="space-y-5">
+          <h1 className="editorial-title text-5xl sm:text-6xl md:text-8xl lg:text-9xl">
             Experience & Skills
           </h1>
-          <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
+          <p className="max-w-3xl text-2xl font-semibold leading-tight text-neutral-700 md:text-4xl">
             My professional journey, education, and technical expertise
           </p>
+          </div>
         </div>
 
         {/* Work Experience */}
         <section>
-          <h2 className="text-3xl font-semibold mb-8 flex items-center gap-3">
-            <Briefcase className="h-8 w-8 text-zinc-400" />
+          <h2 className="mb-6 flex items-center gap-3 border-b border-black/20 pb-3 text-4xl font-black uppercase">
+            <Briefcase className="h-7 w-7 text-neutral-950" />
             Work Experience
           </h2>
-          <div className="space-y-6">
+          <div className="border-x border-t border-black/20">
             {experiences.map((exp, idx) => (
-              <Card key={idx} className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.transition} border p-6 md:p-8`}>
-                <div className="flex items-start gap-4">
-                  <div className={`p-3 rounded-lg bg-zinc-800/50 ${exp.color}`}>
+              <Card key={idx} className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.transition} border-0 border-b`}>
+                <div className="grid gap-0 md:grid-cols-[0.18fr_0.82fr]">
+                  <div className="flex items-start justify-between border-b border-black/20 p-5 md:block md:border-b-0 md:border-r">
+                    <span className="text-5xl font-black leading-none">0{idx + 1}</span>
                     <exp.icon className="h-6 w-6" />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-semibold mb-1">{exp.title}</h3>
-                    <p className="text-zinc-200 font-medium mb-2">{exp.company}</p>
-                    <div className="flex flex-wrap items-center gap-4 text-sm text-zinc-400 mb-4">
+                  <div className="p-5 md:p-7">
+                    <h3 className="text-3xl font-black uppercase leading-none md:text-5xl">{exp.title}</h3>
+                    <p className="mt-3 text-lg font-semibold text-neutral-700">{exp.company}</p>
+                    <div className="mb-5 mt-4 flex flex-wrap items-center gap-4 text-sm text-neutral-600">
                       <span className="flex items-center gap-1">
                         <Calendar className="h-4 w-4" />
                         {exp.period}
@@ -246,10 +250,10 @@ export default function Experience() {
                         {exp.location}
                       </span>
                     </div>
-                    <ul className="space-y-2 mb-4 text-zinc-300">
+                    <ul className="mb-5 space-y-2 text-neutral-800">
                       {exp.description.map((item, i) => (
                         <li key={i} className="flex items-start gap-2">
-                          <span className="text-zinc-200 mt-1.5">•</span>
+                          <span className="mt-1.5 text-neutral-950">•</span>
                           <span>{item}</span>
                         </li>
                       ))}
@@ -268,24 +272,25 @@ export default function Experience() {
 
         {/* Education */}
         <section>
-          <h2 className="text-3xl font-semibold mb-8 flex items-center gap-3">
-            <GraduationCap className="h-8 w-8 text-zinc-400" />
+          <h2 className="mb-6 flex items-center gap-3 border-b border-black/20 pb-3 text-4xl font-black uppercase">
+            <GraduationCap className="h-7 w-7 text-neutral-950" />
             Education
           </h2>
-          <div className="space-y-6">
+          <div className="grid border-l border-t border-black/20 lg:grid-cols-2">
             {education.map((edu, idx) => (
-              <Card key={idx} className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.transition} border p-6 md:p-8`}>
-                <div className="flex items-start gap-4">
-                  <div className={`p-3 rounded-lg bg-zinc-800/50 ${edu.color}`}>
-                    <edu.icon className="h-6 w-6" />
+              <Card key={idx} className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.transition} border-0 border-b border-r p-0`}>
+                <div>
+                  <div className="flex items-center justify-between border-b border-black/20 p-5">
+                    <span className="section-kicker">Education 0{idx + 1}</span>
+                    <edu.icon className="h-5 w-5" />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-semibold mb-1">{edu.degree}</h3>
-                    <p className="text-zinc-400 font-medium mb-2">
+                  <div className="p-5 md:p-7">
+                    <h3 className="mb-3 text-3xl font-black uppercase leading-none">{edu.degree}</h3>
+                    <p className="font-semibold text-neutral-700">
                       {edu.institution}
-                      {edu.note && <span className="text-zinc-500"> · {edu.note}</span>}
+                      {edu.note && <span className="text-neutral-500"> · {edu.note}</span>}
                     </p>
-                    <div className="flex flex-wrap items-center gap-4 text-sm text-zinc-400 mb-4">
+                    <div className="mb-5 mt-4 flex flex-wrap items-center gap-4 text-sm text-neutral-600">
                       <span className="flex items-center gap-1">
                         <Calendar className="h-4 w-4" />
                         {edu.period}
@@ -294,10 +299,10 @@ export default function Experience() {
                         <MapPin className="h-4 w-4" />
                         {edu.location}
                       </span>
-                      <span className="font-semibold text-zinc-200">{edu.gpa}</span>
+                      <span className="font-semibold text-neutral-950">{edu.gpa}</span>
                     </div>
                     <div className="mt-4">
-                      <p className="text-sm font-medium text-zinc-300 mb-3">Course Highlights:</p>
+                      <p className="section-kicker mb-3">Course Highlights:</p>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                         {edu.highlights.map((course, i) => (
                           <Badge key={i} variant="outline" className="justify-start px-3 py-2">
@@ -315,20 +320,20 @@ export default function Experience() {
 
         {/* Certifications */}
         <section>
-          <h2 className="text-3xl font-semibold mb-8 flex items-center gap-3">
-            <Award className="h-8 w-8 text-zinc-400" />
+          <h2 className="mb-6 flex items-center gap-3 border-b border-black/20 pb-3 text-4xl font-black uppercase">
+            <Award className="h-7 w-7 text-neutral-950" />
             Certifications & Courses
           </h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid border-l border-t border-black/20 md:grid-cols-2">
             {certifications.map((cert, idx) => (
-              <Card key={idx} className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.transition} border p-6`}>
+              <Card key={idx} className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.transition} border-0 border-b border-r p-6`}>
                 <div className="flex items-start gap-4">
-                  <div className={`p-3 rounded-lg bg-zinc-800/50 ${cert.color}`}>
+                  <div className="border border-black/20 p-3">
                     <cert.icon className="h-6 w-6" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold mb-1">{cert.title}</h3>
-                    <p className="text-sm text-zinc-400 mb-2">{cert.org}</p>
+                    <h3 className="font-semibold mb-1 text-neutral-950">{cert.title}</h3>
+                    <p className="text-sm text-neutral-600 mb-2">{cert.org}</p>
                     <Badge variant="outline">{cert.year}</Badge>
                   </div>
                 </div>
@@ -339,15 +344,15 @@ export default function Experience() {
 
         {/* Skills */}
         <section>
-          <h2 className="text-3xl font-semibold mb-8">Technical Skills</h2>
-          <div className="grid md:grid-cols-3 gap-6">
+          <h2 className="mb-6 border-b border-black/20 pb-3 text-4xl font-black uppercase">Technical Skills</h2>
+          <div className="grid border-l border-t border-black/20 md:grid-cols-3">
             {Object.entries(skills).map(([group, items]) => (
-              <Card key={group} className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.transition} border p-6`}>
-                <h3 className="text-lg font-semibold mb-4">{group}</h3>
+              <Card key={group} className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.transition} border-0 border-b border-r p-6`}>
+                <h3 className="mb-5 text-2xl font-black uppercase">{group}</h3>
                 <div className="space-y-3">
                   {items.map((s) => (
                     <div key={s.name} className="flex items-center justify-between">
-                      <span className="text-zinc-300">{s.name}</span>
+                      <span className="text-neutral-800">{s.name}</span>
                       <Badge variant="secondary" className="text-xs">{s.level}</Badge>
                     </div>
                   ))}

@@ -5,21 +5,18 @@ import { Button } from "./ui/button";
 import { motion as Motion } from "framer-motion";
 
 const THEME = {
-  // Dark “ink” background with subtle depth
-  pageBg: "bg-[linear-gradient(to_bottom,#141518,#111215)]",
-  pageText: "text-zinc-100",
+  pageBg: "bg-[#f4f1ea]",
+  pageText: "text-neutral-950",
 
-  // Glass surfaces + rules
-  headerGlass: "glass rule",
-  surface: "glass",
-  surfaceHover: "hover:bg-white/[0.06]",
+  headerGlass: "bg-[#f4f1ea]/90 backdrop-blur-xl border-b border-black/20",
+  surface: "border border-black/20 bg-transparent",
+  surfaceHover: "hover:bg-black hover:text-[#f4f1ea]",
   transition: "transition-all duration-300 ease-out",
 
-  // Type + accents (monochrome)
-  navText: "text-zinc-300 hover:text-zinc-100",
-  navActive: "text-zinc-100",
-  subtleText: "text-zinc-400",
-  rule: "border-white/10",
+  navText: "text-neutral-600 hover:text-neutral-950",
+  navActive: "text-neutral-950",
+  subtleText: "text-neutral-600",
+  rule: "border-black/20",
 };
 
 const RESUME_URL = "https://drive.google.com/file/d/1_WXtF8ZR1PibWy0pU4sSbGDKIx6uDuSD/view?usp=sharing";
@@ -46,7 +43,7 @@ export default function Layout({ children }) {
   };
 
   return (
-    <div className={`min-h-screen ${THEME.pageBg} text-zinc-100 ${THEME.pageText} bg-glass-motion`}>
+    <div className={`min-h-screen ${THEME.pageBg} ${THEME.pageText} bg-glass-motion paper-noise`}>
       {/* Navigation Header */}
       <header className={`sticky top-0 z-50 ${THEME.headerGlass}`}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -54,7 +51,7 @@ export default function Layout({ children }) {
             {/* Brand: display serif, understated */}
             <Link
               to="/"
-              className="font-display text-2xl tracking-tight text-zinc-100 hover:opacity-90 transition-opacity"
+              className="font-display text-2xl tracking-tight text-neutral-950 hover:opacity-70 transition-opacity"
             >
               VC
             </Link>
@@ -70,7 +67,7 @@ export default function Layout({ children }) {
                     className={[
                       "font-display text-[12px] tracking-[0.18em] uppercase",
                       "pb-1 border-b",
-                      active ? `border-white/60 ${THEME.navActive}` : `border-transparent ${THEME.navText}`,
+                      active ? `border-black ${THEME.navActive}` : `border-transparent ${THEME.navText}`,
                       THEME.transition,
                     ].join(" ")}
                   >
@@ -84,7 +81,7 @@ export default function Layout({ children }) {
             <div className="flex items-center gap-2 sm:gap-3">
               {/* Mobile menu button */}
               <button
-                className="md:hidden p-2 text-zinc-300 hover:text-zinc-100"
+                className="md:hidden p-2 text-neutral-700 hover:text-neutral-950"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-label="Toggle menu"
               >
@@ -95,35 +92,35 @@ export default function Layout({ children }) {
                 href={GITHUB}
                 target="_blank"
                 rel="noreferrer"
-                className={`p-2 rounded-lg ${THEME.transition} ${THEME.surface} ${THEME.surfaceHover}`}
+                className={`p-2 ${THEME.transition} ${THEME.surface} ${THEME.surfaceHover}`}
                 aria-label="GitHub"
               >
-                <Github className="h-5 w-5 text-zinc-200" />
+                <Github className="h-5 w-5" />
               </a>
               <a
                 href={LINKEDIN}
                 target="_blank"
                 rel="noreferrer"
-                className={`p-2 rounded-lg ${THEME.transition} ${THEME.surface} ${THEME.surfaceHover}`}
+                className={`p-2 ${THEME.transition} ${THEME.surface} ${THEME.surfaceHover}`}
                 aria-label="LinkedIn"
               >
-                <Linkedin className="h-5 w-5 text-zinc-200" />
+                <Linkedin className="h-5 w-5" />
               </a>
               <a
                 href={SCHOLAR}
                 target="_blank"
                 rel="noreferrer"
-                className={`p-2 rounded-lg ${THEME.transition} ${THEME.surface} ${THEME.surfaceHover}`}
+                className={`p-2 ${THEME.transition} ${THEME.surface} ${THEME.surfaceHover}`}
                 aria-label="Google Scholar"
               >
-                <BookOpen className="h-5 w-5 text-zinc-200" />
+                <BookOpen className="h-5 w-5" />
               </a>
               <a
                 href={`mailto:${EMAIL}`}
-                className={`p-2 rounded-lg ${THEME.transition} ${THEME.surface} ${THEME.surfaceHover}`}
+                className={`p-2 ${THEME.transition} ${THEME.surface} ${THEME.surfaceHover}`}
                 aria-label="Email"
               >
-                <Mail className="h-5 w-5 text-zinc-200" />
+                <Mail className="h-5 w-5" />
               </a>
 
               {/* Resume: minimal, monochrome */}
@@ -131,7 +128,7 @@ export default function Layout({ children }) {
                 asChild
                 variant="outline"
                 size="sm"
-                className="hidden sm:flex border-white/15 text-zinc-100 bg-white/[0.03] hover:bg-white/[0.06]"
+                className="hidden sm:flex"
               >
                 <a href={RESUME_URL} target="_blank" rel="noreferrer" className="flex items-center gap-2">
                   <FileDown className="h-4 w-4" />
@@ -144,7 +141,7 @@ export default function Layout({ children }) {
 
         {/* Mobile menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-white/10 glass">
+          <div className="md:hidden border-t border-black/20 bg-[#f4f1ea]">
             <nav className="flex flex-col p-4 space-y-3">
               {nav.map((item) => {
                 const active = isActive(item.path);
@@ -156,7 +153,7 @@ export default function Layout({ children }) {
                     className={[
                       "font-display text-[12px] tracking-[0.18em] uppercase",
                       "py-2 border-b",
-                      active ? "border-white/60 text-zinc-100" : "border-white/10 text-zinc-300 hover:text-zinc-100",
+                      active ? "border-black text-neutral-950" : "border-black/10 text-neutral-600 hover:text-neutral-950",
                       THEME.transition,
                     ].join(" ")}
                   >
@@ -169,7 +166,7 @@ export default function Layout({ children }) {
                 href={RESUME_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-2 flex items-center justify-between py-2 font-mono text-[12px] tracking-[0.18em] uppercase text-zinc-300 hover:text-zinc-100 transition-colors"
+                className="mt-2 flex items-center justify-between py-2 font-display text-[12px] tracking-[0.18em] uppercase text-neutral-600 hover:text-neutral-950 transition-colors"
               >
                 <span>Resume</span>
                 <FileDown className="h-4 w-4" />
@@ -191,17 +188,17 @@ export default function Layout({ children }) {
       </Motion.main>
 
       {/* Footer: thin rules, mono labels */}
-      <footer className="mt-20 border-t border-white/10 glass">
+      <footer className="mt-20 border-t border-black/20 bg-[#f4f1ea]/80">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className={`font-display text-[12px] tracking-[0.14em] uppercase ${THEME.subtleText}`}>
+            <p className={`text-center font-display text-[12px] tracking-[0.14em] uppercase ${THEME.subtleText}`}>
               © {new Date().getFullYear()} Virginia Ceccatelli. All rights reserved.
             </p>
 
             <div className="flex items-center gap-6">
               <a
                 href={`mailto:${EMAIL}`}
-                className={`font-display text-[12px] tracking-[0.14em] uppercase ${THEME.subtleText} hover:text-zinc-100 transition-colors`}
+                className={`break-all text-center font-display text-[12px] tracking-[0.14em] uppercase ${THEME.subtleText} hover:text-neutral-950 transition-colors`}
               >
                 {EMAIL}
               </a>
@@ -211,7 +208,7 @@ export default function Layout({ children }) {
                   href={GITHUB}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-zinc-300 hover:text-zinc-100 transition-colors"
+                  className="text-neutral-600 hover:text-neutral-950 transition-colors"
                 >
                   <Github className="h-5 w-5" />
                 </a>
@@ -219,7 +216,7 @@ export default function Layout({ children }) {
                   href={LINKEDIN}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-zinc-300 hover:text-zinc-100 transition-colors"
+                  className="text-neutral-600 hover:text-neutral-950 transition-colors"
                 >
                   <Linkedin className="h-5 w-5" />
                 </a>
@@ -227,7 +224,7 @@ export default function Layout({ children }) {
                   href={SCHOLAR}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-zinc-300 hover:text-zinc-100 transition-colors"
+                  className="text-neutral-600 hover:text-neutral-950 transition-colors"
                   aria-label="Google Scholar"
                 >
                   <BookOpen className="h-5 w-5" />

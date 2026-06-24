@@ -3,9 +3,9 @@ import { Card } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
 
 const THEME = {
-  surface: "bg-zinc-800/50 backdrop-blur-sm",
-  surfaceBorder: "border-zinc-700/50",
-  surfaceHover: "hover:bg-zinc-700/30",
+  surface: "bg-transparent",
+  surfaceBorder: "border-black/20",
+  surfaceHover: "hover:bg-black hover:text-[#f4f1ea]",
   transition: "transition-all duration-300",
 };
 
@@ -54,52 +54,56 @@ export default function Writing() {
   ];
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
-      <div className="max-w-5xl mx-auto space-y-12">
+    <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+      <div className="mx-auto space-y-12">
         {/* Header */}
-        <div className="text-center space-y-4">
-          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white via-pink-100 to-rose-100 bg-clip-text text-transparent leading-tight pb-1">
+        <div className="grid border-y border-black/20 py-6 md:grid-cols-[0.65fr_1.35fr]">
+          <p className="section-kicker mb-5 md:mb-0">Papers / Articles</p>
+          <div className="space-y-5">
+          <h1 className="editorial-title text-6xl md:text-8xl lg:text-9xl">
             Papers & Articles
           </h1>
-          <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
+          <p className="max-w-3xl text-2xl font-semibold leading-tight text-neutral-700 md:text-4xl">
             Research papers, articles, and technical writing
           </p>
+          </div>
         </div>
 
         {/* Writings Grid */}
-        <div className="space-y-6">
+        <div className="border-x border-t border-black/20">
           {writings.map((writing, idx) => (
             <Card
               key={idx}
-              className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.surfaceHover} ${THEME.transition} border p-6 md:p-8 group`}
+              className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.surfaceHover} ${THEME.transition} group border-0 border-b`}
             >
-              <div className="flex items-start gap-4">
-                <div className={`p-3 rounded-lg bg-zinc-800/50 ${writing.color}`}>
-                  <writing.icon className="h-6 w-6" />
+              <div className="grid md:grid-cols-[0.22fr_0.78fr]">
+                <div className="flex items-start justify-between border-b border-black/20 p-5 md:block md:border-b-0 md:border-r">
+                  <span className="text-5xl font-black leading-none">0{idx + 1}</span>
+                  <writing.icon className="mt-4 h-6 w-6" />
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-semibold mb-3 group-hover:text-zinc-200 transition-colors">
+                <div className="p-5 md:p-8">
+                  <h3 className="mb-5 text-3xl font-black uppercase leading-none transition-colors md:text-5xl">
                     {writing.title}
                   </h3>
-                  <p className="text-zinc-300 mb-4 leading-relaxed">{writing.description}</p>
+                  <p className="mb-5 max-w-4xl text-lg leading-relaxed text-neutral-700 group-hover:text-[#f4f1ea]">{writing.description}</p>
                   
-                  <div className="flex flex-wrap gap-2 mb-4">
+                  <div className="mb-5 flex flex-wrap gap-2">
                     {writing.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="text-xs">
+                      <Badge key={tag} variant="secondary" className="text-xs group-hover:border-[#f4f1ea]/40 group-hover:text-[#f4f1ea]">
                         {tag}
                       </Badge>
                     ))}
                   </div>
                   
                   <div className="flex items-center justify-between">
-                    <div className="text-sm text-zinc-400">
+                    <div className="section-kicker">
                       {writing.year} • {writing.type}
                     </div>
                     <a
                       href={writing.link}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-2 text-sm text-zinc-200 hover:text-zinc-300 transition-colors"
+                      className="inline-flex items-center gap-2 border-b border-current text-sm font-semibold uppercase tracking-[0.14em] transition-colors"
                     >
                       <span>Read</span>
                       <ExternalLink className="h-4 w-4" />

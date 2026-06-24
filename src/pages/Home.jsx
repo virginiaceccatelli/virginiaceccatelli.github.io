@@ -6,16 +6,16 @@ import { Badge } from "../components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 
 const THEME = {
-  surface: "bg-zinc-800/50 backdrop-blur-sm",
-  surfaceBorder: "border-zinc-700/50",
-  surfaceHover: "hover:bg-zinc-700/30",
+  surface: "bg-transparent",
+  surfaceBorder: "border-black/20",
+  surfaceHover: "hover:bg-black hover:text-[#f4f1ea]",
   transition: "transition-all duration-300",
 };
 
 export default function Home() {
   const NAME = "Virginia Ceccatelli";
   const TAGLINE = "AI Safety | Systems Security | Cybersecurity Policy";
-  const ROLE = "McGill University Computer Science Alumni";
+  const ROLE = "McGill Computer Science Alumni";
   const LOCATION = "Montreal, Canada";
 
   const focusAreas = [
@@ -50,98 +50,114 @@ export default function Home() {
 
   return (
     <div className="relative">
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-16 md:pt-32 md:pb-24">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6 animate-fade-in">
-            <p className="text-sm uppercase tracking-widest text-zinc-200 font-semibold">Hello, I'm</p>
-            
-            <div className="flex items-center gap-6">
-              <img
-                src={profileImg}
-                alt={NAME}
-                className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-2 border-zinc-500/30 shadow-2xl"
-              />
-              <div>
-                <h1 className="text-5xl md:text-6xl font-bold leading-tight bg-gradient-to-r from-white via-zinc-100 to-rose-100 bg-clip-text text-transparent">
-                  {NAME}
-                </h1>
-              </div>
-            </div>
-            
-            <p className="text-xl md:text-2xl text-zinc-300 font-medium">{ROLE}</p>
-            <p className="text-lg text-zinc-400">{LOCATION}</p>
-            
-            <div className="flex flex-wrap gap-2 pt-2">
-              {TAGLINE.split("|").map((t) => (
-                <Badge key={t.trim()} variant="secondary" className="px-4 py-1.5 text-sm">
-                  {t.trim()}
-                </Badge>
-              ))}
-            </div>
-            
-            <div className="flex flex-wrap gap-4 pt-4">
-              <Button asChild size="lg" className="group">
-                <Link to="/projects" className="flex items-center gap-2">
-                  View Projects
-                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg">
-                <Link to="/experience">My Experience</Link>
-              </Button>
-            </div>
+      <section className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8 pt-12 md:pt-20 pb-10">
+        <div className="grid min-h-[calc(100vh-7rem)] grid-rows-[auto_1fr_auto] border-x border-black/15">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 border-y border-black/20 text-[11px] font-semibold uppercase tracking-[0.18em]">
+            <div className="border-b border-black/20 p-3 sm:border-b-0 sm:border-r">Hello!</div>
+            <div className="border-b border-black/20 p-3 sm:border-b-0 md:border-r">AI Safety</div>
+            <div className="border-r border-black/20 p-3 hidden md:block">Systems Security</div>
+            <div className="p-3 text-left md:text-right">Portfolio / 2026</div>
           </div>
 
-          <div className="space-y-6">
-            {/* Highlights Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {highlights.map((item, idx) => (
-                <Card key={idx} className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.surfaceHover} ${THEME.transition} border text-center`}>
-                  <CardContent className="p-6">
-                    <item.icon className={`h-8 w-8 ${item.color} mx-auto mb-3`} />
-                    <h3 className="font-semibold text-lg mb-1">{item.title}</h3>
-                    <p className="text-sm text-zinc-400">{item.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+          <div className="grid lg:grid-cols-[1.15fr_0.85fr]">
+            <div className="flex flex-col justify-between border-b border-black/20 p-4 sm:p-8 lg:border-b-0 lg:border-r">
+              <div className="space-y-6">
+                <h1 className="editorial-title text-[12.5vw] sm:text-[16vw] lg:text-[9.6vw]">
+                  {NAME.split(" ")[0]}
+                  <br />
+                  {NAME.split(" ")[1]}
+                </h1>
+                <p className="max-w-3xl border-t border-black/20 pt-5 text-2xl font-semibold leading-tight text-neutral-950 md:text-4xl">
+                  {ROLE}
+                </p>
+              </div>
 
-            {/* Focus Areas Card */}
-            <Card className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.transition} border`}>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <ShieldCheck className="h-5 w-5 text-zinc-200" />
-                  Areas of Interest
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 gap-3">
-                  {focusAreas.map((area) => (
-                    <Badge key={area} variant="outline" className="justify-start px-3 py-2 rounded-lg">
-                      {area}
+              <div className="mt-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+                <div className="flex flex-wrap gap-2">
+                  {TAGLINE.split("|").map((t) => (
+                    <Badge key={t.trim()} variant="secondary" className="px-4 py-2">
+                      {t.trim()}
                     </Badge>
                   ))}
                 </div>
-              </CardContent>
-            </Card>
+                <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                  <Button asChild size="lg" className="group w-full sm:w-auto">
+                    <Link to="/projects" className="flex items-center gap-2">
+                      View Projects
+                      <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </Button>
+                  <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
+                    <Link to="/experience">My Experience</Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid content-between">
+              <div className="grid grid-cols-[1fr_auto] gap-4 p-4 sm:p-8">
+                <div className="section-kicker">Profile</div>
+                <ShieldCheck className="h-5 w-5" />
+              </div>
+              <div className="px-4 sm:px-8">
+                <img
+                  src={profileImg}
+                  alt={NAME}
+                  className="aspect-[4/5] w-full border border-black/25 object-cover grayscale contrast-125"
+                />
+              </div>
+              <div className="grid grid-cols-1 border-t border-black/20">
+                {highlights.map((item, idx) => (
+                  <Card key={idx} className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.surfaceHover} ${THEME.transition} border-0 border-b last:border-b-0`}>
+                    <CardContent className="grid grid-cols-[0.22fr_0.78fr] gap-4 p-5">
+                      <div className="flex items-center justify-between gap-3">
+                        <span className="section-kicker">0{idx + 1}</span>
+                        <item.icon className={`h-5 w-5 ${item.color}`} />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-black uppercase leading-none">{item.title}</h3>
+                        <p className="mt-2 text-sm text-neutral-600">{item.description}</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Quick Stats Section */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 border-t border-zinc-800">
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="text-center">
-            <div className="text-4xl font-bold text-zinc-200 mb-2">McGill</div>
-            <div className="text-zinc-400">Computer Science + Economics</div>
+      <section className="scroll-band">
+        <div className="mx-auto grid max-w-[1500px] grid-cols-1 md:grid-cols-[0.8fr_1.2fr]">
+          <div className="border-b border-black/20 p-6 md:border-b-0 md:border-r">
+            <CardTitle className="flex items-center gap-2 text-2xl uppercase">
+              <ShieldCheck className="h-5 w-5" />
+              Areas of Interest
+            </CardTitle>
           </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-zinc-300 mb-2">UCL</div>
-            <div className="text-zinc-400">S2Lab Systems Security</div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            {focusAreas.map((area) => (
+              <div key={area} className="border-b border-r border-black/20 p-5 text-xl font-semibold uppercase leading-tight last:border-r-0">
+                {area}
+              </div>
+            ))}
           </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-zinc-300 mb-2">MILA</div>
-            <div className="text-zinc-400">Multilingual AI Safety</div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8 py-10">
+        <div className="grid border border-black/20 md:grid-cols-3">
+          <div className="border-b border-black/20 p-8 md:border-b-0 md:border-r">
+            <div className="text-5xl font-black uppercase leading-none">McGill</div>
+            <div className="mt-3 text-neutral-600">Computer Science + Economics</div>
+          </div>
+          <div className="border-b border-black/20 p-8 md:border-b-0 md:border-r">
+            <div className="text-5xl font-black uppercase leading-none">UCL</div>
+            <div className="mt-3 text-neutral-600">S2Lab Systems Security</div>
+          </div>
+          <div className="p-8">
+            <div className="text-5xl font-black uppercase leading-none">MILA</div>
+            <div className="mt-3 text-neutral-600">Multilingual AI Safety</div>
           </div>
         </div>
       </section>

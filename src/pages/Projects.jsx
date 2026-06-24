@@ -4,9 +4,9 @@ import { Badge } from "../components/ui/badge";
 import { Button } from "../components/ui/button";
 
 const THEME = {
-  surface: "bg-zinc-800/50 backdrop-blur-sm",
-  surfaceBorder: "border-zinc-700/50",
-  surfaceHover: "hover:bg-zinc-700/30",
+  surface: "bg-transparent",
+  surfaceBorder: "border-black/20",
+  surfaceHover: "hover:bg-black hover:text-[#f4f1ea]",
   transition: "transition-all duration-300",
 };
 
@@ -71,72 +71,78 @@ export default function Projects() {
   ];
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
-      <div className="max-w-5xl mx-auto space-y-12">
+    <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+      <div className="mx-auto space-y-12">
         {/* Header */}
-        <div className="text-center space-y-4">
-          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white via-pink-100 to-rose-100 bg-clip-text text-transparent leading-tight pb-1">
+        <div className="grid border-y border-black/20 py-6 md:grid-cols-[0.65fr_1.35fr]">
+          <div className="mb-5 md:mb-0">
+            <p className="section-kicker">Selected Work</p>
+          </div>
+          <div className="space-y-5">
+          <h1 className="editorial-title text-6xl md:text-8xl lg:text-9xl">
             My Projects
           </h1>
-          <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
+          <p className="max-w-3xl text-2xl font-semibold leading-tight text-neutral-700 md:text-4xl">
             A collection of my recent work in AI safety, robotics, data systems, and network security
           </p>
           <a
             href={GITHUB}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 text-sm text-zinc-200 hover:text-zinc-300 transition-colors underline underline-offset-4"
+            className="inline-flex items-center gap-2 border-b border-black text-sm font-semibold uppercase tracking-[0.14em] text-neutral-950 transition-colors hover:text-neutral-600"
           >
             <Github className="h-4 w-4" />
             See more on GitHub
           </a>
+          </div>
         </div>
 
         {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid border-l border-t border-black/20 md:grid-cols-2 xl:grid-cols-3">
           {projects.map((project, idx) => (
             <Card
               key={idx}
-              className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.surfaceHover} ${THEME.transition} border p-6 group`}
+              className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.surfaceHover} ${THEME.transition} group min-h-[360px] border-0 border-b border-r p-0`}
             >
-              <div className="flex items-start gap-4 mb-4">
-                <div className={`p-3 rounded-lg bg-zinc-800/50 ${project.color}`}>
+              <div className="flex h-full flex-col">
+                <div className="flex items-center justify-between border-b border-black/20 p-5">
+                  <span className="text-5xl font-black leading-none">0{idx + 1}</span>
                   <project.icon className="h-6 w-6" />
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-semibold mb-2 group-hover:text-zinc-200 transition-colors">
+                <div className="flex flex-1 flex-col p-5">
+                  <h3 className="mb-5 text-3xl font-black uppercase leading-none transition-colors">
                     {project.title}
                   </h3>
+              
+                  <p className="mb-5 leading-relaxed text-neutral-700 group-hover:text-[#f4f1ea]">{project.blurb}</p>
+              
+                  <div className="mb-5 flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <Badge key={tag} variant="secondary" className="text-xs group-hover:border-[#f4f1ea]/40 group-hover:text-[#f4f1ea]">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+              
+                  <div className="mt-auto flex gap-3 pt-2">
+                    {project.repo && (
+                      <Button asChild variant="outline" size="sm">
+                        <a href={project.repo} target="_blank" rel="noreferrer" className="flex items-center gap-2">
+                          <Github className="h-4 w-4" />
+                          Code
+                        </a>
+                      </Button>
+                    )}
+                    {project.demo && (
+                      <Button asChild size="sm">
+                        <a href={project.demo} target="_blank" rel="noreferrer" className="flex items-center gap-2">
+                          <ExternalLink className="h-4 w-4" />
+                          View
+                        </a>
+                      </Button>
+                    )}
+                  </div>
                 </div>
-              </div>
-              
-              <p className="text-zinc-300 mb-4 leading-relaxed">{project.blurb}</p>
-              
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.tags.map((tag) => (
-                  <Badge key={tag} variant="secondary" className="text-xs">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-              
-              <div className="flex gap-3 pt-2">
-                {project.repo && (
-                  <Button asChild variant="outline" size="sm">
-                    <a href={project.repo} target="_blank" rel="noreferrer" className="flex items-center gap-2">
-                      <Github className="h-4 w-4" />
-                      Code
-                    </a>
-                  </Button>
-                )}
-                {project.demo && (
-                  <Button asChild size="sm">
-                    <a href={project.demo} target="_blank" rel="noreferrer" className="flex items-center gap-2">
-                      <ExternalLink className="h-4 w-4" />
-                      View
-                    </a>
-                  </Button>
-                )}
               </div>
             </Card>
           ))}

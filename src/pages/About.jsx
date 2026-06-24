@@ -3,13 +3,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card"
 import { Badge } from "../components/ui/badge";
 
 const THEME = {
-  surface: "bg-zinc-800/50 backdrop-blur-sm",
-  surfaceBorder: "border-zinc-700/50",
-  surfaceHover: "hover:bg-zinc-700/30",
+  surface: "bg-transparent",
+  surfaceBorder: "border-black/20",
+  surfaceHover: "hover:bg-black hover:text-[#f4f1ea]",
   transition: "transition-all duration-300",
-  accentStrong: "text-zinc-200",
-  accent: "text-zinc-300",
-  accentMuted: "text-zinc-400",
+  accentStrong: "text-neutral-950",
+  accent: "text-neutral-700",
+  accentMuted: "text-neutral-600",
 };
 
 export default function About() {
@@ -18,8 +18,7 @@ export default function About() {
     { icon: Award, text: "Distinction, top 25% - McGill University" },
     { icon: Award, text: "Dean's List, top 10% - IE University" },
     { icon: Users, text: "Former Vice President - Girls Who Code McGill" },
-    { icon: Users, text: "50+ volunteer instructors recruited" },
-    { icon: BookOpen, text: "Andalus Committee NYC Researcher" },
+    { icon: BookOpen, text: "Former Andalus Committee NYC Researcher" },
   ];
 
   const courseHighlights = [
@@ -33,30 +32,33 @@ export default function About() {
   ];
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
-      <div className="max-w-4xl mx-auto space-y-12">
+    <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+      <div className="mx-auto space-y-10">
         {/* Header */}
-        <div className="text-center space-y-4">
-          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent leading-tight pb-1">
+        <div className="grid border-y border-black/20 py-6 md:grid-cols-[0.65fr_1.35fr]">
+          <p className="section-kicker mb-4 md:mb-0">Profile / Background</p>
+          <div className="space-y-5">
+          <h1 className="editorial-title text-6xl md:text-8xl lg:text-9xl">
             About Me
           </h1>
-          <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
+          <p className="max-w-4xl text-2xl font-semibold leading-tight text-neutral-700 md:text-4xl">
             McGill Computer Science alum working across AI safety, systems security, and cybersecurity policy
           </p>
+          </div>
         </div>
 
         {/* Main Content */}
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-[1.35fr_0.65fr]">
           {/* About Text */}
-          <Card className={`lg:col-span-2 ${THEME.surface} ${THEME.surfaceBorder} ${THEME.transition} border`}>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-3">
-                <GraduationCap className="h-6 w-6 text-zinc-200" />
+          <Card className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.transition} border p-0`}>
+            <CardHeader className="border-b border-black/20">
+              <CardTitle className="flex items-center gap-3 text-2xl uppercase">
+                <GraduationCap className="h-6 w-6 text-neutral-950" />
                 Background
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-4 text-zinc-300 leading-relaxed">
+            <CardContent className="p-6 md:p-10">
+              <div className="space-y-6 text-xl leading-relaxed text-neutral-800">
               <p>
                 I'm a McGill University Computer Science alum with a strong interest in AI safety,
                 systems security, and cybersecurity policy. Originally trained in International Relations at IE University, I developed a strong interest in
@@ -66,7 +68,7 @@ export default function About() {
                 technical underpinnings of machine learning, networks, compiler design, and systems programming.
               </p>
               <p>
-                The decision to pivot was not only academic, but it was a personal commitment to
+                The decision to pivot was a personal commitment to
                 developing the skills needed to address the security challenges that come with emerging
                 technologies and a quickly changing digital landscape.
               </p>
@@ -80,8 +82,7 @@ export default function About() {
                 Currently, I'm working with UCL S2Lab on trajectory-based uncertainty quantification for
                 language models, combining mechanistic interpretability with residual-stream geometry to
                 anticipate uncertainty and hallucinations before output generation. I am also joining WIIT
-                Premium Cloud as a Machine Learning Intern focused on cloud-native infrastructure for large
-                language model workloads.
+                Premium Cloud as a Machine Learning Intern focused on cloud-native infrastructure for LLM workloads.
               </p>
               <p>
                 I'm eager to develop my skills and gain more experience in the field of cybersecurity and AI safety. I bring a deep motivation to understand emerging security
@@ -92,16 +93,16 @@ export default function About() {
           </Card>
 
           {/* At a Glance */}
-          <div className="space-y-6">
-            <Card className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.transition} border`}>
-              <CardHeader>
-                <CardTitle>At a Glance</CardTitle>
+          <div className="grid border-x border-b border-black/20 lg:border-l-0">
+            <Card className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.transition} border-0 border-b`}>
+              <CardHeader className="border-b border-black/20">
+                <CardTitle className="uppercase">At a Glance</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-0">
                 <div className="space-y-3">
                   {achievements.map((item, idx) => (
-                    <div key={idx} className="flex items-start gap-3 text-sm text-zinc-300">
-                      <item.icon className="h-4 w-4 text-zinc-300 mt-0.5 flex-shrink-0" />
+                    <div key={idx} className="flex items-start gap-3 border-b border-black/15 p-4 text-sm text-neutral-800 last:border-b-0">
+                      <item.icon className="h-4 w-4 text-neutral-950 mt-0.5 flex-shrink-0" />
                       <span>{item.text}</span>
                     </div>
                   ))}
@@ -109,18 +110,18 @@ export default function About() {
               </CardContent>
             </Card>
 
-            <Card className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.transition} border`}>
-              <CardHeader>
-                <CardTitle>Academic Excellence</CardTitle>
+            <Card className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.transition} border-0`}>
+              <CardHeader className="border-b border-black/20">
+                <CardTitle className="uppercase">Academic Excellence</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-5">
                 <div className="space-y-2">
-                  <div className="text-3xl font-bold text-zinc-200 mb-2">3.8 GPA</div>
-                  <p className="text-sm text-zinc-400 mb-4">McGill University, Distinction</p>
+                  <div className="mb-2 text-6xl font-black uppercase leading-none text-neutral-950">3.8 GPA</div>
+                  <p className="text-sm text-neutral-600 mb-4">McGill University, Distinction</p>
                   <div className="space-y-2">
-                    <p className="text-sm font-medium text-zinc-300 mb-2">Course Highlights:</p>
+                    <p className="section-kicker mb-2">Course Highlights:</p>
                     {courseHighlights.map((course, idx) => (
-                      <Badge key={idx} variant="outline" className="block w-full text-left px-3 py-2 mb-2">
+                      <Badge key={idx} variant="outline" className="block w-full px-3 py-2 text-left">
                         {course}
                       </Badge>
                     ))}
