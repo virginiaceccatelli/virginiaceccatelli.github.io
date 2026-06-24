@@ -4,8 +4,8 @@ import { Badge } from "../components/ui/badge";
 
 const THEME = {
   surface: "bg-transparent",
-  surfaceBorder: "border-[#5E5653]/20",
-  surfaceHover: "hover:bg-[#6B7C98] hover:text-[#E9E6E7]",
+  surfaceBorder: "border-black/20",
+  surfaceHover: "hover:bg-black hover:text-[#f4f1ea]",
   transition: "transition-all duration-300",
 };
 
@@ -19,7 +19,7 @@ export default function Writing() {
       type: "Preprint",
       link: "https://arxiv.org/abs/2606.06037",
       icon: FileText,
-      color: "text-[#7B7F8A]",
+      color: "text-zinc-400",
     },
     {
       title: "Sky Diplomacy: The Geopolitical Impact of the Proliferation of Iranian-Russian Military Drone Trade on Global Alliances and Security",
@@ -29,7 +29,7 @@ export default function Writing() {
       type: "Article",
       link: "https://ipr.blogs.ie.edu/wp-content/uploads/sites/574/2024/02/Sky-Diplomacy-Final-Draft.docx-1.pdf",
       icon: FileText,
-      color: "text-[#7B7F8A]",
+      color: "text-zinc-400",
     },
     {
       title: "CNN Robotic Vision for Ground Segmentation - U-Net Applicability",
@@ -39,7 +39,7 @@ export default function Writing() {
       type: "Research Paper",
       link: "https://github.com/virginiaceccatelli/vision_control",
       icon: FileText,
-      color: "text-[#7B7F8A]",
+      color: "text-zinc-400",
     },
     {
       title: "Securing the Digital Frontier: U.S.-Sub-Saharan Africa Cybersecurity Partnerships in the Shadow of China’s Digital Silk Road",
@@ -49,7 +49,7 @@ export default function Writing() {
       type: "Policy Report",
       link: "https://65bead61-ada5-408e-9924-c7be6e498634.filesusr.com/ugd/d98a02_77af6c01d90f4c0f8e7df233cab6cd35.pdf",
       icon: FileText,
-      color: "text-[#7B7F8A]",
+      color: "text-zinc-400",
     },
   ];
 
@@ -57,27 +57,27 @@ export default function Writing() {
     <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8 py-14 md:py-20">
       <div className="mx-auto space-y-12">
         {/* Header */}
-        <div className="grid border-y border-[#5E5653]/20 py-6 md:grid-cols-[0.65fr_1.35fr]">
+        <div className="grid border-y border-black/20 py-6 md:grid-cols-[0.65fr_1.35fr]">
           <p className="section-kicker mb-5 md:mb-0">Papers / Articles</p>
           <div className="space-y-5">
           <h1 className="editorial-title text-6xl md:text-8xl lg:text-9xl">
             Papers & Articles
           </h1>
-          <p className="max-w-3xl text-2xl font-semibold leading-tight text-[#6B7C98] md:text-4xl">
+          <p className="max-w-3xl text-2xl font-semibold leading-tight text-neutral-700 md:text-4xl">
             Research papers, articles, and technical writing
           </p>
           </div>
         </div>
 
         {/* Writings Grid */}
-        <div className="border-x border-t border-[#5E5653]/20">
+        <div className="border-x border-t border-black/20">
           {writings.map((writing, idx) => (
             <Card
               key={idx}
               className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.surfaceHover} ${THEME.transition} group border-0 border-b`}
             >
               <div className="grid md:grid-cols-[0.22fr_0.78fr]">
-                <div className="flex items-start justify-between border-b border-[#5E5653]/20 p-5 md:block md:border-b-0 md:border-r">
+                <div className="flex items-start justify-between border-b border-black/20 p-5 md:block md:border-b-0 md:border-r">
                   <span className="text-5xl font-black leading-none">0{idx + 1}</span>
                   <writing.icon className="mt-4 h-6 w-6" />
                 </div>
@@ -85,11 +85,11 @@ export default function Writing() {
                   <h3 className="mb-5 text-3xl font-black uppercase leading-none transition-colors md:text-5xl">
                     {writing.title}
                   </h3>
-                  <p className="mb-5 max-w-4xl text-lg leading-relaxed text-[#6B7C98] group-hover:text-[#E9E6E7]">{writing.description}</p>
+                  <p className="mb-5 max-w-4xl text-lg leading-relaxed text-neutral-700 group-hover:text-[#f4f1ea]">{writing.description}</p>
                   
                   <div className="mb-5 flex flex-wrap gap-2">
                     {writing.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="text-xs group-hover:border-[#E9E6E7]/40 group-hover:text-[#E9E6E7]">
+                      <Badge key={tag} variant="secondary" className="text-xs group-hover:border-[#f4f1ea]/40 group-hover:text-[#f4f1ea]">
                         {tag}
                       </Badge>
                     ))}

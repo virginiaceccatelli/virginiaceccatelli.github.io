@@ -7,8 +7,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card"
 
 const THEME = {
   surface: "bg-transparent",
-  surfaceBorder: "border-[#5E5653]/20",
-  surfaceHover: "hover:bg-[#6B7C98] hover:text-[#E9E6E7]",
+  surfaceBorder: "border-black/20",
+  surfaceHover: "hover:bg-black hover:text-[#f4f1ea]",
   transition: "transition-all duration-300",
 };
 
@@ -32,42 +32,42 @@ export default function Home() {
       icon: GraduationCap,
       title: "3.8 GPA",
       description: "McGill CS + Economics",
-      color: "text-[#7B7F8A]",
+      color: "text-zinc-300",
     },
     {
       icon: ScanEye,
       title: "Systems Security Researcher",
       description: "UCL S2Lab",
-      color: "text-[#7B7F8A]",
+      color: "text-zinc-300",
     },
     {
       icon: ServerCog,
       title: "ML Intern",
       description: "WIIT Premium Cloud",
-      color: "text-[#7B7F8A]",
+      color: "text-zinc-300",
     },
   ];
 
   return (
     <div className="relative">
       <section className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8 pt-12 md:pt-20 pb-10">
-        <div className="grid min-h-[calc(100vh-7rem)] grid-rows-[auto_1fr_auto] border-x border-[#5E5653]/15">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 border-y border-[#5E5653]/20 text-[11px] font-semibold uppercase tracking-[0.18em]">
-            <div className="border-b border-[#5E5653]/20 p-3 sm:border-b-0 sm:border-r">Hello!</div>
-            <div className="border-b border-[#5E5653]/20 p-3 sm:border-b-0 md:border-r">AI Safety</div>
-            <div className="border-r border-[#5E5653]/20 p-3 hidden md:block">Systems Security</div>
+        <div className="grid min-h-[calc(100vh-7rem)] grid-rows-[auto_1fr_auto] border-x border-black/15">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 border-y border-black/20 text-[11px] font-semibold uppercase tracking-[0.18em]">
+            <div className="border-b border-black/20 p-3 sm:border-b-0 sm:border-r">Hello!</div>
+            <div className="border-b border-black/20 p-3 sm:border-b-0 md:border-r">AI Safety</div>
+            <div className="border-r border-black/20 p-3 hidden md:block">Systems Security</div>
             <div className="p-3 text-left md:text-right">Portfolio / 2026</div>
           </div>
 
           <div className="grid lg:grid-cols-[1.15fr_0.85fr]">
-            <div className="flex flex-col justify-between border-b border-[#5E5653]/20 p-4 sm:p-8 lg:border-b-0 lg:border-r">
+            <div className="flex flex-col justify-between border-b border-black/20 p-4 sm:p-8 lg:border-b-0 lg:border-r">
               <div className="space-y-6">
                 <h1 className="editorial-title text-[12.5vw] sm:text-[16vw] lg:text-[9.6vw]">
                   {NAME.split(" ")[0]}
                   <br />
                   {NAME.split(" ")[1]}
                 </h1>
-                <p className="max-w-3xl border-t border-[#5E5653]/20 pt-5 text-2xl font-semibold leading-tight text-[#5E5653] md:text-4xl">
+                <p className="max-w-3xl border-t border-black/20 pt-5 text-2xl font-semibold leading-tight text-neutral-950 md:text-4xl">
                   {ROLE}
                 </p>
               </div>
@@ -103,10 +103,10 @@ export default function Home() {
                 <img
                   src={profileImg}
                   alt={NAME}
-                  className="aspect-[4/5] w-full border border-[#5E5653]/25 object-cover grayscale contrast-125"
+                  className="aspect-[4/5] w-full border border-black/25 object-cover grayscale contrast-125"
                 />
               </div>
-              <div className="grid grid-cols-1 border-t border-[#5E5653]/20">
+              <div className="grid grid-cols-1 border-t border-black/20">
                 {highlights.map((item, idx) => (
                   <Card key={idx} className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.surfaceHover} ${THEME.transition} border-0 border-b last:border-b-0`}>
                     <CardContent className="grid grid-cols-[0.22fr_0.78fr] gap-4 p-5">
@@ -116,7 +116,7 @@ export default function Home() {
                       </div>
                       <div>
                         <h3 className="text-2xl font-black uppercase leading-none">{item.title}</h3>
-                        <p className="mt-2 text-sm text-[#7B7F8A]">{item.description}</p>
+                        <p className="mt-2 text-sm text-neutral-600">{item.description}</p>
                       </div>
                     </CardContent>
                   </Card>
@@ -129,7 +129,7 @@ export default function Home() {
 
       <section className="scroll-band">
         <div className="mx-auto grid max-w-[1500px] grid-cols-1 md:grid-cols-[0.8fr_1.2fr]">
-          <div className="border-b border-[#5E5653]/20 p-6 md:border-b-0 md:border-r">
+          <div className="border-b border-black/20 p-6 md:border-b-0 md:border-r">
             <CardTitle className="flex items-center gap-2 text-2xl uppercase">
               <ShieldCheck className="h-5 w-5" />
               Areas of Interest
@@ -137,7 +137,7 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {focusAreas.map((area) => (
-              <div key={area} className="border-b border-r border-[#5E5653]/20 p-5 text-xl font-semibold uppercase leading-tight last:border-r-0">
+              <div key={area} className="border-b border-r border-black/20 p-5 text-xl font-semibold uppercase leading-tight last:border-r-0">
                 {area}
               </div>
             ))}
@@ -146,18 +146,18 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8 py-10">
-        <div className="grid border border-[#5E5653]/20 md:grid-cols-3">
-          <div className="border-b border-[#5E5653]/20 p-8 md:border-b-0 md:border-r">
+        <div className="grid border border-black/20 md:grid-cols-3">
+          <div className="border-b border-black/20 p-8 md:border-b-0 md:border-r">
             <div className="text-5xl font-black uppercase leading-none">McGill</div>
-            <div className="mt-3 text-[#7B7F8A]">Computer Science + Economics</div>
+            <div className="mt-3 text-neutral-600">Computer Science + Economics</div>
           </div>
-          <div className="border-b border-[#5E5653]/20 p-8 md:border-b-0 md:border-r">
+          <div className="border-b border-black/20 p-8 md:border-b-0 md:border-r">
             <div className="text-5xl font-black uppercase leading-none">UCL</div>
-            <div className="mt-3 text-[#7B7F8A]">S2Lab Systems Security</div>
+            <div className="mt-3 text-neutral-600">S2Lab Systems Security</div>
           </div>
           <div className="p-8">
             <div className="text-5xl font-black uppercase leading-none">MILA</div>
-            <div className="mt-3 text-[#7B7F8A]">Multilingual AI Safety</div>
+            <div className="mt-3 text-neutral-600">Multilingual AI Safety</div>
           </div>
         </div>
       </section>
