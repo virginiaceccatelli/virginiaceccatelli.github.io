@@ -85,11 +85,7 @@
     position: absolute;
     inset: 0;
     z-index: -1;
-    background-image:
-      linear-gradient(rgba(0,0,0,0.055) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
-    background-size: 42px 42px;
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.78), rgba(0,0,0,0.18) 46%, transparent);
+    background: #f4f1ea;
     pointer-events: none;
   }
   .bg-glass-motion::after {
@@ -97,11 +93,8 @@
     position: absolute;
     inset: 0;
     z-index: -1;
-    background-image:
-      radial-gradient(circle at 20% 10%, rgba(176, 168, 101, 0.24), transparent 28%),
-      radial-gradient(circle at 92% 28%, rgba(0,0,0,0.08), transparent 24%),
-      linear-gradient(135deg, transparent 0 48%, rgba(0,0,0,0.04) 48% 52%, transparent 52%);
-    opacity: 0.8;
+    background: transparent;
+    opacity: 0;
     pointer-events: none;
   }
   .animate-fade-in {
