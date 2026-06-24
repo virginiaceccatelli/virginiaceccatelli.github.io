@@ -54,8 +54,6 @@ export default function Home() {
         <div className="grid min-h-[calc(100vh-7rem)] grid-rows-[auto_1fr_auto] border-x border-black/15">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 border-y border-black/20 text-[11px] font-semibold uppercase tracking-[0.18em]">
             <div className="border-b border-black/20 p-3 sm:border-b-0 sm:border-r">Hello!</div>
-            <div className="border-b border-black/20 p-3 sm:border-b-0 md:border-r">AI Safety</div>
-            <div className="border-r border-black/20 p-3 hidden md:block">Systems Security</div>
             <div className="p-3 text-left md:text-right">Portfolio / 2026</div>
           </div>
 
