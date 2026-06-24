@@ -159,7 +159,7 @@
   .scroll-band {
     border-top: 1px solid rgba(0,0,0,0.22);
     border-bottom: 1px solid rgba(0,0,0,0.22);
-    background: rgba(244, 241, 234, 0.62);
+    background: transparent;
   }
   @keyframes glassDrift {
     0%   { transform: translate(-2%, -1%) scale(1.02); }
