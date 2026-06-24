@@ -4,12 +4,12 @@ import { Badge } from "../components/ui/badge";
 
 const THEME = {
   surface: "bg-transparent",
-  surfaceBorder: "border-black/20",
-  surfaceHover: "hover:bg-black hover:text-[#f4f1ea]",
+  surfaceBorder: "border-[#5E5653]/20",
+  surfaceHover: "hover:bg-[#6B7C98] hover:text-[#E9E6E7]",
   transition: "transition-all duration-300",
-  accentStrong: "text-neutral-950",
-  accent: "text-neutral-700",
-  accentMuted: "text-neutral-600",
+  accentStrong: "text-[#5E5653]",
+  accent: "text-[#6B7C98]",
+  accentMuted: "text-[#7B7F8A]",
 };
 
 export default function About() {
@@ -35,13 +35,13 @@ export default function About() {
     <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8 py-14 md:py-20">
       <div className="mx-auto space-y-10">
         {/* Header */}
-        <div className="grid border-y border-black/20 py-6 md:grid-cols-[0.65fr_1.35fr]">
+        <div className="grid border-y border-[#5E5653]/20 py-6 md:grid-cols-[0.65fr_1.35fr]">
           <p className="section-kicker mb-4 md:mb-0">Profile / Background</p>
           <div className="space-y-5">
           <h1 className="editorial-title text-6xl md:text-8xl lg:text-9xl">
             About Me
           </h1>
-          <p className="max-w-4xl text-2xl font-semibold leading-tight text-neutral-700 md:text-4xl">
+          <p className="max-w-4xl text-2xl font-semibold leading-tight text-[#6B7C98] md:text-4xl">
             McGill Computer Science alum working across AI safety, systems security, and cybersecurity policy
           </p>
           </div>
@@ -51,14 +51,14 @@ export default function About() {
         <div className="grid lg:grid-cols-[1.35fr_0.65fr]">
           {/* About Text */}
           <Card className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.transition} border p-0`}>
-            <CardHeader className="border-b border-black/20">
+            <CardHeader className="border-b border-[#5E5653]/20">
               <CardTitle className="flex items-center gap-3 text-2xl uppercase">
-                <GraduationCap className="h-6 w-6 text-neutral-950" />
+                <GraduationCap className="h-6 w-6 text-[#5E5653]" />
                 Background
               </CardTitle>
             </CardHeader>
             <CardContent className="p-6 md:p-10">
-              <div className="space-y-6 text-xl leading-relaxed text-neutral-800">
+              <div className="space-y-6 text-xl leading-relaxed text-[#5E5653]">
               <p>
                 I'm a McGill University Computer Science alum with a strong interest in AI safety,
                 systems security, and cybersecurity policy. Originally trained in International Relations at IE University, I developed a strong interest in
@@ -93,16 +93,16 @@ export default function About() {
           </Card>
 
           {/* At a Glance */}
-          <div className="grid border-x border-b border-black/20 lg:border-l-0">
+          <div className="grid border-x border-b border-[#5E5653]/20 lg:border-l-0">
             <Card className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.transition} border-0 border-b`}>
-              <CardHeader className="border-b border-black/20">
+              <CardHeader className="border-b border-[#5E5653]/20">
                 <CardTitle className="uppercase">At a Glance</CardTitle>
               </CardHeader>
               <CardContent className="p-0">
                 <div className="space-y-3">
                   {achievements.map((item, idx) => (
-                    <div key={idx} className="flex items-start gap-3 border-b border-black/15 p-4 text-sm text-neutral-800 last:border-b-0">
-                      <item.icon className="h-4 w-4 text-neutral-950 mt-0.5 flex-shrink-0" />
+                    <div key={idx} className="flex items-start gap-3 border-b border-[#5E5653]/15 p-4 text-sm text-[#5E5653] last:border-b-0">
+                      <item.icon className="h-4 w-4 text-[#5E5653] mt-0.5 flex-shrink-0" />
                       <span>{item.text}</span>
                     </div>
                   ))}
@@ -111,13 +111,13 @@ export default function About() {
             </Card>
 
             <Card className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.transition} border-0`}>
-              <CardHeader className="border-b border-black/20">
+              <CardHeader className="border-b border-[#5E5653]/20">
                 <CardTitle className="uppercase">Academic Excellence</CardTitle>
               </CardHeader>
               <CardContent className="p-5">
                 <div className="space-y-2">
-                  <div className="mb-2 text-6xl font-black uppercase leading-none text-neutral-950">3.8 GPA</div>
-                  <p className="text-sm text-neutral-600 mb-4">McGill University, Distinction</p>
+                  <div className="mb-2 text-6xl font-black uppercase leading-none text-[#5E5653]">3.8 GPA</div>
+                  <p className="text-sm text-[#7B7F8A] mb-4">McGill University, Distinction</p>
                   <div className="space-y-2">
                     <p className="section-kicker mb-2">Course Highlights:</p>
                     {courseHighlights.map((course, idx) => (

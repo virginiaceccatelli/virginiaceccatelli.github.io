@@ -4,8 +4,8 @@ import { Badge } from "../components/ui/badge";
 
 const THEME = {
   surface: "bg-transparent",
-  surfaceBorder: "border-black/20",
-  surfaceHover: "hover:bg-black hover:text-[#f4f1ea]",
+  surfaceBorder: "border-[#5E5653]/20",
+  surfaceHover: "hover:bg-[#6B7C98] hover:text-[#E9E6E7]",
   transition: "transition-all duration-300",
 };
 
@@ -22,7 +22,7 @@ export default function Experience() {
       ],
       tags: ["Machine Learning", "LLM Infrastructure", "Cloud Native", "Deployment"],
       icon: Briefcase,
-      color: "text-zinc-300",
+      color: "text-[#7B7F8A]",
     },
     {
       type: "work",
@@ -36,7 +36,7 @@ export default function Experience() {
       ],
       tags: ["Systems Security", "AI Safety", "Mechanistic Interpretability", "Uncertainty Quantification"],
       icon: Briefcase,
-      color: "text-zinc-300",
+      color: "text-[#7B7F8A]",
     },
     {
       type: "work",
@@ -51,7 +51,7 @@ export default function Experience() {
       ],
       tags: ["AI Safety", "LALMs", "Code-Switching", "Dataset Creation"],
       icon: Briefcase,
-      color: "text-zinc-300",
+      color: "text-[#7B7F8A]",
     },
     {
       type: "work",
@@ -65,7 +65,7 @@ export default function Experience() {
       ],
       tags: ["Research", "Policy", "Security"],
       icon: Briefcase,
-      color: "text-zinc-300",
+      color: "text-[#7B7F8A]",
     },
     {
       type: "work",
@@ -79,7 +79,7 @@ export default function Experience() {
       ],
       tags: ["Teaching", "Python", "Mentoring"],
       icon: Briefcase,
-      color: "text-zinc-300",
+      color: "text-[#7B7F8A]",
     },    
     {
       type: "work",
@@ -94,7 +94,7 @@ export default function Experience() {
       ],
       tags: ["Computer Vision", "U-Net", "MobileNetV2", "Robotics", "Motion Planning"],
       icon: Briefcase,
-      color: "text-zinc-300",
+      color: "text-[#7B7F8A]",
     },
     {
       type: "work",
@@ -109,7 +109,7 @@ export default function Experience() {
       ],
       tags: ["Reinforcement Learning", "Data Cleaning", "Finance", "Analytics"],
       icon: Briefcase,
-      color: "text-zinc-300",
+      color: "text-[#7B7F8A]",
     },
     {
       type: "work",
@@ -123,7 +123,7 @@ export default function Experience() {
       ],
       tags: ["Cybersecurity Research", "Ransomware", "Policy", "Quant Analysis"],
       icon: Briefcase,
-      color: "text-zinc-300",
+      color: "text-[#7B7F8A]",
     },
   ];  
 
@@ -141,7 +141,7 @@ export default function Experience() {
         "Compiler Design (Graduate)",
       ],
       icon: GraduationCap,
-      color: "text-zinc-300",
+      color: "text-[#7B7F8A]",
     },
     {
       institution: "IE University",
@@ -158,7 +158,7 @@ export default function Experience() {
         "Foreign Aid",
       ],
       icon: GraduationCap,
-      color: "text-zinc-300",
+      color: "text-[#7B7F8A]",
     },
   ];  
 
@@ -168,14 +168,14 @@ export default function Experience() {
       org: "Udemy / Dion Training Solutions",
       year: "2025",
       icon: Award,
-      color: "text-zinc-300",
+      color: "text-[#7B7F8A]",
     },
     {
       title: "KPMG Data Analytics Virtual Internship",
       org: "Forage",
       year: "2023",
       icon: Award,
-      color: "text-zinc-400",
+      color: "text-[#7B7F8A]",
     },
   ];
 
@@ -211,13 +211,13 @@ export default function Experience() {
     <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8 py-14 md:py-20">
       <div className="mx-auto space-y-16">
         {/* Header */}
-        <div className="grid border-y border-black/20 py-6 md:grid-cols-[0.65fr_1.35fr]">
+        <div className="grid border-y border-[#5E5653]/20 py-6 md:grid-cols-[0.65fr_1.35fr]">
           <p className="section-kicker mb-4 md:mb-0">Archive / Skills</p>
           <div className="space-y-5">
           <h1 className="editorial-title text-5xl sm:text-6xl md:text-8xl lg:text-9xl">
             Experience & Skills
           </h1>
-          <p className="max-w-3xl text-2xl font-semibold leading-tight text-neutral-700 md:text-4xl">
+          <p className="max-w-3xl text-2xl font-semibold leading-tight text-[#6B7C98] md:text-4xl">
             My professional journey, education, and technical expertise
           </p>
           </div>
@@ -225,22 +225,22 @@ export default function Experience() {
 
         {/* Work Experience */}
         <section>
-          <h2 className="mb-6 flex items-center gap-3 border-b border-black/20 pb-3 text-4xl font-black uppercase">
-            <Briefcase className="h-7 w-7 text-neutral-950" />
+          <h2 className="mb-6 flex items-center gap-3 border-b border-[#5E5653]/20 pb-3 text-4xl font-black uppercase">
+            <Briefcase className="h-7 w-7 text-[#5E5653]" />
             Work Experience
           </h2>
-          <div className="border-x border-t border-black/20">
+          <div className="border-x border-t border-[#5E5653]/20">
             {experiences.map((exp, idx) => (
               <Card key={idx} className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.transition} border-0 border-b`}>
                 <div className="grid gap-0 md:grid-cols-[0.18fr_0.82fr]">
-                  <div className="flex items-start justify-between border-b border-black/20 p-5 md:block md:border-b-0 md:border-r">
+                  <div className="flex items-start justify-between border-b border-[#5E5653]/20 p-5 md:block md:border-b-0 md:border-r">
                     <span className="text-5xl font-black leading-none">0{idx + 1}</span>
                     <exp.icon className="h-6 w-6" />
                   </div>
                   <div className="p-5 md:p-7">
                     <h3 className="text-3xl font-black uppercase leading-none md:text-5xl">{exp.title}</h3>
-                    <p className="mt-3 text-lg font-semibold text-neutral-700">{exp.company}</p>
-                    <div className="mb-5 mt-4 flex flex-wrap items-center gap-4 text-sm text-neutral-600">
+                    <p className="mt-3 text-lg font-semibold text-[#6B7C98]">{exp.company}</p>
+                    <div className="mb-5 mt-4 flex flex-wrap items-center gap-4 text-sm text-[#7B7F8A]">
                       <span className="flex items-center gap-1">
                         <Calendar className="h-4 w-4" />
                         {exp.period}
@@ -250,10 +250,10 @@ export default function Experience() {
                         {exp.location}
                       </span>
                     </div>
-                    <ul className="mb-5 space-y-2 text-neutral-800">
+                    <ul className="mb-5 space-y-2 text-[#5E5653]">
                       {exp.description.map((item, i) => (
                         <li key={i} className="flex items-start gap-2">
-                          <span className="mt-1.5 text-neutral-950">•</span>
+                          <span className="mt-1.5 text-[#5E5653]">•</span>
                           <span>{item}</span>
                         </li>
                       ))}
@@ -272,25 +272,25 @@ export default function Experience() {
 
         {/* Education */}
         <section>
-          <h2 className="mb-6 flex items-center gap-3 border-b border-black/20 pb-3 text-4xl font-black uppercase">
-            <GraduationCap className="h-7 w-7 text-neutral-950" />
+          <h2 className="mb-6 flex items-center gap-3 border-b border-[#5E5653]/20 pb-3 text-4xl font-black uppercase">
+            <GraduationCap className="h-7 w-7 text-[#5E5653]" />
             Education
           </h2>
-          <div className="grid border-l border-t border-black/20 lg:grid-cols-2">
+          <div className="grid border-l border-t border-[#5E5653]/20 lg:grid-cols-2">
             {education.map((edu, idx) => (
               <Card key={idx} className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.transition} border-0 border-b border-r p-0`}>
                 <div>
-                  <div className="flex items-center justify-between border-b border-black/20 p-5">
+                  <div className="flex items-center justify-between border-b border-[#5E5653]/20 p-5">
                     <span className="section-kicker">Education 0{idx + 1}</span>
                     <edu.icon className="h-5 w-5" />
                   </div>
                   <div className="p-5 md:p-7">
                     <h3 className="mb-3 text-3xl font-black uppercase leading-none">{edu.degree}</h3>
-                    <p className="font-semibold text-neutral-700">
+                    <p className="font-semibold text-[#6B7C98]">
                       {edu.institution}
-                      {edu.note && <span className="text-neutral-500"> · {edu.note}</span>}
+                      {edu.note && <span className="text-[#AB978C]"> · {edu.note}</span>}
                     </p>
-                    <div className="mb-5 mt-4 flex flex-wrap items-center gap-4 text-sm text-neutral-600">
+                    <div className="mb-5 mt-4 flex flex-wrap items-center gap-4 text-sm text-[#7B7F8A]">
                       <span className="flex items-center gap-1">
                         <Calendar className="h-4 w-4" />
                         {edu.period}
@@ -299,7 +299,7 @@ export default function Experience() {
                         <MapPin className="h-4 w-4" />
                         {edu.location}
                       </span>
-                      <span className="font-semibold text-neutral-950">{edu.gpa}</span>
+                      <span className="font-semibold text-[#5E5653]">{edu.gpa}</span>
                     </div>
                     <div className="mt-4">
                       <p className="section-kicker mb-3">Course Highlights:</p>
@@ -320,20 +320,20 @@ export default function Experience() {
 
         {/* Certifications */}
         <section>
-          <h2 className="mb-6 flex items-center gap-3 border-b border-black/20 pb-3 text-4xl font-black uppercase">
-            <Award className="h-7 w-7 text-neutral-950" />
+          <h2 className="mb-6 flex items-center gap-3 border-b border-[#5E5653]/20 pb-3 text-4xl font-black uppercase">
+            <Award className="h-7 w-7 text-[#5E5653]" />
             Certifications & Courses
           </h2>
-          <div className="grid border-l border-t border-black/20 md:grid-cols-2">
+          <div className="grid border-l border-t border-[#5E5653]/20 md:grid-cols-2">
             {certifications.map((cert, idx) => (
               <Card key={idx} className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.transition} border-0 border-b border-r p-6`}>
                 <div className="flex items-start gap-4">
-                  <div className="border border-black/20 p-3">
+                  <div className="border border-[#5E5653]/20 p-3">
                     <cert.icon className="h-6 w-6" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold mb-1 text-neutral-950">{cert.title}</h3>
-                    <p className="text-sm text-neutral-600 mb-2">{cert.org}</p>
+                    <h3 className="font-semibold mb-1 text-[#5E5653]">{cert.title}</h3>
+                    <p className="text-sm text-[#7B7F8A] mb-2">{cert.org}</p>
                     <Badge variant="outline">{cert.year}</Badge>
                   </div>
                 </div>
@@ -344,15 +344,15 @@ export default function Experience() {
 
         {/* Skills */}
         <section>
-          <h2 className="mb-6 border-b border-black/20 pb-3 text-4xl font-black uppercase">Technical Skills</h2>
-          <div className="grid border-l border-t border-black/20 md:grid-cols-3">
+          <h2 className="mb-6 border-b border-[#5E5653]/20 pb-3 text-4xl font-black uppercase">Technical Skills</h2>
+          <div className="grid border-l border-t border-[#5E5653]/20 md:grid-cols-3">
             {Object.entries(skills).map(([group, items]) => (
               <Card key={group} className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.transition} border-0 border-b border-r p-6`}>
                 <h3 className="mb-5 text-2xl font-black uppercase">{group}</h3>
                 <div className="space-y-3">
                   {items.map((s) => (
                     <div key={s.name} className="flex items-center justify-between">
-                      <span className="text-neutral-800">{s.name}</span>
+                      <span className="text-[#5E5653]">{s.name}</span>
                       <Badge variant="secondary" className="text-xs">{s.level}</Badge>
                     </div>
                   ))}

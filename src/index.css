@@ -31,26 +31,26 @@
     --radius: 0.5rem
   }
   .dark {
-    --background: 42 28% 94%;
-    --foreground: 0 0% 6%;
+    --background: 330 4% 91%;
+    --foreground: 17 6% 35%;
   
-    --card: 42 28% 94%;
-    --card-foreground: 0 0% 6%;
+    --card: 330 4% 91%;
+    --card-foreground: 17 6% 35%;
   
-    --popover: 42 28% 94%;
-    --popover-foreground: 0 0% 6%;
+    --popover: 330 4% 91%;
+    --popover-foreground: 17 6% 35%;
   
-    --secondary: 42 18% 88%;
-    --secondary-foreground: 0 0% 6%;
+    --secondary: 22 15% 61%;
+    --secondary-foreground: 330 4% 91%;
   
-    --muted: 42 18% 88%;
-    --muted-foreground: 0 0% 30%;
+    --muted: 225 6% 51%;
+    --muted-foreground: 225 6% 51%;
   
-    --accent: 58 34% 67%;
-    --accent-foreground: 0 0% 6%;
+    --accent: 214 22% 51%;
+    --accent-foreground: 330 4% 91%;
   
-    --border: 0 0% 8%;
-    --input: 0 0% 8%;
+    --border: 17 6% 35%;
+    --input: 17 6% 35%;
   }
 }
 
@@ -60,17 +60,17 @@
   }
   html {
     scroll-behavior: smooth;
-    background: #f4f1ea;
+    background: #E9E6E7;
   }
   body {
     @apply font-sans;
-    background: #f4f1ea;
+    background: #E9E6E7;
     color: hsl(var(--foreground));
     font-feature-settings: "rlig" 1, "calt" 1;
   }
   ::selection {
-    background: #1b1b1b;
-    color: #f4f1ea;
+    background: #5E5653;
+    color: #E9E6E7;
   }
 }
 
@@ -86,10 +86,10 @@
     inset: 0;
     z-index: -1;
     background-image:
-      linear-gradient(rgba(0,0,0,0.055) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+      linear-gradient(rgba(94,86,83,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(107,124,152,0.055) 1px, transparent 1px);
     background-size: 42px 42px;
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.78), rgba(0,0,0,0.18) 46%, transparent);
+    mask-image: linear-gradient(to bottom, rgba(94,86,83,0.78), rgba(94,86,83,0.18) 46%, transparent);
     pointer-events: none;
   }
   .bg-glass-motion::after {
@@ -118,15 +118,15 @@
   }
 
   .glass {
-    background: rgba(244, 241, 234, 0.86);
-    border: 1px solid rgba(0, 0, 0, 0.18);
+    background: rgba(233, 230, 231, 0.86);
+    border: 1px solid rgba(94, 86, 83, 0.18);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     box-shadow: none;
   }
 
   .rule {
-    border-color: rgba(0, 0, 0, 0.18);
+    border-color: rgba(94, 86, 83, 0.18);
   }
   .paper-noise {
     position: relative;
@@ -154,8 +154,8 @@
     text-transform: uppercase;
   }
   .scroll-band {
-    border-top: 1px solid rgba(0,0,0,0.22);
-    border-bottom: 1px solid rgba(0,0,0,0.22);
+    border-top: 1px solid rgba(94,86,83,0.22);
+    border-bottom: 1px solid rgba(94,86,83,0.22);
     background: transparent;
   }
   @keyframes glassDrift {

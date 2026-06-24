@@ -5,8 +5,8 @@ import { Button } from "../components/ui/button";
 
 const THEME = {
   surface: "bg-transparent",
-  surfaceBorder: "border-black/20",
-  surfaceHover: "hover:bg-black hover:text-[#f4f1ea]",
+  surfaceBorder: "border-[#5E5653]/20",
+  surfaceHover: "hover:bg-[#6B7C98] hover:text-[#E9E6E7]",
   transition: "transition-all duration-300",
 };
 
@@ -21,7 +21,7 @@ export default function Projects() {
       repo: null,
       demo: "https://arxiv.org/abs/2606.06037",
       icon: Mic,
-      color: "text-zinc-400",
+      color: "text-[#7B7F8A]",
     },
     {
       title: "MS-VoxNews Dataset",
@@ -30,7 +30,7 @@ export default function Projects() {
       repo: null,
       demo: "https://huggingface.co/datasets/McGill-NLP/speech-translation-and-summarization",
       icon: Newspaper,
-      color: "text-zinc-400",
+      color: "text-[#7B7F8A]",
     },
     {
       title: "Trajectory-Based Uncertainty Quantification for LMs",
@@ -39,7 +39,7 @@ export default function Projects() {
       repo: null,
       demo: "",
       icon: Brain,
-      color: "text-zinc-400",
+      color: "text-[#7B7F8A]",
     },
     {
       title: "Reinforcement-Learning Data Preprocessing Pipeline Automation",
@@ -48,7 +48,7 @@ export default function Projects() {
       repo: null,
       demo: "",
       icon: Brain,
-      color: "text-zinc-400",
+      color: "text-[#7B7F8A]",
     },
     {
       title: "Robotic Ground Segmentation and Motion Decision",
@@ -57,7 +57,7 @@ export default function Projects() {
       repo: "https://github.com/virginiaceccatelli/vision_control",
       demo: "",
       icon: Code,
-      color: "text-zinc-400",
+      color: "text-[#7B7F8A]",
     },
     {
       title: "Cisco SOHO Network Simulation",
@@ -66,7 +66,7 @@ export default function Projects() {
       repo: "https://github.com/virginiaceccatelli/Cisco-Packet-Tracer-Projects",
       demo: "",
       icon: Network,
-      color: "text-zinc-400",
+      color: "text-[#7B7F8A]",
     },
   ];
 
@@ -74,7 +74,7 @@ export default function Projects() {
     <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8 py-14 md:py-20">
       <div className="mx-auto space-y-12">
         {/* Header */}
-        <div className="grid border-y border-black/20 py-6 md:grid-cols-[0.65fr_1.35fr]">
+        <div className="grid border-y border-[#5E5653]/20 py-6 md:grid-cols-[0.65fr_1.35fr]">
           <div className="mb-5 md:mb-0">
             <p className="section-kicker">Selected Work</p>
           </div>
@@ -82,14 +82,14 @@ export default function Projects() {
           <h1 className="editorial-title text-6xl md:text-8xl lg:text-9xl">
             My Projects
           </h1>
-          <p className="max-w-3xl text-2xl font-semibold leading-tight text-neutral-700 md:text-4xl">
+          <p className="max-w-3xl text-2xl font-semibold leading-tight text-[#6B7C98] md:text-4xl">
             A collection of my recent work in AI safety, robotics, data systems, and network security
           </p>
           <a
             href={GITHUB}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 border-b border-black text-sm font-semibold uppercase tracking-[0.14em] text-neutral-950 transition-colors hover:text-neutral-600"
+            className="inline-flex items-center gap-2 border-b border-[#5E5653] text-sm font-semibold uppercase tracking-[0.14em] text-[#5E5653] transition-colors hover:text-[#7B7F8A]"
           >
             <Github className="h-4 w-4" />
             See more on GitHub
@@ -98,14 +98,14 @@ export default function Projects() {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid border-l border-t border-black/20 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid border-l border-t border-[#5E5653]/20 md:grid-cols-2 xl:grid-cols-3">
           {projects.map((project, idx) => (
             <Card
               key={idx}
               className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.surfaceHover} ${THEME.transition} group min-h-[360px] border-0 border-b border-r p-0`}
             >
               <div className="flex h-full flex-col">
-                <div className="flex items-center justify-between border-b border-black/20 p-5">
+                <div className="flex items-center justify-between border-b border-[#5E5653]/20 p-5">
                   <span className="text-5xl font-black leading-none">0{idx + 1}</span>
                   <project.icon className="h-6 w-6" />
                 </div>
@@ -114,11 +114,11 @@ export default function Projects() {
                     {project.title}
                   </h3>
               
-                  <p className="mb-5 leading-relaxed text-neutral-700 group-hover:text-[#f4f1ea]">{project.blurb}</p>
+                  <p className="mb-5 leading-relaxed text-[#6B7C98] group-hover:text-[#E9E6E7]">{project.blurb}</p>
               
                   <div className="mb-5 flex flex-wrap gap-2">
                     {project.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="text-xs group-hover:border-[#f4f1ea]/40 group-hover:text-[#f4f1ea]">
+                      <Badge key={tag} variant="secondary" className="text-xs group-hover:border-[#E9E6E7]/40 group-hover:text-[#E9E6E7]">
                         {tag}
                       </Badge>
                     ))}
