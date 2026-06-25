@@ -40,7 +40,7 @@ export default function Experience() {
     },
     {
       type: "work",
-      title: "AI Safety Researcher – Audio Jailbreaking & Multilingual LLMs",
+      title: "AI Safety Researcher",
       company: "MILA Quebec AI Institute, Prof. David Adelani",
       location: "Montreal, Canada",
       period: "January 2026 - August 2026",
@@ -55,7 +55,7 @@ export default function Experience() {
     },
     {
       type: "work",
-      title: "Researcher",
+      title: "Cyber-Policy Researcher",
       company: "Andalus Committee (New York Office)",
       location: "New York, USA",
       period: "July 2025 - July 2026",

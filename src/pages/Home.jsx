@@ -53,9 +53,9 @@ export default function Home() {
       <section className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8 pt-12 md:pt-20 pb-10">
         <div className="grid min-h-[calc(100vh-7rem)] grid-rows-[auto_1fr_auto] border-x border-black/15">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 border-y border-black/20 text-[11px] font-semibold uppercase tracking-[0.18em]">
-            <div className="border-b border-black/20 p-3 sm:border-b-0 sm:border-r"></div>
-            <div className="border-b border-black/20 p-3 sm:border-b-0 sm:border-r"></div>
-            <div className="border-b border-black/20 p-3 sm:border-b-0 sm:border-r"></div>
+            <div className="border-b border-black/20 p-3 sm:border-b-0 sm:border-r">Hello!</div>
+            <div className="border-b border-black/20 p-3 sm:border-b-0 sm:border-r">★</div>
+            <div className="border-b border-black/20 p-3 sm:border-b-0 sm:border-r">★</div>
             <div className="p-3 text-left md:text-right">Portfolio / 2026</div>
           </div>
 
