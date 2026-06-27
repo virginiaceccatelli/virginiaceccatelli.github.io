@@ -6,10 +6,8 @@ import App from "./App.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <div className="dark">
     <HashRouter>
       <App />
     </HashRouter>
-    </div>
   </StrictMode>
 );

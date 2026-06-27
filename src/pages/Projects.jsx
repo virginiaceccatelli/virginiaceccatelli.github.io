@@ -1,153 +1,84 @@
-import { Github, ExternalLink, Code, Brain, Network, Mic, Newspaper } from "lucide-react";
-import { Card } from "../components/ui/card";
-import { Badge } from "../components/ui/badge";
-import { Button } from "../components/ui/button";
-
-const THEME = {
-  surface: "bg-transparent",
-  surfaceBorder: "border-black/20",
-  surfaceHover: "hover:bg-black hover:text-[#f4f1ea]",
-  transition: "transition-all duration-300",
-};
+import { useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 
 const GITHUB = "https://github.com/virginiaceccatelli";
 
-export default function Projects() {
-  const projects = [
-    {
-      title: "SpeechJBB: Code-Switched Speech Safety Evaluation",
-      blurb: "Audio jailbreak benchmark probing safety alignment and comprehension in large audio language models under code-switched and perturbed multilingual speech.",
-      tags: ["AI Safety", "LALMs", "Speech", "Code-Switching"],
-      repo: null,
-      demo: "https://arxiv.org/abs/2606.06037",
-      icon: Mic,
-      color: "text-zinc-400",
-    },
-    {
-      title: "MS-VoxNews Dataset",
-      blurb: "Multilingual corpus for joint summarization and translation of long-form spoken news in low-resource languages.",
-      tags: ["Dataset", "Speech", "Summarization", "Translation"],
-      repo: null,
-      demo: "https://huggingface.co/datasets/McGill-NLP/speech-translation-and-summarization",
-      icon: Newspaper,
-      color: "text-zinc-400",
-    },
-    {
-      title: "Trajectory-Based Uncertainty Quantification for LMs",
-      blurb: "Research framework combining mechanistic interpretability with residual-stream geometry to anticipate uncertainty and hallucinations before generation.",
-      tags: ["Mechanistic Interpretability", "Uncertainty", "LLMs"],
-      repo: null,
-      demo: "",
-      icon: Brain,
-      color: "text-zinc-400",
-    },
-    {
-      title: "Reinforcement-Learning Data Preprocessing Pipeline Automation",
-      blurb: "RL-driven data quality checks: outlier detection, imputation, and financial validity rules.",
-      tags: ["RL", "Pandas", "Sklearn"],
-      repo: null,
-      demo: "",
-      icon: Brain,
-      color: "text-zinc-400",
-    },
-    {
-      title: "Robotic Ground Segmentation and Motion Decision",
-      blurb: "Robotic empty space detection and CNN direction generation for robot navigation.",
-      tags: ["Pytorch", "TorchScript", "OpenCV"],
-      repo: "https://github.com/virginiaceccatelli/vision_control",
-      demo: "",
-      icon: Code,
-      color: "text-zinc-400",
-    },
-    {
-      title: "Cisco SOHO Network Simulation",
-      blurb: "Small Office, Home Office Network Configuration on Cisco Packet Tracer Platform.",
-      tags: ["Cisco", "Subnetting", "Routing"],
-      repo: "https://github.com/virginiaceccatelli/Cisco-Packet-Tracer-Projects",
-      demo: "",
-      icon: Network,
-      color: "text-zinc-400",
-    },
-  ];
-
+function Reveal({ children, delay = 0 }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-50px 0px" });
   return (
-    <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8 py-14 md:py-20">
-      <div className="mx-auto space-y-12">
-        {/* Header */}
-        <div className="grid border-y border-black/20 py-6 md:grid-cols-[0.65fr_1.35fr]">
-          <div className="mb-5 md:mb-0">
-            <p className="section-kicker">Selected Work</p>
+    <motion.div ref={ref} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay }}>
+      {children}
+    </motion.div>
+  );
+}
+
+const projects = [
+  { num: "01", title: "SpeechJBB: Code-Switched Speech Safety Evaluation", blurb: "Audio jailbreak benchmark probing safety alignment and comprehension in large audio language models under code-switched and perturbed multilingual speech.", tags: ["AI Safety", "LALMs", "Speech", "Code-Switching"], repo: null, link: "https://arxiv.org/abs/2606.06037", linkLabel: "View paper", status: "Published" },
+  { num: "02", title: "MS-VoxNews Dataset", blurb: "Multilingual corpus for joint summarization and translation of long-form spoken news in low-resource languages.", tags: ["Dataset", "Speech", "Summarization", "Translation"], repo: null, link: "https://huggingface.co/datasets/McGill-NLP/speech-translation-and-summarization", linkLabel: "View dataset", status: "Published" },
+  { num: "03", title: "Trajectory-Based Uncertainty Quantification", blurb: "Research framework combining mechanistic interpretability with residual-stream geometry to anticipate uncertainty and hallucinations in LMs before output generation.", tags: ["Mechanistic Interpretability", "Uncertainty", "LLMs"], repo: null, link: null, linkLabel: null, status: "Ongoing — UCL S2Lab" },
+  { num: "04", title: "RL Data Preprocessing Automation", blurb: "Reinforcement-learning-driven data quality pipeline: outlier detection, imputation, and financial validity rules to reduce manual preprocessing.", tags: ["Reinforcement Learning", "Pandas", "Sklearn", "Finance"], repo: null, link: null, linkLabel: null, status: "Wavestone · 2024" },
+  { num: "05", title: "Robotic Ground Segmentation & Motion Decision", blurb: "Real-time RGB-only ground segmentation using U-Net + MobileNetV2 backbone and CNN-based directional decision for autonomous indoor robot navigation.", tags: ["PyTorch", "TorchScript", "OpenCV", "Robotics"], repo: "https://github.com/virginiaceccatelli/vision_control", link: null, linkLabel: "View code", status: "McGill Prometheus Lab · 2025" },
+  { num: "06", title: "Cisco SOHO Network Simulation", blurb: "Small Office / Home Office network design and configuration on Cisco Packet Tracer, covering subnetting, VLANs, and routing protocols.", tags: ["Cisco", "Subnetting", "Routing", "Networking"], repo: "https://github.com/virginiaceccatelli/Cisco-Packet-Tracer-Projects", link: null, linkLabel: "View code", status: "2024" },
+];
+
+export default function Projects() {
+  return (
+    <div style={{ background: "transparent", paddingTop: "56px" }}>
+      <div style={{ maxWidth: "1440px", margin: "0 auto", padding: "0 2rem" }}>
+
+        <div style={{ padding: "6rem 0 5rem", borderBottom: "1px solid rgba(26,26,26,0.1)" }}>
+          <Reveal><p className="kicker" style={{ marginBottom: "1.5rem" }}>Selected Work</p></Reveal>
+          <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: "2rem" }}>
+            <Reveal delay={0.08}>
+              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(4rem, 13vw, 12rem)", fontWeight: 300, lineHeight: 0.88, letterSpacing: "-0.02em", color: "#1a1a1a", margin: 0 }}>Projects</h1>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <a href={GITHUB} target="_blank" rel="noreferrer" className="kicker link-underline" style={{ color: "#7c7068", textDecoration: "none", transition: "color 0.2s" }} onMouseEnter={e => (e.currentTarget.style.color = "#1a1a1a")} onMouseLeave={e => (e.currentTarget.style.color = "#7c7068")}>
+                See more on GitHub →
+              </a>
+            </Reveal>
           </div>
-          <div className="space-y-5">
-          <h1 className="editorial-title text-6xl md:text-8xl lg:text-9xl">
-            My Projects
-          </h1>
-          <p className="max-w-3xl text-2xl font-semibold leading-tight text-neutral-700 md:text-4xl">
-            A collection of my recent work in AI safety, robotics, data systems, and network security
-          </p>
-          <a
-            href={GITHUB}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 border-b border-black text-sm font-semibold uppercase tracking-[0.14em] text-neutral-950 transition-colors hover:text-neutral-600"
-          >
-            <Github className="h-4 w-4" />
-            See more on GitHub
-          </a>
-          </div>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", borderLeft: "1px solid rgba(26,26,26,0.1)", borderTop: "1px solid rgba(26,26,26,0.1)" }}>
+          {projects.map((project, i) => <ProjectCard key={project.num} project={project} delay={Math.min(i * 0.06, 0.3)} />)}
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid border-l border-t border-black/20 md:grid-cols-2 xl:grid-cols-3">
-          {projects.map((project, idx) => (
-            <Card
-              key={idx}
-              className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.surfaceHover} ${THEME.transition} group min-h-[360px] border-0 border-b border-r p-0`}
-            >
-              <div className="flex h-full flex-col">
-                <div className="flex items-center justify-between border-b border-black/20 p-5">
-                  <span className="text-5xl font-black leading-none">0{idx + 1}</span>
-                  <project.icon className="h-6 w-6" />
-                </div>
-                <div className="flex flex-1 flex-col p-5">
-                  <h3 className="mb-5 text-3xl font-black uppercase leading-none transition-colors">
-                    {project.title}
-                  </h3>
-              
-                  <p className="mb-5 leading-relaxed text-neutral-700 group-hover:text-[#f4f1ea]">{project.blurb}</p>
-              
-                  <div className="mb-5 flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="text-xs group-hover:border-[#f4f1ea]/40 group-hover:text-[#f4f1ea]">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-              
-                  <div className="mt-auto flex gap-3 pt-2">
-                    {project.repo && (
-                      <Button asChild variant="outline" size="sm">
-                        <a href={project.repo} target="_blank" rel="noreferrer" className="flex items-center gap-2">
-                          <Github className="h-4 w-4" />
-                          Code
-                        </a>
-                      </Button>
-                    )}
-                    {project.demo && (
-                      <Button asChild size="sm">
-                        <a href={project.demo} target="_blank" rel="noreferrer" className="flex items-center gap-2">
-                          <ExternalLink className="h-4 w-4" />
-                          View
-                        </a>
-                      </Button>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
+        <div style={{ height: "5rem" }} />
       </div>
     </div>
+  );
+}
+
+function ProjectCard({ project, delay }) {
+  const [hovered, setHovered] = useState(false);
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-60px 0px" });
+  const href = project.repo || project.link;
+  return (
+    <motion.div ref={ref} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay }}>
+      <div
+        onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
+        style={{ borderRight: "1px solid rgba(26,26,26,0.1)", borderBottom: "1px solid rgba(26,26,26,0.1)", padding: "2.5rem 2rem", minHeight: "360px", display: "flex", flexDirection: "column", background: hovered ? "#1a1a1a" : "transparent", transition: "background 0.45s cubic-bezier(0.16,1,0.3,1)", cursor: href ? "pointer" : "default" }}
+        onClick={() => href && window.open(href, "_blank")}
+      >
+        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "2rem" }}>
+          <span style={{ fontFamily: "'Faustina', serif", fontSize: "0.68rem", letterSpacing: "0.2em", textTransform: "uppercase", color: hovered ? "rgba(244,241,234,0.45)" : "#7c7068", transition: "color 0.45s" }}>{project.num}</span>
+          <span style={{ fontFamily: "'Faustina', serif", fontSize: "0.68rem", letterSpacing: "0.15em", textTransform: "uppercase", color: hovered ? "rgba(244,241,234,0.45)" : "#7c7068", transition: "color 0.45s" }}>{project.status}</span>
+        </div>
+        <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.5rem, 2.8vw, 2.2rem)", fontWeight: 300, lineHeight: 1.15, color: hovered ? "#f4f1ea" : "#1a1a1a", margin: "0 0 1.25rem 0", transition: "color 0.45s", flexGrow: 1 }}>{project.title}</h3>
+        <p style={{ fontFamily: "'Faustina', serif", fontSize: "0.9rem", lineHeight: 1.7, color: hovered ? "rgba(244,241,234,0.7)" : "#7c7068", margin: "0 0 1.5rem 0", transition: "color 0.45s" }}>{project.blurb}</p>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "1.5rem" }}>
+          {project.tags.map(tag => (
+            <span key={tag} style={{ fontFamily: "'Faustina', serif", fontSize: "0.68rem", letterSpacing: "0.1em", textTransform: "uppercase", border: `1px solid ${hovered ? "rgba(244,241,234,0.25)" : "rgba(26,26,26,0.18)"}`, padding: "0.3rem 0.65rem", color: hovered ? "rgba(244,241,234,0.65)" : "#7c7068", transition: "border-color 0.45s, color 0.45s" }}>{tag}</span>
+          ))}
+        </div>
+        {href && (
+          <a href={href} target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()} style={{ fontFamily: "'Faustina', serif", fontSize: "0.72rem", letterSpacing: "0.18em", textTransform: "uppercase", color: hovered ? "#f4f1ea" : "#1a1a1a", textDecoration: "none", borderBottom: `1px solid ${hovered ? "rgba(244,241,234,0.5)" : "rgba(26,26,26,0.3)"}`, paddingBottom: "2px", alignSelf: "flex-start", transition: "color 0.45s, border-color 0.45s" }}>
+            {project.linkLabel || "View"}
+          </a>
+        )}
+      </div>
+    </motion.div>
   );
 }

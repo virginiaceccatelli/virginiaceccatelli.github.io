@@ -1,70 +1,41 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    darkMode: ["class"],
-    content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
+  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-  	extend: {
-  		borderRadius: {
-  			lg: 'var(--radius)',
-  			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
-  		},
-  		animation: {
-  			'fade-in': 'fadeIn 0.6s ease-in-out',
-  		},
-  		keyframes: {
-  			fadeIn: {
-  				'from': { opacity: '0', transform: 'translateY(20px)' },
-  				'to': { opacity: '1', transform: 'translateY(0)' },
-  			},
-  		},
-		fontFamily: {
-			sans: ['"Faustina"', 'ui-serif', 'Georgia', 'serif'],
-		},		  
-  		colors: {
-  			background: 'hsl(var(--background))',
-  			foreground: 'hsl(var(--foreground))',
-  			card: {
-  				DEFAULT: 'hsl(var(--card))',
-  				foreground: 'hsl(var(--card-foreground))'
-  			},
-  			popover: {
-  				DEFAULT: 'hsl(var(--popover))',
-  				foreground: 'hsl(var(--popover-foreground))'
-  			},
-  			primary: {
-  				DEFAULT: 'hsl(var(--primary))',
-  				foreground: 'hsl(var(--primary-foreground))'
-  			},
-  			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))',
-  				foreground: 'hsl(var(--secondary-foreground))'
-  			},
-  			muted: {
-  				DEFAULT: 'hsl(var(--muted))',
-  				foreground: 'hsl(var(--muted-foreground))'
-  			},
-  			accent: {
-  				DEFAULT: 'hsl(var(--accent))',
-  				foreground: 'hsl(var(--accent-foreground))'
-  			},
-  			destructive: {
-  				DEFAULT: 'hsl(var(--destructive))',
-  				foreground: 'hsl(var(--destructive-foreground))'
-  			},
-  			border: 'hsl(var(--border))',
-  			input: 'hsl(var(--input))',
-  			ring: 'hsl(var(--ring))',
-  			chart: {
-  				'1': 'hsl(var(--chart-1))',
-  				'2': 'hsl(var(--chart-2))',
-  				'3': 'hsl(var(--chart-3))',
-  				'4': 'hsl(var(--chart-4))',
-  				'5': 'hsl(var(--chart-5))'
-  			}
-  		}
-  	}
+    extend: {
+      fontFamily: {
+        sans: ["'Faustina'", "ui-serif", "Georgia", "serif"],
+        display: ["'Cormorant Garamond'", "'Faustina'", "ui-serif", "Georgia", "serif"],
+      },
+      colors: {
+        cream: "#f4f1ea",
+        ink: "#1a1a1a",
+        muted: "#7c7068",
+        warm: "#9b7c5c",
+        placeholder: "#e4dfd5",
+      },
+      borderRadius: {
+        DEFAULT: "0",
+        sm: "0",
+        md: "0",
+        lg: "0",
+        xl: "0",
+      },
+      animation: {
+        "fade-in": "fadeIn 1s ease-out forwards",
+        "slide-up": "slideUp 1s cubic-bezier(0.16,1,0.3,1) forwards",
+      },
+      keyframes: {
+        fadeIn: {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
+        slideUp: {
+          from: { opacity: "0", transform: "translateY(36px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+      },
+    },
   },
   plugins: [require("tailwindcss-animate")],
-}
-
+};

@@ -1,120 +1,70 @@
-import { FileText, ExternalLink } from "lucide-react";
-import { Card } from "../components/ui/card";
-import { Badge } from "../components/ui/badge";
+import { useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 
-const THEME = {
-  surface: "bg-transparent",
-  surfaceBorder: "border-black/20",
-  surfaceHover: "hover:bg-black hover:text-[#f4f1ea]",
-  transition: "transition-all duration-300",
-};
+function Reveal({ children, delay = 0 }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-50px 0px" });
+  return (
+    <motion.div ref={ref} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay }}>
+      {children}
+    </motion.div>
+  );
+}
+
+const writings = [
+  { num: "01", title: "SpeechJBB: Probing Safety Alignment and Comprehension in Large Audio Language Models under Code-Switched Speech", description: "Introduces an audio-based code-switching jailbreak dataset for multilingual speech safety evaluation, showing how code-switched and perturbed multilingual speech can expose weaknesses in large audio language model safety alignment.", tags: ["AI Safety", "Speech", "Code-Switching", "LALMs"], year: "2026", type: "Preprint", link: "https://arxiv.org/abs/2606.06037" },
+  { num: "02", title: "Sky Diplomacy: The Geopolitical Impact of the Proliferation of Iranian-Russian Military Drone Trade on Global Alliances and Security", description: "Focusing on the historical context of Iranian trade with Russia and China as well as recent developments, this study analyzes how armed UAV drones are contributing to the shifting world order and how this is impacting the West from various points of view.", tags: ["UAV", "Policy", "Security", "Geopolitics"], year: "2024", type: "Article", link: "https://ipr.blogs.ie.edu/wp-content/uploads/sites/574/2024/02/Sky-Diplomacy-Final-Draft.docx-1.pdf" },
+  { num: "03", title: "CNN Robotic Vision for Ground Segmentation — U-Net Applicability", description: "Implements a ground segmentation model using U-Net and determines a robot's directional movement decision based on obstacle-free zones. Purely vision-based, portable, and computationally lightweight — useful for prototyping computer vision for robotic navigation.", tags: ["Robotics", "Computer Vision", "Convolutional Neural Networks"], year: "2025", type: "Research Paper", link: "https://github.com/virginiaceccatelli/vision_control" },
+  { num: "04", title: "Securing the Digital Frontier: U.S.–Sub-Saharan Africa Cybersecurity Partnerships in the Shadow of China's Digital Silk Road", description: "Examines U.S. opportunities to strengthen cybersecurity cooperation with Kenya and Ethiopia as both nations navigate rapid digital transformation in East Africa, with implications for Global North–South technology collaboration.", tags: ["Policy", "Cybersecurity", "Digital Silk Road", "Africa"], year: "2025", type: "Policy Report", link: "https://65bead61-ada5-408e-9924-c7be6e498634.filesusr.com/ugd/d98a02_77af6c01d90f4c0f8e7df233cab6cd35.pdf" },
+];
 
 export default function Writing() {
-  const writings = [
-    {
-      title: "SpeechJBB: Probing Safety Alignment and Comprehension in Large Audio Language Models under Code-Switched Speech",
-      description: "Introduces an audio-based code-switching jailbreak dataset for multilingual speech safety evaluation, showing how code-switched and perturbed multilingual speech can expose weaknesses in large audio language model safety alignment.",
-      tags: ["AI Safety", "Speech", "Code-Switching", "LALMs"],
-      year: "2026",
-      type: "Preprint",
-      link: "https://arxiv.org/abs/2606.06037",
-      icon: FileText,
-      color: "text-zinc-400",
-    },
-    {
-      title: "Sky Diplomacy: The Geopolitical Impact of the Proliferation of Iranian-Russian Military Drone Trade on Global Alliances and Security",
-      description: "Focusing on the historical context of Iranian trade with Russia and China, as well as recent developments, the study analyzes how armed UAV drones are contributing to the shifting world order, wherein Russia and China are increasingly taking on a leading role, and how this is impacting the West from various points of view.",
-      tags: ["UAV", "Policy", "Security"],
-      year: "2024",
-      type: "Article",
-      link: "https://ipr.blogs.ie.edu/wp-content/uploads/sites/574/2024/02/Sky-Diplomacy-Final-Draft.docx-1.pdf",
-      icon: FileText,
-      color: "text-zinc-400",
-    },
-    {
-      title: "CNN Robotic Vision for Ground Segmentation - U-Net Applicability",
-      description: "This project implements a model that performs ground segmentation using a U-Net model and determines a robot's directional movement decision based on obstacle-free zones. This approach is purely vision-based, portable, and computationally lightweight - it might be useful for prototyping computer vision for robotic navigation on simple laptops.",
-      tags: ["Robotics", "Computer Vision", "Convolutional Neural Networks"],
-      year: "2025",
-      type: "Research Paper",
-      link: "https://github.com/virginiaceccatelli/vision_control",
-      icon: FileText,
-      color: "text-zinc-400",
-    },
-    {
-      title: "Securing the Digital Frontier: U.S.-Sub-Saharan Africa Cybersecurity Partnerships in the Shadow of China’s Digital Silk Road",
-      description: "This policy report, released by the Andalus Committee's New York Office, examines the United States' opportunities to strengthen cybersecurity cooperation with Kenya and Ethiopia as both nations navigate rapid digital transformation in East Africa.",
-      tags: ["Policy", "Cybersecurity", "Digital Silk Road"],
-      year: "2025",
-      type: "Policy Report",
-      link: "https://65bead61-ada5-408e-9924-c7be6e498634.filesusr.com/ugd/d98a02_77af6c01d90f4c0f8e7df233cab6cd35.pdf",
-      icon: FileText,
-      color: "text-zinc-400",
-    },
-  ];
-
   return (
-    <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8 py-14 md:py-20">
-      <div className="mx-auto space-y-12">
-        {/* Header */}
-        <div className="grid border-y border-black/20 py-6 md:grid-cols-[0.65fr_1.35fr]">
-          <p className="section-kicker mb-5 md:mb-0">Papers / Articles</p>
-          <div className="space-y-5">
-          <h1 className="editorial-title text-6xl md:text-8xl lg:text-9xl">
-            Papers & Articles
-          </h1>
-          <p className="max-w-3xl text-2xl font-semibold leading-tight text-neutral-700 md:text-4xl">
-            Research papers, articles, and technical writing
-          </p>
-          </div>
+    <div style={{ background: "transparent", paddingTop: "56px" }}>
+      <div style={{ maxWidth: "1440px", margin: "0 auto", padding: "0 2rem" }}>
+
+        <div style={{ padding: "6rem 0 5rem", borderBottom: "1px solid rgba(26,26,26,0.1)" }}>
+          <Reveal><p className="kicker" style={{ marginBottom: "1.5rem" }}>Papers / Articles</p></Reveal>
+          <Reveal delay={0.08}>
+            <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(4rem, 12vw, 11rem)", fontWeight: 300, lineHeight: 0.88, letterSpacing: "-0.02em", color: "#1a1a1a", margin: 0 }}>Writing</h1>
+          </Reveal>
         </div>
 
-        {/* Writings Grid */}
-        <div className="border-x border-t border-black/20">
-          {writings.map((writing, idx) => (
-            <Card
-              key={idx}
-              className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.surfaceHover} ${THEME.transition} group border-0 border-b`}
-            >
-              <div className="grid md:grid-cols-[0.22fr_0.78fr]">
-                <div className="flex items-start justify-between border-b border-black/20 p-5 md:block md:border-b-0 md:border-r">
-                  <span className="text-5xl font-black leading-none">0{idx + 1}</span>
-                  <writing.icon className="mt-4 h-6 w-6" />
-                </div>
-                <div className="p-5 md:p-8">
-                  <h3 className="mb-5 text-3xl font-black uppercase leading-none transition-colors md:text-5xl">
-                    {writing.title}
-                  </h3>
-                  <p className="mb-5 max-w-4xl text-lg leading-relaxed text-neutral-700 group-hover:text-[#f4f1ea]">{writing.description}</p>
-                  
-                  <div className="mb-5 flex flex-wrap gap-2">
-                    {writing.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="text-xs group-hover:border-[#f4f1ea]/40 group-hover:text-[#f4f1ea]">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <div className="section-kicker">
-                      {writing.year} • {writing.type}
-                    </div>
-                    <a
-                      href={writing.link}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-2 border-b border-current text-sm font-semibold uppercase tracking-[0.14em] transition-colors"
-                    >
-                      <span>Read</span>
-                      <ExternalLink className="h-4 w-4" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          ))}
+        <div>
+          {writings.map((item, i) => <WritingRow key={item.num} item={item} delay={Math.min(i * 0.07, 0.28)} />)}
+          <div style={{ height: "1px", background: "rgba(26,26,26,0.1)" }} />
         </div>
+        <div style={{ height: "5rem" }} />
       </div>
     </div>
+  );
+}
+
+function WritingRow({ item, delay }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-40px 0px" });
+  return (
+    <motion.div ref={ref} initial={{ opacity: 0, y: 18 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay }} style={{ borderTop: "1px solid rgba(26,26,26,0.1)" }}>
+      <div onClick={() => setOpen(!open)} style={{ display: "grid", gridTemplateColumns: "56px 1fr auto", gap: "2rem", alignItems: "start", padding: "2.5rem 0", cursor: "pointer" }}>
+        <span className="kicker" style={{ paddingTop: "0.6rem" }}>{item.num}</span>
+        <div>
+          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.5rem, 3.2vw, 2.6rem)", fontWeight: 300, lineHeight: 1.12, color: "#1a1a1a", margin: "0 0 0.5rem 0" }}>{item.title}</p>
+          <span className="kicker">{item.year} · {item.type}</span>
+        </div>
+        <span className="kicker" style={{ paddingTop: "0.6rem", transition: "transform 0.3s", transform: open ? "rotate(45deg)" : "none" }}>+</span>
+      </div>
+      <motion.div initial={false} animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }} transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }} style={{ overflow: "hidden" }}>
+        <div style={{ paddingLeft: "calc(56px + 2rem)", paddingBottom: "2.5rem", display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+          <p style={{ fontFamily: "'Faustina', serif", fontSize: "0.95rem", lineHeight: 1.78, color: "#3a3530", margin: 0, maxWidth: "680px" }}>{item.description}</p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+            {item.tags.map(tag => (
+              <span key={tag} style={{ fontFamily: "'Faustina', serif", fontSize: "0.68rem", letterSpacing: "0.12em", textTransform: "uppercase", border: "1px solid rgba(26,26,26,0.18)", padding: "0.35rem 0.75rem", color: "#7c7068" }}>{tag}</span>
+            ))}
+          </div>
+          <a href={item.link} target="_blank" rel="noreferrer" className="kicker link-underline" style={{ color: "#1a1a1a", textDecoration: "none" }}>Read {item.type} →</a>
+        </div>
+      </motion.div>
+    </motion.div>
   );
 }

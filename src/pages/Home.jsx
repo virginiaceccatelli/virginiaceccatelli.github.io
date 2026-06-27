@@ -1,166 +1,217 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, ShieldCheck, GraduationCap, ScanEye, ServerCog } from "lucide-react";
-import profileImg from "../assets/foto.png";
-import { Button } from "../components/ui/button";
-import { Badge } from "../components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
+import { useState, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
-const THEME = {
-  surface: "bg-transparent",
-  surfaceBorder: "border-black/20",
-  surfaceHover: "hover:bg-black hover:text-[#f4f1ea]",
-  transition: "transition-all duration-300",
-};
+const GITHUB = "https://github.com/virginiaceccatelli";
+const EMAIL = "virginia.ceccatelli@mail.mcgill.ca";
+
+function Reveal({ children, delay = 0, style = {} }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-60px 0px" });
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 28 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay }}
+      style={style}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function ExploreTile({ dest, delay }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <Reveal delay={delay}>
+      <Link
+        to={dest.path}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        style={{
+          display: "flex", flexDirection: "column", justifyContent: "space-between",
+          padding: "2.5rem 2rem", minHeight: "220px",
+          textDecoration: "none",
+          background: hovered ? "#1a1a1a" : "transparent",
+          transition: "background 0.45s cubic-bezier(0.16,1,0.3,1)",
+          borderRight: "1px solid rgba(26,26,26,0.1)", cursor: "pointer",
+        }}
+      >
+        <p style={{ fontFamily: "'Faustina', serif", fontSize: "0.68rem", letterSpacing: "0.2em", textTransform: "uppercase", color: hovered ? "rgba(244,241,234,0.55)" : "#7c7068", margin: 0, transition: "color 0.45s" }}>
+          {dest.sub}
+        </p>
+        <div>
+          <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.2rem, 4vw, 3.2rem)", fontWeight: 300, lineHeight: 1, color: hovered ? "#f4f1ea" : "#1a1a1a", margin: "0 0 1.25rem 0", transition: "color 0.45s" }}>
+            {dest.label}
+          </h3>
+          <span style={{ fontFamily: "'Faustina', serif", fontSize: "0.9rem", color: hovered ? "rgba(244,241,234,0.6)" : "#7c7068", transition: "color 0.45s" }}>→</span>
+        </div>
+      </Link>
+    </Reveal>
+  );
+}
+
+const focusAreas = [
+  { num: "01", area: "AI Safety & Security", sub: "Mechanistic interpretability, uncertainty quantification, multilingual speech safety evaluation" },
+  { num: "02", area: "Systems Security", sub: "Trajectory-based uncertainty frameworks, residual-stream geometry, hallucination anticipation" },
+  { num: "03", area: "Cybersecurity Policy", sub: "U.S.–Africa partnerships, Digital Silk Road dynamics, global north-south collaboration" },
+];
+
+const destinations = [
+  { label: "About", path: "/about", sub: "Background & profile" },
+  { label: "Experience", path: "/experience", sub: "Work & education" },
+  { label: "Projects", path: "/projects", sub: "Selected work" },
+  { label: "Writing", path: "/writing", sub: "Papers & articles" },
+];
 
 export default function Home() {
-  const NAME = "Virginia Ceccatelli";
-  const TAGLINE = "AI Safety | Systems Security | Cybersecurity Policy";
-  const ROLE = "McGill Computer Science Alumni";
-  const LOCATION = "Montreal, Canada";
-
-  const focusAreas = [
-    "Mechanistic Interpretability",
-    "Uncertainty Quantification",
-    "Multilingual Speech Safety",
-    "AI Safety & Security",
-    "Systems Security",
-    "Cybersecurity Policy",
-  ];
-
-  const highlights = [
-    {
-      icon: GraduationCap,
-      title: "3.8 GPA",
-      description: "McGill CS + Economics",
-      color: "text-zinc-300",
-    },
-    {
-      icon: ScanEye,
-      title: "Systems Security Researcher",
-      description: "UCL S2Lab",
-      color: "text-zinc-300",
-    },
-    {
-      icon: ServerCog,
-      title: "ML Intern",
-      description: "WIIT Premium Cloud",
-      color: "text-zinc-300",
-    },
-  ];
-
   return (
-    <div className="relative">
-      <section className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8 pt-12 md:pt-20 pb-10">
-        <div className="grid min-h-[calc(100vh-7rem)] grid-rows-[auto_1fr_auto] border-x border-black/15">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 border-y border-black/20 text-[11px] font-semibold uppercase tracking-[0.18em]">
-            <div className="border-b border-black/20 p-3 sm:border-b-0 sm:border-r">Hello!</div>
-            <div className="border-b border-black/20 p-3 sm:border-b-0 sm:border-r">★</div>
-            <div className="border-b border-black/20 p-3 sm:border-b-0 sm:border-r">★</div>
-            <div className="p-3 text-left md:text-right">Portfolio / 2026</div>
-          </div>
+    <div style={{ background: "transparent" }}>
 
-          <div className="grid lg:grid-cols-[1.15fr_0.85fr]">
-            <div className="flex flex-col justify-between border-b border-black/20 p-4 sm:p-8 lg:border-b-0 lg:border-r">
-              <div className="space-y-6">
-                <h1 className="editorial-title text-[12.5vw] sm:text-[16vw] lg:text-[9.6vw]">
-                  {NAME.split(" ")[0]}
-                  <br />
-                  {NAME.split(" ")[1]}
-                </h1>
-                <p className="max-w-3xl border-t border-black/20 pt-5 text-2xl font-semibold leading-tight text-neutral-950 md:text-4xl">
-                  {ROLE}
-                </p>
-              </div>
+      {/* HERO */}
+      <section style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 2rem 4.5rem", maxWidth: "1440px", margin: "0 auto", position: "relative" }}>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+        >
+          <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(5.5rem, 17vw, 20rem)", fontWeight: 300, lineHeight: 0.86, letterSpacing: "-0.02em", color: "#1a1a1a", margin: 0 }}>
+            Virginia<br />Ceccatelli
+          </h1>
+        </motion.div>
 
-              <div className="mt-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-                <div className="flex flex-wrap gap-2">
-                  {TAGLINE.split("|").map((t) => (
-                    <Badge key={t.trim()} variant="secondary" className="px-4 py-2">
-                      {t.trim()}
-                    </Badge>
-                  ))}
-                </div>
-                <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                  <Button asChild size="lg" className="group w-full sm:w-auto">
-                    <Link to="/projects" className="flex items-center gap-2">
-                      View Projects
-                      <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </Button>
-                  <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
-                    <Link to="/experience">My Experience</Link>
-                  </Button>
-                </div>
-              </div>
-            </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.9 }}
+          style={{ marginTop: "2.5rem", display: "flex", flexWrap: "wrap", gap: "1.5rem 3rem", alignItems: "center" }}
+        >
+          <span className="kicker">AI Safety · Systems Security · Cybersecurity Policy</span>
+          <span className="kicker" style={{ color: "rgba(124,112,104,0.5)" }}>McGill CS · UCL S2Lab · MILA</span>
+        </motion.div>
 
-            <div className="grid content-between">
-              <div className="grid grid-cols-[1fr_auto] gap-4 p-4 sm:p-8">
-                <div className="section-kicker">Profile</div>
-                <ShieldCheck className="h-5 w-5" />
-              </div>
-              <div className="px-4 sm:px-8">
-                <img
-                  src={profileImg}
-                  alt={NAME}
-                  className="aspect-[4/5] w-full border border-black/25 object-cover grayscale contrast-125"
-                />
-              </div>
-              <div className="grid grid-cols-1 border-t border-black/20">
-                {highlights.map((item, idx) => (
-                  <Card key={idx} className={`${THEME.surface} ${THEME.surfaceBorder} ${THEME.surfaceHover} ${THEME.transition} border-0 border-b last:border-b-0`}>
-                    <CardContent className="grid grid-cols-[0.22fr_0.78fr] gap-4 p-5">
-                      <div className="flex items-center justify-between gap-3">
-                        <span className="section-kicker">0{idx + 1}</span>
-                        <item.icon className={`h-5 w-5 ${item.color}`} />
-                      </div>
-                      <div>
-                        <h3 className="text-2xl font-black uppercase leading-none">{item.title}</h3>
-                        <p className="mt-2 text-sm text-neutral-600">{item.description}</p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.6, duration: 0.8 }}
+          className="kicker"
+          style={{ position: "absolute", bottom: "3rem", right: "2rem", writingMode: "vertical-lr", color: "rgba(26,26,26,0.28)" }}
+        >
+          scroll
+        </motion.span>
       </section>
 
-      <section className="scroll-band">
-        <div className="mx-auto grid max-w-[1500px] grid-cols-1 md:grid-cols-[0.8fr_1.2fr]">
-          <div className="border-b border-black/20 p-6 md:border-b-0 md:border-r">
-            <CardTitle className="flex items-center gap-2 text-2xl uppercase">
-              <ShieldCheck className="h-5 w-5" />
-              Areas of Interest
-            </CardTitle>
+      <div style={{ height: "1px", background: "rgba(26,26,26,0.1)", maxWidth: "1440px", margin: "0 auto" }} />
+
+      {/* INTRO */}
+      <section style={{ maxWidth: "1440px", margin: "0 auto", padding: "7rem 2rem", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "4rem", alignItems: "start" }}>
+        <Reveal>
+          <p className="kicker" style={{ marginBottom: "1.5rem" }}>Profile</p>
+          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.7rem, 3.2vw, 2.6rem)", fontWeight: 300, lineHeight: 1.28, color: "#1a1a1a", margin: "0 0 2rem 0", maxWidth: "520px" }}>
+            McGill Computer Science alum working at the intersection of AI safety, systems security, and cybersecurity policy.
+          </p>
+          <Link to="/about" className="kicker link-underline" style={{ color: "#1a1a1a", textDecoration: "none" }}>
+            Full profile →
+          </Link>
+        </Reveal>
+
+        <Reveal delay={0.12}>
+          <div style={{ aspectRatio: "3/4", overflow: "hidden", maxWidth: "360px" }}>
+            <img src="/foto.png" alt="Virginia Ceccatelli" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            {focusAreas.map((area) => (
-              <div key={area} className="border-b border-r border-black/20 p-5 text-xl font-semibold uppercase leading-tight last:border-r-0">
-                {area}
+        </Reveal>
+
+        <Reveal delay={0.08}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
+            {[
+              { label: "Currently at", value: "UCL S2Lab · WIIT Premium Cloud" },
+              { label: "Based in", value: "London, UK" },
+              { label: "Education", value: "McGill University — CS + Economics, 3.8 GPA" },
+              { label: "Prev. research", value: "MILA Québec AI Institute" },
+              { label: "Contact", value: EMAIL, href: `mailto:${EMAIL}` },
+            ].map(item => (
+              <div key={item.label} style={{ borderTop: "1px solid rgba(26,26,26,0.1)", padding: "1.5rem 0" }}>
+                <p className="kicker" style={{ margin: "0 0 0.4rem 0" }}>{item.label}</p>
+                {item.href
+                  ? <a href={item.href} style={{ fontFamily: "'Faustina', serif", fontSize: "0.95rem", color: "#1a1a1a", textDecoration: "none" }} className="link-underline">{item.value}</a>
+                  : <p style={{ fontFamily: "'Faustina', serif", fontSize: "0.95rem", color: "#1a1a1a", margin: 0 }}>{item.value}</p>
+                }
               </div>
             ))}
           </div>
+        </Reveal>
+      </section>
+
+      <div style={{ height: "1px", background: "rgba(26,26,26,0.1)", maxWidth: "1440px", margin: "0 auto" }} />
+
+      {/* FOCUS AREAS */}
+      <section style={{ maxWidth: "1440px", margin: "0 auto", padding: "7rem 2rem 0" }}>
+        <Reveal><p className="kicker" style={{ marginBottom: "3rem" }}>Areas of Focus</p></Reveal>
+        {focusAreas.map((area, i) => <FocusRow key={area.num} area={area} delay={i * 0.1} />)}
+        <div style={{ height: "1px", background: "rgba(26,26,26,0.1)" }} />
+      </section>
+
+      {/* EXPLORE TILES */}
+      <section style={{ maxWidth: "1440px", margin: "0 auto", padding: "7rem 2rem" }}>
+        <Reveal><p className="kicker" style={{ marginBottom: "3rem" }}>Explore</p></Reveal>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", border: "1px solid rgba(26,26,26,0.1)" }}>
+          {destinations.map((dest, i) => <ExploreTile key={dest.path} dest={dest} delay={i * 0.06} />)}
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8 py-10">
-        <div className="grid border border-black/20 md:grid-cols-3">
-          <div className="border-b border-black/20 p-8 md:border-b-0 md:border-r">
-            <div className="text-5xl font-black uppercase leading-none">McGill</div>
-            <div className="mt-3 text-neutral-600">Computer Science + Economics</div>
+      {/* CONNECT */}
+      <section style={{ borderTop: "1px solid rgba(26,26,26,0.1)", maxWidth: "1440px", margin: "0 auto", padding: "5rem 2rem", display: "flex", flexWrap: "wrap", gap: "2rem 4rem", alignItems: "center", justifyContent: "space-between" }}>
+        <Reveal>
+          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 300, margin: 0, lineHeight: 1 }}>Get in touch.</p>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <a href={`mailto:${EMAIL}`} className="kicker link-underline" style={{ color: "#1a1a1a", textDecoration: "none" }}>{EMAIL}</a>
+        </Reveal>
+        <Reveal delay={0.15}>
+          <div style={{ display: "flex", gap: "2rem" }}>
+            {[
+              { label: "GitHub", href: GITHUB },
+              { label: "LinkedIn", href: "https://www.linkedin.com/in/virginia-ceccatelli/" },
+              { label: "Scholar", href: "https://scholar.google.com/citations?user=kk8BWhAAAAAJ&hl=en" },
+            ].map(l => (
+              <a key={l.href} href={l.href} target="_blank" rel="noreferrer"
+                className="kicker link-underline"
+                style={{ color: "#7c7068", textDecoration: "none", transition: "color 0.2s" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "#1a1a1a")}
+                onMouseLeave={e => (e.currentTarget.style.color = "#7c7068")}
+              >{l.label}</a>
+            ))}
           </div>
-          <div className="border-b border-black/20 p-8 md:border-b-0 md:border-r">
-            <div className="text-5xl font-black uppercase leading-none">UCL</div>
-            <div className="mt-3 text-neutral-600">S2Lab Systems Security</div>
-          </div>
-          <div className="p-8">
-            <div className="text-5xl font-black uppercase leading-none">MILA</div>
-            <div className="mt-3 text-neutral-600">Multilingual AI Safety</div>
-          </div>
-        </div>
+        </Reveal>
       </section>
     </div>
+  );
+}
+
+function FocusRow({ area, delay }) {
+  const [hovered, setHovered] = useState(false);
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-40px 0px" });
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{ display: "grid", gridTemplateColumns: "64px 1fr", gap: "2rem", alignItems: "start", borderTop: "1px solid rgba(26,26,26,0.1)", padding: "2.75rem 0", cursor: "default" }}
+    >
+      <span className="kicker" style={{ paddingTop: "0.5rem" }}>{area.num}</span>
+      <div>
+        <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 5.5vw, 4.5rem)", fontWeight: 300, lineHeight: 1, margin: "0 0 0.75rem 0", color: "#1a1a1a", transition: "opacity 0.3s", opacity: hovered ? 0.5 : 1 }}>
+          {area.area}
+        </h3>
+        <p style={{ fontFamily: "'Faustina', serif", fontSize: "0.92rem", lineHeight: 1.65, color: "#7c7068", margin: 0, maxWidth: "520px" }}>
+          {area.sub}
+        </p>
+      </div>
+    </motion.div>
   );
 }
