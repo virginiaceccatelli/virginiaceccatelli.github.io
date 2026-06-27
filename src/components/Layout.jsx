@@ -9,24 +9,24 @@ const SCHOLAR = "https://scholar.google.com/citations?user=kk8BWhAAAAAJ&hl=en";
 const EMAIL = "virginia.ceccatelli@mail.mcgill.ca";
 
 const NAV = [
-  { path: "/about", label: "About" },
+  { path: "/about",      label: "About"      },
   { path: "/experience", label: "Experience" },
-  { path: "/projects", label: "Projects" },
-  { path: "/writing", label: "Writing" },
+  { path: "/projects",   label: "Projects"   },
+  { path: "/writing",    label: "Writing"    },
 ];
 
 const SOCIAL = [
-  { label: EMAIL, href: `mailto:${EMAIL}` },
-  { label: "GitHub", href: GITHUB },
-  { label: "LinkedIn", href: LINKEDIN },
+  { label: "GitHub",         href: GITHUB },
   { label: "Google Scholar", href: SCHOLAR },
+  { label: "LinkedIn",       href: LINKEDIN },
+  { label: EMAIL,            href: `mailto:${EMAIL}` },
 ];
 
 const PALETTE = [
-  "#b8a9d4", "#c9b38a", "#a8c4b0", "#d4a8a8",
-  "#9ab4c8", "#c4b8a0", "#b4a8c4", "#a0b8b4",
-  "#c8b890", "#b4a0b8", "#a8b8a0", "#c4a890",
-  "#a8b0c4", "#c0a8a4", "#a8b8a8", "#b8a8b8",
+  "#b8a9d4","#c9b38a","#a8c4b0","#d4a8a8",
+  "#9ab4c8","#c4b8a0","#b4a8c4","#a0b8b4",
+  "#c8b890","#b4a0b8","#a8b8a0","#c4a890",
+  "#a8b0c4","#c0a8a4","#a8b8a8","#b8a8b8",
 ];
 
 function pickColors() {
@@ -34,27 +34,24 @@ function pickColors() {
 }
 
 const BLOB_CONFIG = [
-  { style: { top: "5vh",    left:  "5vw",  width: "45vw", height: "45vw" }, anim: { x: [0,  80, -50,  30, 0], y: [0,  60, -70,  40, 0] }, duration: 22 },
-  { style: { top: "0vh",    right: "5vw",  width: "40vw", height: "40vw" }, anim: { x: [0, -70,  55, -30, 0], y: [0,  80, -60,  35, 0] }, duration: 18 },
-  { style: { bottom: "10vh",left:  "15vw", width: "48vw", height: "48vw" }, anim: { x: [0,  60, -65,  25, 0], y: [0, -70,  55, -30, 0] }, duration: 26 },
-  { style: { bottom: "5vh", right: "10vw", width: "38vw", height: "38vw" }, anim: { x: [0, -60,  50, -20, 0], y: [0, -55,  65, -25, 0] }, duration: 20 },
+  { style: { top: "5vh",    left:  "5vw",  width: "45vw", height: "45vw" }, anim: { x: [0,  80,-50, 30,0], y: [0,  60,-70, 40,0] }, duration: 22 },
+  { style: { top: "0vh",    right: "5vw",  width: "40vw", height: "40vw" }, anim: { x: [0, -70, 55,-30,0], y: [0,  80,-60, 35,0] }, duration: 18 },
+  { style: { bottom:"10vh", left: "15vw",  width: "48vw", height: "48vw" }, anim: { x: [0,  60,-65, 25,0], y: [0, -70, 55,-30,0] }, duration: 26 },
+  { style: { bottom: "5vh", right:"10vw",  width: "38vw", height: "38vw" }, anim: { x: [0, -60, 50,-20,0], y: [0, -55, 65,-25,0] }, duration: 20 },
 ];
 
-/* Three-line hamburger → animated X */
 function Hamburger({ open }) {
-  const bar = (transform) => ({
-    display: "block",
-    width: "22px",
-    height: "1.5px",
+  const bar = (extra) => ({
+    display: "block", width: "22px", height: "1.5px",
     background: "#1a1a1a",
     transition: "transform 0.3s ease, opacity 0.3s ease",
-    transform,
+    ...extra,
   });
   return (
-    <span style={{ display: "flex", flexDirection: "column", gap: "5px", justifyContent: "center" }}>
-      <span style={bar(open ? "translateY(6.5px) rotate(45deg)"  : "none")} />
-      <span style={{ ...bar("none"), opacity: open ? 0 : 1 }}                />
-      <span style={bar(open ? "translateY(-6.5px) rotate(-45deg)" : "none")} />
+    <span style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+      <span style={bar({ transform: open ? "translateY(6.5px) rotate(45deg)"  : "none" })} />
+      <span style={bar({ opacity: open ? 0 : 1 })} />
+      <span style={bar({ transform: open ? "translateY(-6.5px) rotate(-45deg)" : "none" })} />
     </span>
   );
 }
@@ -63,9 +60,16 @@ export default function Layout({ children }) {
   const location = useLocation();
   const [scrolled,   setScrolled]   = useState(false);
   const [menuOpen,   setMenuOpen]   = useState(false);
+  const [isMobile,   setIsMobile]   = useState(() => window.innerWidth < 768);
   const [blobColors, setBlobColors] = useState(() => pickColors());
 
   const shuffleColors = useCallback(() => setBlobColors(pickColors()), []);
+
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -83,6 +87,14 @@ export default function Layout({ children }) {
   const closeMenu = () => setMenuOpen(false);
   const isActive  = (path) => location.pathname === path;
 
+  const navBg = scrolled || menuOpen
+    ? "rgba(250,248,244,0.95)"
+    : "transparent";
+  const navBorder = scrolled || menuOpen
+    ? "1px solid rgba(26,26,26,0.08)"
+    : "1px solid transparent";
+  const navBlur = scrolled || menuOpen ? "blur(18px)" : "none";
+
   return (
     <div
       style={{ minHeight: "100vh", background: "transparent", color: "#1a1a1a" }}
@@ -93,7 +105,14 @@ export default function Layout({ children }) {
         <motion.div key={i}
           animate={cfg.anim}
           transition={{ duration: cfg.duration, ease: "easeInOut", repeat: Infinity, repeatType: "loop" }}
-          style={{ position: "fixed", borderRadius: "50%", filter: "blur(70px)", opacity: 0.65, zIndex: 10, mixBlendMode: "multiply", pointerEvents: "none", backgroundColor: blobColors[i], transition: "background-color 1.6s cubic-bezier(0.16,1,0.3,1)", ...cfg.style }}
+          style={{
+            position: "fixed", borderRadius: "50%", filter: "blur(70px)",
+            opacity: 0.65, zIndex: 10, mixBlendMode: "multiply",
+            pointerEvents: "none",
+            backgroundColor: blobColors[i],
+            transition: "background-color 1.6s cubic-bezier(0.16,1,0.3,1)",
+            ...cfg.style,
+          }}
         />
       ))}
 
@@ -102,13 +121,13 @@ export default function Layout({ children }) {
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 300,
         height: "56px", display: "flex", alignItems: "center", padding: "0 1.5rem",
         transition: "background 0.5s ease, border-color 0.5s ease",
-        background: scrolled || menuOpen ? "rgba(250,248,244,0.95)" : "transparent",
-        borderBottom: scrolled || menuOpen ? "1px solid rgba(26,26,26,0.08)" : "1px solid transparent",
-        backdropFilter: scrolled || menuOpen ? "blur(18px)" : "none",
-        WebkitBackdropFilter: scrolled || menuOpen ? "blur(18px)" : "none",
+        background: navBg, borderBottom: navBorder,
+        backdropFilter: navBlur, WebkitBackdropFilter: navBlur,
       }}>
-        <div style={{ maxWidth: "1440px", margin: "0 auto", width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-
+        <div style={{
+          maxWidth: "1440px", margin: "0 auto", width: "100%",
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+        }}>
           {/* Brand */}
           <Link to="/"
             style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.35rem", fontWeight: 400, letterSpacing: "0.06em", color: "#1a1a1a", textDecoration: "none", transition: "opacity 0.25s" }}
@@ -118,92 +137,87 @@ export default function Layout({ children }) {
           </Link>
 
           {/* Desktop nav */}
-          <nav style={{ display: "flex", gap: "2.5rem", alignItems: "center" }} className="hidden md:flex">
-            {NAV.map(item => <NavLink key={item.path} to={item.path} active={isActive(item.path)}>{item.label}</NavLink>)}
-            <a href={RESUME_PATH} download="Virginia_Ceccatelli_CV.pdf"
-              className="kicker link-underline"
-              style={{ color: "#7c7068", transition: "color 0.2s" }}
-              onMouseEnter={e => (e.currentTarget.style.color = "#1a1a1a")}
-              onMouseLeave={e => (e.currentTarget.style.color = "#7c7068")}>
-              CV
-            </a>
-          </nav>
+          {!isMobile && (
+            <nav style={{ display: "flex", gap: "2.5rem", alignItems: "center" }}>
+              {NAV.map(item => (
+                <NavLink key={item.path} to={item.path} active={isActive(item.path)}>
+                  {item.label}
+                </NavLink>
+              ))}
+              <a href={RESUME_PATH} download="Virginia_Ceccatelli_CV.pdf"
+                className="kicker link-underline"
+                style={{ color: "#7c7068", transition: "color 0.2s" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "#1a1a1a")}
+                onMouseLeave={e => (e.currentTarget.style.color = "#7c7068")}>
+                CV
+              </a>
+            </nav>
+          )}
 
           {/* Hamburger — mobile only */}
-          <button
-            onClick={e => { e.stopPropagation(); setMenuOpen(o => !o); }}
-            className="md:hidden"
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            style={{ background: "none", border: "none", cursor: "pointer", padding: "8px", lineHeight: 0 }}
-          >
-            <Hamburger open={menuOpen} />
-          </button>
+          {isMobile && (
+            <button
+              onClick={e => { e.stopPropagation(); setMenuOpen(o => !o); }}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              style={{ background: "none", border: "none", cursor: "pointer", padding: "8px", lineHeight: 0 }}
+            >
+              <Hamburger open={menuOpen} />
+            </button>
+          )}
         </div>
       </header>
 
       {/* Mobile dropdown */}
       <AnimatePresence>
-        {menuOpen && (
+        {menuOpen && isMobile && (
           <>
-            {/* Backdrop — closes menu on tap outside */}
-            <motion.div
-              key="backdrop"
+            {/* Backdrop */}
+            <motion.div key="backdrop"
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               onClick={e => { e.stopPropagation(); closeMenu(); }}
-              style={{ position: "fixed", inset: 0, zIndex: 295, background: "rgba(0,0,0,0.08)" }}
+              style={{ position: "fixed", inset: 0, zIndex: 295, background: "rgba(0,0,0,0.06)" }}
             />
 
             {/* Dropdown panel */}
-            <motion.div
-              key="dropdown"
-              initial={{ opacity: 0, y: -6 }}
+            <motion.div key="dropdown"
+              initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
+              exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 position: "fixed", top: "56px", left: 0, right: 0, zIndex: 296,
                 background: "rgba(250,248,244,0.97)",
                 backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)",
                 borderBottom: "1px solid rgba(26,26,26,0.1)",
-                paddingBottom: "0.5rem",
               }}
             >
               {NAV.map(item => (
-                <Link
-                  key={item.path}
-                  to={item.path}
+                <Link key={item.path} to={item.path}
                   onClick={e => { e.stopPropagation(); closeMenu(); }}
                   style={{
                     display: "flex", alignItems: "center", justifyContent: "space-between",
-                    padding: "0.85rem 1.5rem",
+                    padding: "0.9rem 1.5rem",
                     fontFamily: "'Faustina', serif", fontSize: "0.68rem",
                     letterSpacing: "0.2em", textTransform: "uppercase",
                     color: isActive(item.path) ? "#1a1a1a" : "#7c7068",
                     textDecoration: "none",
                     borderBottom: "1px solid rgba(26,26,26,0.06)",
-                    background: "transparent",
-                  }}
-                >
+                  }}>
                   {item.label}
                   {isActive(item.path) && (
-                    <span style={{ width: "4px", height: "4px", borderRadius: "50%", background: "#1a1a1a", flexShrink: 0 }} />
+                    <span style={{ width: "4px", height: "4px", borderRadius: "50%", background: "#1a1a1a" }} />
                   )}
                 </Link>
               ))}
-
-              {/* CV row */}
-              <a
-                href={RESUME_PATH}
-                download="Virginia_Ceccatelli_CV.pdf"
+              <a href={RESUME_PATH} download="Virginia_Ceccatelli_CV.pdf"
                 onClick={e => { e.stopPropagation(); closeMenu(); }}
                 style={{
-                  display: "block", padding: "0.85rem 1.5rem",
+                  display: "block", padding: "0.9rem 1.5rem",
                   fontFamily: "'Faustina', serif", fontSize: "0.68rem",
                   letterSpacing: "0.2em", textTransform: "uppercase",
                   color: "#7c7068", textDecoration: "none",
-                }}
-              >
+                }}>
                 CV — Download
               </a>
             </motion.div>
@@ -212,12 +226,10 @@ export default function Layout({ children }) {
       </AnimatePresence>
 
       {/* Content */}
-      <motion.main
-        key={location.pathname}
+      <motion.main key={location.pathname}
         initial={{ opacity: 0 }} animate={{ opacity: 1 }}
         transition={{ duration: 0.45, ease: "easeOut" }}
-        style={{ position: "relative", zIndex: 1 }}
-      >
+        style={{ position: "relative", zIndex: 1 }}>
         {children}
       </motion.main>
 
