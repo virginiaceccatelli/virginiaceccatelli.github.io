@@ -59,7 +59,7 @@ function ProjectCard({ project, delay }) {
     <motion.div ref={ref} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay }}>
       <div
         onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
-        style={{ borderRight: "1px solid rgba(26,26,26,0.1)", borderBottom: "1px solid rgba(26,26,26,0.1)", padding: "2.5rem 2rem", minHeight: "360px", display: "flex", flexDirection: "column", background: hovered ? "#1a1a1a" : "transparent", transition: "background 0.45s cubic-bezier(0.16,1,0.3,1)", cursor: href ? "pointer" : "default" }}
+        style={{ borderRight: "1px solid rgba(26,26,26,0.1)", borderBottom: "1px solid rgba(26,26,26,0.1)", padding: "2.5rem 2rem", height: "420px", display: "flex", flexDirection: "column", background: hovered ? "#1a1a1a" : "transparent", transition: "background 0.45s cubic-bezier(0.16,1,0.3,1)", cursor: href ? "pointer" : "default" }}
         onClick={() => href && window.open(href, "_blank")}
       >
         <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "2rem" }}>

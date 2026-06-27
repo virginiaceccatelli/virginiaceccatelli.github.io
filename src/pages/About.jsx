@@ -61,7 +61,7 @@ export default function About() {
               </Reveal>
             ))}
           </div>
-          <div style={{ padding: "5rem 0 5rem 3rem" }}>
+          <div style={{ padding: "3rem 0 5rem 3rem" }}>
             <Reveal>
               <div style={{ aspectRatio: "3/4", overflow: "hidden", marginBottom: "3rem", maxWidth: "380px" }}>
                 <img src="/first.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
@@ -89,7 +89,7 @@ export default function About() {
             ))}
           </div>
           <div style={{ padding: "5rem 0 5rem 3rem" }}>
-            <Reveal><p className="kicker" style={{ marginBottom: "1rem" }}>Academic Excellence</p></Reveal>
+            <Reveal><p className="kicker" style={{ marginBottom: "0.4rem" }}>Academic Excellence</p></Reveal>
             <Reveal delay={0.06}>
               <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(3.5rem, 8vw, 7rem)", fontWeight: 300, lineHeight: 1, color: "#1a1a1a", margin: "0 0 0.5rem 0" }}>3.8</p>
               <p className="kicker" style={{ marginBottom: "3rem" }}>GPA · McGill University · Distinction</p>
