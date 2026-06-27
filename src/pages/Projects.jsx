@@ -66,15 +66,15 @@ function ProjectCard({ project, delay }) {
           <span style={{ fontFamily: "'Faustina', serif", fontSize: "0.68rem", letterSpacing: "0.2em", textTransform: "uppercase", color: hovered ? "rgba(244,241,234,0.45)" : "#7c7068", transition: "color 0.45s" }}>{project.num}</span>
           <span style={{ fontFamily: "'Faustina', serif", fontSize: "0.68rem", letterSpacing: "0.15em", textTransform: "uppercase", color: hovered ? "rgba(244,241,234,0.45)" : "#7c7068", transition: "color 0.45s" }}>{project.status}</span>
         </div>
-        <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.5rem, 2.8vw, 2.2rem)", fontWeight: 300, lineHeight: 1.15, color: hovered ? "#f4f1ea" : "#1a1a1a", margin: "0 0 1.25rem 0", transition: "color 0.45s", flexGrow: 1 }}>{project.title}</h3>
-        <p style={{ fontFamily: "'Faustina', serif", fontSize: "0.9rem", lineHeight: 1.7, color: hovered ? "rgba(244,241,234,0.7)" : "#7c7068", margin: "0 0 1.5rem 0", transition: "color 0.45s" }}>{project.blurb}</p>
+        <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.5rem, 2.8vw, 2.2rem)", fontWeight: 300, lineHeight: 1.15, color: hovered ? "#f4f1ea" : "#1a1a1a", margin: "0 0 1rem 0", transition: "color 0.45s" }}>{project.title}</h3>
+        <p style={{ fontFamily: "'Faustina', serif", fontSize: "0.9rem", lineHeight: 1.7, color: hovered ? "rgba(244,241,234,0.7)" : "#7c7068", margin: "0 0 1.25rem 0", transition: "color 0.45s", flexGrow: 1, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 4, WebkitBoxOrient: "vertical" }}>{project.blurb}</p>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "1.5rem" }}>
           {project.tags.map(tag => (
             <span key={tag} style={{ fontFamily: "'Faustina', serif", fontSize: "0.68rem", letterSpacing: "0.1em", textTransform: "uppercase", border: `1px solid ${hovered ? "rgba(244,241,234,0.25)" : "rgba(26,26,26,0.18)"}`, padding: "0.3rem 0.65rem", color: hovered ? "rgba(244,241,234,0.65)" : "#7c7068", transition: "border-color 0.45s, color 0.45s" }}>{tag}</span>
           ))}
         </div>
         {href && (
-          <a href={href} target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()} style={{ fontFamily: "'Faustina', serif", fontSize: "0.72rem", letterSpacing: "0.18em", textTransform: "uppercase", color: hovered ? "#f4f1ea" : "#1a1a1a", textDecoration: "none", borderBottom: `1px solid ${hovered ? "rgba(244,241,234,0.5)" : "rgba(26,26,26,0.3)"}`, paddingBottom: "2px", alignSelf: "flex-start", transition: "color 0.45s, border-color 0.45s" }}>
+          <a href={href} target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()} style={{ fontFamily: "'Faustina', serif", fontSize: "0.72rem", letterSpacing: "0.18em", textTransform: "uppercase", color: hovered ? "#f4f1ea" : "#1a1a1a", textDecoration: "none", borderBottom: `1px solid ${hovered ? "rgba(244,241,234,0.5)" : "rgba(26,26,26,0.3)"}`, paddingBottom: "2px", alignSelf: "flex-start", marginTop: "auto", transition: "color 0.45s, border-color 0.45s" }}>
             {project.linkLabel || "View"}
           </a>
         )}

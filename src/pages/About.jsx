@@ -61,7 +61,7 @@ export default function About() {
               </Reveal>
             ))}
           </div>
-          <div style={{ padding: "3rem 0 5rem 3rem" }}>
+          <div style={{ padding: "5rem 0 5rem 3rem", display: "flex", flexDirection: "column", justifyContent: "center" }}>
             <Reveal>
               <div style={{ aspectRatio: "3/4", overflow: "hidden", marginBottom: "3rem", maxWidth: "380px" }}>
                 <img src="/first.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
