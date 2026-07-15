@@ -53,8 +53,8 @@ function ExploreTile({ dest, delay }) {
 }
 
 const focusAreas = [
-  { num: "01", area: "AI Safety & Security", sub: "Mechanistic interpretability, uncertainty quantification, multilingual speech safety evaluation" },
-  { num: "02", area: "Systems Security", sub: "Trajectory-based uncertainty frameworks, residual-stream geometry, hallucination anticipation" },
+  { num: "01", area: "AI Safety & Security", sub: "Multilingual speech-safety evaluation, jailbreak benchmarks, agentic red-teaming and hardening" },
+  { num: "02", area: "Interpretability & Program Analysis", sub: "Trajectory-based uncertainty probes, tracing data flow and security taint in code models, activation patching" },
   { num: "03", area: "Cybersecurity Policy", sub: "U.S.–Africa partnerships, Digital Silk Road dynamics, global north-south collaboration" },
 ];
 
@@ -87,7 +87,7 @@ export default function Home() {
           transition={{ duration: 1, delay: 0.9 }}
           style={{ marginTop: "2.5rem", display: "flex", flexWrap: "wrap", gap: "1.5rem 3rem", alignItems: "center" }}
         >
-          <span className="kicker">AI Safety · Systems Security · Cybersecurity Policy</span>
+          <span className="kicker">AI Safety · AI Security · Cybersecurity Policy</span>
           <span className="kicker" style={{ color: "rgba(124,112,104,0.5)" }}>McGill CS · UCL S2Lab · MILA</span>
         </motion.div>
 
@@ -109,7 +109,7 @@ export default function Home() {
         <Reveal>
           <p className="kicker" style={{ marginBottom: "1.5rem" }}>Profile</p>
           <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.7rem, 3.2vw, 2.6rem)", fontWeight: 300, lineHeight: 1.28, color: "#1a1a1a", margin: "0 0 2rem 0", maxWidth: "520px" }}>
-            McGill Computer Science alum working at the intersection of AI safety, systems security, and cybersecurity policy.
+            McGill Computer Science alum working at the intersection of AI safety, AI security, and cybersecurity policy.
           </p>
           <Link to="/about" className="kicker link-underline" style={{ color: "#1a1a1a", textDecoration: "none" }}>
             Full profile →

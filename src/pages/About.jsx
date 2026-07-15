@@ -30,10 +30,10 @@ const courses = [
 ];
 
 const bio = [
-  "I'm a McGill University Computer Science alum with a strong interest in AI safety, systems security, and cybersecurity policy. Originally trained in International Relations at IE University, I developed a deep interest in the societal dimensions of technology — particularly how global events intersect with cybersecurity threats.",
+  "I'm a McGill University Computer Science alum with a strong interest in AI safety, systems security, and cybersecurity policy. Originally trained in International Relations at IE University, I developed a deep interest in the societal dimensions of technology, particularly how global events intersect with cybersecurity threats.",
   "This curiosity led me to pivot and complete a BA in Computer Science with a Minor in Economics at McGill, where I explored the technical underpinnings of machine learning, networks, compiler design, and systems programming.",
-  "My research has moved between technical security and policy questions: I studied ransomware activity around elections, developed a vision-based ground segmentation pipeline for autonomous indoor navigation, and contributed to multilingual speech safety work at MILA, including SpeechJBB and the MS-VoxNews dataset.",
-  "Currently, I'm working with UCL S2Lab on trajectory-based uncertainty quantification for language models, combining mechanistic interpretability with residual-stream geometry to anticipate uncertainty and hallucinations before output generation. I am also joining WIIT Premium Cloud as a Machine Learning Intern focused on cloud-native infrastructure for LLM workloads.",
+  "My research has moved between technical security and policy questions: I studied ransomware activity around elections, developed a vision-based ground segmentation pipeline for autonomous indoor navigation, and led multilingual speech safety work at MILA; including SpeechJBB, an audio code-switching jailbreak benchmark published at EMNLP 2026, and the dataset underpinning VoxSumm, built in collaboration with Google DeepMind.",
+  "Currently, I'm an AI Security Researcher with UCL S2Lab, developing trajectory-based probes for LLM uncertainty estimation and a program-analysis framework that traces binding, data flow, and security taint through code models, verified with causal interventions like activation patching. I'm also an AI Security Intern at WIIT — The Premium Cloud, building an agentic purple-teaming loop that continuously red-teams AI agents and autonomously hardens them.",
 ];
 
 export default function About() {

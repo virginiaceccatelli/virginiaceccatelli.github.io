@@ -12,19 +12,19 @@ function Reveal({ children, delay = 0 }) {
 }
 
 const work = [
-  { title: "Machine Learning Intern", company: "WIIT — The Premium Cloud", location: "Düsseldorf, Germany", period: "July 2026 – Current", bullets: ["Leading development and deployment of a cloud-native cluster for large language model workloads."], tags: ["Machine Learning", "LLM Infrastructure", "Cloud Native"] },
-  { title: "Systems Security Researcher", company: "UCL S2Lab — Prof. Lorenzo Cavallaro", location: "London, UK", period: "June 2026 – Current", bullets: ["Developing a trajectory-based uncertainty quantification framework for language models.", "Combining mechanistic interpretability with residual-stream geometry to anticipate uncertainty and hallucinations before output generation."], tags: ["Systems Security", "AI Safety", "Mechanistic Interpretability"] },
-  { title: "AI Safety Researcher", company: "MILA Québec AI Institute — Prof. David Adelani", location: "Montréal, Canada", period: "January 2026 – August 2026", bullets: ["Led SpeechJBB, an audio-based code-switching jailbreak dataset for multilingual speech safety evaluation.", "Exposed weaknesses in large audio language model safety alignment under code-switched and perturbed multilingual speech.", "Created the dataset for MS-VoxNews, a multilingual corpus for joint summarization and translation of long-form spoken news in low-resource languages."], tags: ["AI Safety", "LALMs", "Code-Switching", "Dataset Creation"] },
+  { title: "AI Security Intern", company: "WIIT — The Premium Cloud", location: "Düsseldorf, Germany", period: "July 2026 – Current", bullets: ["Collaborating with WIIT AI Engineers to build an agentic purple-teaming loop that continuously red-teams AI agents and autonomously hardens them, integrating HikmaAI's enforcement layer as the runtime control.", "Spearheading an automated attacker with a defined taxonomy — prompt injection, tool-parameter manipulation, and goal hijacking — alongside safety pillars such as bias and misinformation.", "Producing an evaluation harness to quantify detection, bypass, and false-positive rates across attack vectors."], tags: ["AI Security", "Red-Teaming", "Agentic Systems"] },
+  { title: "AI Security Researcher", company: "UCL S2Lab — Prof. Lorenzo Cavallaro", location: "London, UK (Remote)", period: "June 2026 – Current", bullets: ["Co-developed and validated a taxonomy of internal LLM uncertainty signals, introducing trajectory-based probes that improved uncertainty estimation across four model families while reducing inference cost relative to sampling-based methods.", "Built a framework to trace binding, data flow, control dependence, and security taint flow in code models, benchmarking ~2,000 synthetic and real Python programs with causal interventions and leakage-resistant controls.", "Verifying causal use of semantic representations via activation patching, and stress-testing robustness under semantics-preserving transformations across 5 obfuscation levels."], tags: ["AI Security", "Interpretability", "Program Analysis"] },
+  { title: "AI Safety Researcher", company: "MILA Québec AI Institute — Prof. David Adelani", location: "Montréal, Canada", period: "January 2026 – August 2026", bullets: ["Led SpeechJBB, the first audio-based code-switching jailbreak dataset for multilingual speech-safety evaluation, exposing weaknesses in SOTA LALM safety alignment; published at EMNLP 2026 (Main Conference).", "Identified that non-English code-switching increased mean jailbreak success by 28% and reduced refusal by 14.4% relative to monolingual speech; introduced a pseudo-word obfuscation attack increasing jailbreak success by 34%.", "Created the dataset underpinning VoxSumm, a multilingual corpus for joint summarization and translation of long-form spoken news in low-resource languages, developed in collaboration with Google DeepMind."], tags: ["AI Safety", "LALMs", "Code-Switching", "Dataset Creation"] },
   { title: "Cyber-Policy Researcher", company: "Andalus Committee — New York Office", location: "New York, USA", period: "July 2025 – July 2026", bullets: ["Authored a policy paper on developing U.S.–Africa cybersecurity partnerships within the emerging Digital Silk Road.", "Explored opportunities for Global North–South collaboration on cybersecurity and emerging technologies."], tags: ["Research", "Policy", "Cybersecurity"] },
   { title: "Vice President", company: "Girls Who Code McGill", location: "Montréal, Canada", period: "August 2024 – May 2026", bullets: ["Directed internal operations for McGill's Girls Who Code chapter.", "Developed a Python curriculum and recruited more than 50 volunteer instructors for weekly classes across Montréal high schools."], tags: ["Teaching", "Python", "Mentoring"] },
-  { title: "Robotic Vision Researcher", company: "McGill Prometheus Lab — Prof. Joseph Vybihal", location: "Montréal, Canada", period: "May 2025 – August 2025", bullets: ["Developed a real-time ground-segmentation and motion-planning system using a U-Net with a MobileNetV2 backbone.", "Engineered an RGB-only semantic-segmentation pipeline as a low-cost alternative to LIDAR-based navigation."], tags: ["Computer Vision", "U-Net", "MobileNetV2", "Robotics"] },
-  { title: "Financial Optimization Intern", company: "Wavestone", location: "Munich, Germany", period: "June 2024 – July 2024", bullets: ["Led development of a reinforcement-learning approach to automate data cleaning and reduce manual preprocessing.", "Presented outcomes to actuarial leadership, focusing on measurable efficiency gains in financial data processing."], tags: ["Reinforcement Learning", "Data Cleaning", "Finance"] },
+  { title: "Computer Vision Researcher", company: "McGill Prometheus Lab — Prof. Joseph Vybihal", location: "Montréal, Canada", period: "May 2025 – August 2025", bullets: ["Devised a ground-segmentation and motion-planning system in C++ (U-Net, MobileNetV2), deployed across images, video, and live webcam for autonomous indoor navigation, reaching 0.91 validation IoU on a custom-labelled dataset.", "Selected the deployment checkpoint via safety-driven evaluation, prioritising small-obstacle detection and calibrated confidence on ambiguous surfaces over peak IoU."], tags: ["Computer Vision", "U-Net", "MobileNetV2", "Robotics"] },
+  { title: "Digital Transformation Intern", company: "Wavestone", location: "Munich, Germany", period: "June 2024 – July 2024", bullets: ["Designed an RL system — environment, state & action spaces, and reward function — to automate data cleaning tasks; reduced records requiring manual review by 29% while preserving 96% correction precision.", "Improved the validity, accuracy, and completeness of financial datasets; deployed across the German actuarial department."], tags: ["Reinforcement Learning", "Data Cleaning", "Finance"] },
   { title: "IR & Cybersecurity Researcher", company: "IE University — Prof. Karen Nershi", location: "Madrid, Spain", period: "February 2024 – May 2024", bullets: ["Analyzed ransomware activity patterns during election cycles linked to multiple state actors.", "Produced a structured literature review on ransomware and cyber insurance, identifying gaps between research and policy frameworks."], tags: ["Cybersecurity Research", "Ransomware", "Policy"] },
 ];
 
 const education = [
-  { institution: "McGill University", degree: "BA — Computer Science (Major), Economics (Minor)", location: "Montréal, Canada", period: "2024 – 2026", gpa: "3.8 GPA · Distinction", highlights: ["Operating Systems", "Applied Machine Learning (Graduate)", "Computer Networks (Graduate)", "Compiler Design (Graduate)"] },
-  { institution: "IE University", degree: "BA — International Relations (transferred after Year 2)", location: "Madrid, Spain", period: "2022 – 2024", gpa: "9.02/10 · Dean's List", highlights: ["Comparative Politics", "International Law", "Quantitative Methods", "International Political Economy"] },
+  { institution: "McGill University", degree: "BA — Computer Science (Major), Economics (Minor)", location: "Montréal, Canada", period: "2024 – 2026", gpa: "3.8 GPA · Graduated with Distinction (top 25%)", highlights: ["Applied Machine Learning (Graduate)", "Computer Networks (Graduate)", "Compiler Design (Graduate)", "Operating Systems"] },
+  { institution: "IE University", degree: "BSc — International Relations (transferred after Year 2)", location: "Madrid, Spain", period: "2022 – 2024", gpa: "9.0/10 · Dean's List (top 10%)", highlights: ["Comparative Politics", "International Law", "Quantitative Methods", "International Political Economy", "Foreign Aid"] },
 ];
 
 const certs = [
@@ -34,19 +34,20 @@ const certs = [
 
 const skills = {
   "Languages": [
-    { name: "Python", level: "Experienced" }, { name: "Java", level: "Experienced" },
-    { name: "C / C++", level: "Intermediate" }, { name: "Assembly", level: "Intermediate" },
-    { name: "OCaml", level: "Intermediate" }, { name: "JavaScript", level: "Intermediate" }, { name: "SQL", level: "Intermediate" },
+    { name: "Python", level: "Experienced" }, { name: "C / C++", level: "Experienced" },
+    { name: "Java", level: "Experienced" }, { name: "OCaml", level: "Intermediate" },
+    { name: "Assembly", level: "Intermediate" }, { name: "Bash", level: "Experienced" },
+    { name: "SQL", level: "Intermediate" }, { name: "R / Stata / MATLAB", level: "Working" },
   ],
   "ML & Data": [
-    { name: "Machine Learning", level: "Experienced" }, { name: "PyTorch / OpenCV", level: "Working" },
-    { name: "Mechanistic Interpretability", level: "Working" }, { name: "R / Stata / MATLAB", level: "Working" },
-    { name: "Data Analysis", level: "Experienced" }, { name: "Dataset Creation", level: "Experienced" },
+    { name: "PyTorch", level: "Experienced" }, { name: "Hugging Face Transformers", level: "Experienced" },
+    { name: "scikit-learn", level: "Experienced" }, { name: "NumPy / pandas", level: "Experienced" },
+    { name: "OpenCV", level: "Working" }, { name: "LLM APIs", level: "Experienced" },
   ],
-  "Security & Systems": [
-    { name: "Kali Linux", level: "Intermediate" }, { name: "Linux", level: "Working" },
-    { name: "Docker", level: "Working" }, { name: "Cisco Packet Tracer", level: "Intermediate" },
-    { name: "Cybersecurity Policy", level: "Experienced" }, { name: "Git & GitHub", level: "Experienced" },
+  "Systems & Tools": [
+    { name: "Git", level: "Experienced" }, { name: "Docker", level: "Experienced" },
+    { name: "Linux", level: "Working" }, { name: "CUDA", level: "Intermediate" },
+    { name: "SGE / SLURM", level: "Experienced" }, { name: "Program Analysis", level: "Working" },
   ],
 };
 
