@@ -258,7 +258,7 @@ function IntroPanel() {
       <div style={PANEL_INNER}>
         <p className="kicker" style={{ marginBottom: "2rem" }}>Areas of Focus</p>
         <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.4rem, 6vw, 5rem)", fontWeight: 300, lineHeight: 1.06, color: "#1a1a1a", margin: "0 0 2.5rem 0", maxWidth: "16ch" }}>
-          Three threads running through the work.
+          The things that interest me, excite me, and that I want to explore further.
         </p>
         <p className="kicker" style={{ display: "flex", alignItems: "center", gap: "0.75rem", color: "rgba(26,26,26,0.4)" }}>
           <span style={{ display: "inline-block", width: "42px", height: "1px", background: "currentColor" }} />
