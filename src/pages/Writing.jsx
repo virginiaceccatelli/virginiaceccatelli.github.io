@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
+import SplitText from "../components/fx/SplitText";
 
 function Reveal({ children, delay = 0 }) {
   const ref = useRef(null);
@@ -27,9 +28,15 @@ export default function Writing() {
 
         <div style={{ padding: "6rem 0 5rem", borderBottom: "1px solid rgba(26,26,26,0.1)" }}>
           <Reveal><p className="kicker" style={{ marginBottom: "1.5rem" }}>Papers / Articles</p></Reveal>
-          <Reveal delay={0.08}>
-            <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(4rem, 12vw, 11rem)", fontWeight: 300, lineHeight: 0.88, letterSpacing: "-0.02em", color: "#1a1a1a", margin: 0 }}>Writing</h1>
-          </Reveal>
+          <SplitText
+            text="Writing"
+            tag="h1"
+            trigger="load"
+            delay={0.1}
+            stagger={0.05}
+            duration={1.3}
+            style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(4rem, 12vw, 11rem)", fontWeight: 300, lineHeight: 0.88, letterSpacing: "-0.02em", color: "#1a1a1a", margin: 0 }}
+          />
         </div>
 
         <div>

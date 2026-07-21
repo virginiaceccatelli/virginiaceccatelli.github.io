@@ -1,5 +1,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import SplitText from "../components/fx/SplitText";
+import Parallax from "../components/fx/Parallax";
 
 function Reveal({ children, delay = 0 }) {
   const ref = useRef(null);
@@ -44,11 +46,15 @@ export default function About() {
         {/* Heading */}
         <div style={{ padding: "6rem 0 5rem", borderBottom: "1px solid rgba(26,26,26,0.1)" }}>
           <Reveal><p className="kicker" style={{ marginBottom: "1.5rem" }}>Profile / Background</p></Reveal>
-          <Reveal delay={0.08}>
-            <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(4rem, 14vw, 13rem)", fontWeight: 300, lineHeight: 0.88, letterSpacing: "-0.02em", color: "#1a1a1a", margin: 0 }}>
-              About
-            </h1>
-          </Reveal>
+          <SplitText
+            text="About"
+            tag="h1"
+            trigger="load"
+            delay={0.1}
+            stagger={0.05}
+            duration={1.3}
+            style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(4rem, 14vw, 13rem)", fontWeight: 300, lineHeight: 0.88, letterSpacing: "-0.02em", color: "#1a1a1a", margin: 0 }}
+          />
         </div>
 
         {/* Bio + photo */}
@@ -63,14 +69,14 @@ export default function About() {
           </div>
           <div style={{ padding: "5rem 0 5rem 3rem", display: "flex", flexDirection: "column", justifyContent: "center" }}>
             <Reveal>
-              <div style={{ aspectRatio: "3/4", overflow: "hidden", marginBottom: "3rem", maxWidth: "380px" }}>
+              <Parallax strength={9} scale={1.14} style={{ aspectRatio: "3/4", marginBottom: "3rem", maxWidth: "380px" }}>
                 <img src="/first.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-              </div>
+              </Parallax>
             </Reveal>
             <Reveal delay={0.1}>
-              <div style={{ aspectRatio: "4/3", overflow: "hidden", maxWidth: "380px" }}>
+              <Parallax strength={9} scale={1.14} style={{ aspectRatio: "4/3", maxWidth: "380px" }}>
                 <img src="/second.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-              </div>
+              </Parallax>
             </Reveal>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
+import SplitText from "../components/fx/SplitText";
 
 const GITHUB = "https://github.com/virginiaceccatelli";
 
@@ -31,9 +32,15 @@ export default function Projects() {
         <div style={{ padding: "6rem 0 5rem", borderBottom: "1px solid rgba(26,26,26,0.1)" }}>
           <Reveal><p className="kicker" style={{ marginBottom: "1.5rem" }}>Selected Work</p></Reveal>
           <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: "2rem" }}>
-            <Reveal delay={0.08}>
-              <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(4rem, 13vw, 12rem)", fontWeight: 300, lineHeight: 0.88, letterSpacing: "-0.02em", color: "#1a1a1a", margin: 0 }}>Projects</h1>
-            </Reveal>
+            <SplitText
+              text="Projects"
+              tag="h1"
+              trigger="load"
+              delay={0.1}
+              stagger={0.045}
+              duration={1.3}
+              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(4rem, 13vw, 12rem)", fontWeight: 300, lineHeight: 0.88, letterSpacing: "-0.02em", color: "#1a1a1a", margin: 0 }}
+            />
             <Reveal delay={0.15}>
               <a href={GITHUB} target="_blank" rel="noreferrer" className="kicker link-underline" style={{ color: "#7c7068", textDecoration: "none", transition: "color 0.2s" }} onMouseEnter={e => (e.currentTarget.style.color = "#1a1a1a")} onMouseLeave={e => (e.currentTarget.style.color = "#7c7068")}>
                 See more on GitHub →

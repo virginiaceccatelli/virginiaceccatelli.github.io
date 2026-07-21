@@ -1,6 +1,15 @@
 import { Link } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useState, useRef, useLayoutEffect } from "react";
 import { motion, useInView } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SplitText from "../components/fx/SplitText";
+import Parallax from "../components/fx/Parallax";
+import Marquee from "../components/fx/Marquee";
+import Magnet from "../components/fx/Magnet";
+import HorizontalScroll from "../components/fx/HorizontalScroll";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const GITHUB = "https://github.com/virginiaceccatelli";
 const EMAIL = "virginia.ceccatelli@mail.mcgill.ca";
@@ -66,30 +75,55 @@ const destinations = [
 ];
 
 export default function Home() {
+  const heroRef = useRef(null);
+  const heroInnerRef = useRef(null);
+
+  // Hero drifts up and fades as it scrolls away — scrubbed by Lenis via ScrollTrigger
+  useLayoutEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+    const ctx = gsap.context(() => {
+      gsap.to(heroInnerRef.current, {
+        yPercent: -14,
+        opacity: 0.25,
+        ease: "none",
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: "bottom bottom",
+          end: "bottom 25%",
+          scrub: true,
+        },
+      });
+    }, heroRef);
+    return () => ctx.revert();
+  }, []);
+
   return (
     <div style={{ background: "transparent" }}>
 
       {/* HERO */}
-      <section style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 2rem 4.5rem", maxWidth: "1440px", margin: "0 auto", position: "relative" }}>
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-        >
-          <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(5.5rem, 17vw, 20rem)", fontWeight: 300, lineHeight: 0.86, letterSpacing: "-0.02em", color: "#1a1a1a", margin: 0 }}>
-            Virginia<br />Ceccatelli
-          </h1>
-        </motion.div>
+      <section ref={heroRef} style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 2rem 4.5rem", maxWidth: "1440px", margin: "0 auto", position: "relative" }}>
+        <div ref={heroInnerRef}>
+          <SplitText
+            text={"Virginia\nCeccatelli"}
+            tag="h1"
+            trigger="load"
+            delay={0.15}
+            stagger={0.045}
+            duration={1.4}
+            style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(5.5rem, 17vw, 20rem)", fontWeight: 300, lineHeight: 0.86, letterSpacing: "-0.02em", color: "#1a1a1a", margin: 0 }}
+          />
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.9 }}
-          style={{ marginTop: "2.5rem", display: "flex", flexWrap: "wrap", gap: "1.5rem 3rem", alignItems: "center" }}
-        >
-          <span className="kicker">AI Safety · AI Security · Cybersecurity Policy</span>
-          <span className="kicker" style={{ color: "rgba(124,112,104,0.5)" }}>McGill CS · UCL S2Lab · MILA</span>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 1.1 }}
+            style={{ marginTop: "2.5rem", display: "flex", flexWrap: "wrap", gap: "1.5rem 3rem", alignItems: "center" }}
+          >
+            <span className="kicker">AI Safety · AI Security · Cybersecurity Policy</span>
+            <span className="kicker" style={{ color: "rgba(124,112,104,0.5)" }}>McGill CS · UCL S2Lab · MILA</span>
+          </motion.div>
+        </div>
 
         <motion.span
           initial={{ opacity: 0 }}
@@ -102,7 +136,13 @@ export default function Home() {
         </motion.span>
       </section>
 
-      <div style={{ height: "1px", background: "rgba(26,26,26,0.1)", maxWidth: "1440px", margin: "0 auto" }} />
+      {/* Marquee band — reacts to scroll velocity */}
+      <div style={{ borderTop: "1px solid rgba(26,26,26,0.1)", borderBottom: "1px solid rgba(26,26,26,0.1)", padding: "1.1rem 0" }}>
+        <Marquee
+          text="AI Safety · AI Security · Cybersecurity Policy"
+          style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.4rem, 2.6vw, 2.2rem)", fontWeight: 300, color: "rgba(26,26,26,0.55)", letterSpacing: "0.02em" }}
+        />
+      </div>
 
       {/* INTRO */}
       <section style={{ maxWidth: "1440px", margin: "0 auto", padding: "7rem 2rem", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "4rem", alignItems: "start" }}>
@@ -117,9 +157,9 @@ export default function Home() {
         </Reveal>
 
         <Reveal delay={0.12}>
-          <div style={{ aspectRatio: "3/4", overflow: "hidden", maxWidth: "360px" }}>
+          <Parallax strength={9} scale={1.14} style={{ aspectRatio: "3/4", maxWidth: "360px" }}>
             <img src="/foto.png" alt="Virginia Ceccatelli" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-          </div>
+          </Parallax>
         </Reveal>
 
         <Reveal delay={0.08}>
@@ -145,12 +185,13 @@ export default function Home() {
 
       <div style={{ height: "1px", background: "rgba(26,26,26,0.1)", maxWidth: "1440px", margin: "0 auto" }} />
 
-      {/* FOCUS AREAS */}
-      <section style={{ maxWidth: "1440px", margin: "0 auto", padding: "7rem 2rem 0" }}>
-        <Reveal><p className="kicker" style={{ marginBottom: "3rem" }}>Areas of Focus</p></Reveal>
-        {focusAreas.map((area, i) => <FocusRow key={area.num} area={area} delay={i * 0.1} />)}
-        <div style={{ height: "1px", background: "rgba(26,26,26,0.1)" }} />
-      </section>
+      {/* FOCUS AREAS — horizontal pinned journey */}
+      <HorizontalScroll style={{ borderTop: "1px solid rgba(26,26,26,0.1)", borderBottom: "1px solid rgba(26,26,26,0.1)" }}>
+        <IntroPanel />
+        {focusAreas.map((area, i) => (
+          <FocusPanel key={area.num} area={area} index={i} total={focusAreas.length} />
+        ))}
+      </HorizontalScroll>
 
       {/* EXPLORE TILES */}
       <section style={{ maxWidth: "1440px", margin: "0 auto", padding: "7rem 2rem" }}>
@@ -163,10 +204,18 @@ export default function Home() {
       {/* CONNECT */}
       <section style={{ borderTop: "1px solid rgba(26,26,26,0.1)", maxWidth: "1440px", margin: "0 auto", padding: "5rem 2rem", display: "flex", flexWrap: "wrap", gap: "2rem 4rem", alignItems: "center", justifyContent: "space-between" }}>
         <Reveal>
-          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 300, margin: 0, lineHeight: 1 }}>Get in touch.</p>
+          <SplitText
+            text="Get in touch."
+            tag="p"
+            trigger="scroll"
+            stagger={0.03}
+            style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 300, margin: 0, lineHeight: 1 }}
+          />
         </Reveal>
         <Reveal delay={0.1}>
-          <a href={`mailto:${EMAIL}`} className="kicker link-underline" style={{ color: "#1a1a1a", textDecoration: "none" }}>{EMAIL}</a>
+          <Magnet>
+            <a href={`mailto:${EMAIL}`} className="kicker link-underline" style={{ color: "#1a1a1a", textDecoration: "none" }}>{EMAIL}</a>
+          </Magnet>
         </Reveal>
         <Reveal delay={0.15}>
           <div style={{ display: "flex", gap: "2rem" }}>
@@ -189,29 +238,80 @@ export default function Home() {
   );
 }
 
-function FocusRow({ area, delay }) {
-  const [hovered, setHovered] = useState(false);
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-40px 0px" });
+const PANEL_STYLE = {
+  flexShrink: 0,
+  width: "100vw",
+  minHeight: "78vh",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  padding: "clamp(3rem, 8vh, 7rem) clamp(1.5rem, 8vw, 9rem)",
+  borderRight: "1px solid rgba(26,26,26,0.1)",
+  boxSizing: "border-box",
+};
+
+const PANEL_INNER = { width: "100%", maxWidth: "1100px", margin: "0 auto" };
+
+function IntroPanel() {
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay }}
+    <div style={{ ...PANEL_STYLE, justifyContent: "center" }}>
+      <div style={PANEL_INNER}>
+        <p className="kicker" style={{ marginBottom: "2rem" }}>Areas of Focus</p>
+        <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.4rem, 6vw, 5rem)", fontWeight: 300, lineHeight: 1.06, color: "#1a1a1a", margin: "0 0 2.5rem 0", maxWidth: "16ch" }}>
+          Three threads running through the work.
+        </p>
+        <p className="kicker" style={{ display: "flex", alignItems: "center", gap: "0.75rem", color: "rgba(26,26,26,0.4)" }}>
+          <span style={{ display: "inline-block", width: "42px", height: "1px", background: "currentColor" }} />
+          Scroll to move across
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function FocusPanel({ area, index, total }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      style={{ display: "grid", gridTemplateColumns: "64px 1fr", gap: "2rem", alignItems: "start", borderTop: "1px solid rgba(26,26,26,0.1)", padding: "2.75rem 0", cursor: "default" }}
+      style={PANEL_STYLE}
     >
-      <span className="kicker" style={{ paddingTop: "0.5rem" }}>{area.num}</span>
-      <div>
-        <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2rem, 5.5vw, 4.5rem)", fontWeight: 300, lineHeight: 1, margin: "0 0 0.75rem 0", color: "#1a1a1a", transition: "opacity 0.3s", opacity: hovered ? 0.5 : 1 }}>
+      <div style={{ ...PANEL_INNER, display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+        <span
+          style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontSize: "clamp(4rem, 12vw, 11rem)",
+            fontWeight: 300, lineHeight: 0.8,
+            color: hovered ? "rgba(26,26,26,0.28)" : "rgba(26,26,26,0.13)",
+            transition: "color 0.6s ease",
+          }}
+        >
+          {area.num}
+        </span>
+        <span className="kicker" style={{ paddingTop: "0.75rem" }}>
+          {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+        </span>
+      </div>
+
+      <div style={PANEL_INNER}>
+        <h3
+          style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontSize: "clamp(2.4rem, 6.5vw, 6rem)",
+            fontWeight: 300, lineHeight: 1.02,
+            margin: "0 0 1.5rem 0", color: "#1a1a1a",
+            maxWidth: "18ch",
+            transition: "transform 0.6s cubic-bezier(0.16,1,0.3,1)",
+            transform: hovered ? "translateX(0.75rem)" : "none",
+          }}
+        >
           {area.area}
         </h3>
-        <p style={{ fontFamily: "'Faustina', serif", fontSize: "0.92rem", lineHeight: 1.65, color: "#7c7068", margin: 0, maxWidth: "520px" }}>
+        <p style={{ fontFamily: "'Faustina', serif", fontSize: "clamp(0.95rem, 1.5vw, 1.15rem)", lineHeight: 1.7, color: "#7c7068", margin: 0, maxWidth: "48ch" }}>
           {area.sub}
         </p>
       </div>
-    </motion.div>
+    </div>
   );
 }

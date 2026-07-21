@@ -1,6 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { getLenis } from "./fx/lenisInstance";
+import GradientField from "./fx/GradientField";
 
 const RESUME_PATH = "/resume.pdf";
 const GITHUB = "https://github.com/virginiaceccatelli";
@@ -20,24 +22,6 @@ const SOCIAL = [
   { label: "Google Scholar", href: SCHOLAR },
   { label: "LinkedIn",       href: LINKEDIN },
   { label: EMAIL,            href: `mailto:${EMAIL}` },
-];
-
-const PALETTE = [
-  "#b8a9d4","#c9b38a","#a8c4b0","#d4a8a8",
-  "#9ab4c8","#c4b8a0","#b4a8c4","#a0b8b4",
-  "#c8b890","#b4a0b8","#a8b8a0","#c4a890",
-  "#a8b0c4","#c0a8a4","#a8b8a8","#b8a8b8",
-];
-
-function pickColors() {
-  return [...PALETTE].sort(() => Math.random() - 0.5).slice(0, 4);
-}
-
-const BLOB_CONFIG = [
-  { style: { top: "5vh",    left:  "5vw",  width: "45vw", height: "45vw" }, anim: { x: [0,  80,-50, 30,0], y: [0,  60,-70, 40,0] }, duration: 22 },
-  { style: { top: "0vh",    right: "5vw",  width: "40vw", height: "40vw" }, anim: { x: [0, -70, 55,-30,0], y: [0,  80,-60, 35,0] }, duration: 18 },
-  { style: { bottom:"10vh", left: "15vw",  width: "48vw", height: "48vw" }, anim: { x: [0,  60,-65, 25,0], y: [0, -70, 55,-30,0] }, duration: 26 },
-  { style: { bottom: "5vh", right:"10vw",  width: "38vw", height: "38vw" }, anim: { x: [0, -60, 50,-20,0], y: [0, -55, 65,-25,0] }, duration: 20 },
 ];
 
 function Hamburger({ open }) {
@@ -61,9 +45,7 @@ export default function Layout({ children }) {
   const [scrolled,   setScrolled]   = useState(false);
   const [menuOpen,   setMenuOpen]   = useState(false);
   const [isMobile,   setIsMobile]   = useState(() => window.innerWidth < 768);
-  const [blobColors, setBlobColors] = useState(() => pickColors());
-
-  const shuffleColors = useCallback(() => setBlobColors(pickColors()), []);
+  const fieldRef = useRef(null);
 
   useEffect(() => {
     const onResize = () => setIsMobile(window.innerWidth < 768);
@@ -71,17 +53,26 @@ export default function Layout({ children }) {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
+  const progressRef = useRef(null);
+
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 60);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const p = max > 0 ? window.scrollY / max : 0;
+      if (progressRef.current) progressRef.current.style.transform = `scaleX(${p})`;
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => { setMenuOpen(false); window.scrollTo(0, 0); }, [location.pathname]);
+  useEffect(() => { setMenuOpen(false); }, [location.pathname]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    const lenis = getLenis();
+    if (menuOpen) lenis?.stop(); else lenis?.start();
+    return () => { document.body.style.overflow = ""; lenis?.start(); };
   }, [menuOpen]);
 
   const closeMenu = () => setMenuOpen(false);
@@ -98,23 +89,10 @@ export default function Layout({ children }) {
   return (
     <div
       style={{ minHeight: "100vh", background: "transparent", color: "#1a1a1a" }}
-      onClick={shuffleColors}
+      onClick={() => fieldRef.current?.shuffle()}
     >
-      {/* Blobs */}
-      {BLOB_CONFIG.map((cfg, i) => (
-        <motion.div key={i}
-          animate={cfg.anim}
-          transition={{ duration: cfg.duration, ease: "easeInOut", repeat: Infinity, repeatType: "loop" }}
-          style={{
-            position: "fixed", borderRadius: "50%", filter: "blur(70px)",
-            opacity: 0.65, zIndex: 10, mixBlendMode: "multiply",
-            pointerEvents: "none",
-            backgroundColor: blobColors[i],
-            transition: "background-color 1.6s cubic-bezier(0.16,1,0.3,1)",
-            ...cfg.style,
-          }}
-        />
-      ))}
+      {/* Living gradient field — replaces the old static blobs */}
+      <GradientField ref={fieldRef} />
 
       {/* Nav */}
       <header style={{
@@ -166,6 +144,17 @@ export default function Layout({ children }) {
           )}
         </div>
       </header>
+
+      {/* Scroll progress hairline */}
+      <div
+        ref={progressRef}
+        style={{
+          position: "fixed", top: "56px", left: 0, right: 0, zIndex: 301,
+          height: "1px", background: "#1a1a1a",
+          transform: "scaleX(0)", transformOrigin: "left",
+          pointerEvents: "none",
+        }}
+      />
 
       {/* Mobile dropdown */}
       <AnimatePresence>
