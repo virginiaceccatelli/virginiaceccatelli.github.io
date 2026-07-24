@@ -8,11 +8,14 @@ import { getLenis } from "./lenisInstance";
  * multiply blend) but alive and reactive. `shuffle()` re-rolls the palette.
  */
 
+// Scholarly but not grey — a wider set of soft, gently saturated hues
+// (violet, blue, teal, sage, amber, clay) kept muted so the field still
+// reads as a quiet wash behind text rather than a candy bloom.
 const PALETTE = [
-  "#b8a9d4", "#c9b38a", "#a8c4b0", "#d4a8a8",
-  "#9ab4c8", "#c4b8a0", "#b4a8c4", "#a0b8b4",
-  "#c8b890", "#b4a0b8", "#a8b8a0", "#c4a890",
-  "#a8b0c4", "#c0a8a4", "#a8b8a8", "#b8a8b8",
+  "#a99bd0", "#8fb0cf", "#8fc0b4", "#c8b285",
+  "#cf9f9a", "#9fb98f", "#b39ac2", "#87a9c4",
+  "#c4ab7e", "#9ec2ba", "#c99ba6", "#a7b58c",
+  "#9d9fce", "#7fb3b0", "#cba98e", "#b8a0c0",
 ];
 const BASE = "#faf8f4";
 
@@ -126,10 +129,10 @@ const GradientField = forwardRef(function GradientField(_, ref) {
         const r = b.radius * maxDim;
         const [rr, gg, bb] = b.color.map((v) => Math.round(v));
 
-        // low alpha keeps overlaps airy instead of muddy under multiply
+        // lower alpha than before — a restrained tint, not a saturated bloom
         const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
-        grad.addColorStop(0, `rgba(${rr},${gg},${bb},0.34)`);
-        grad.addColorStop(0.45, `rgba(${rr},${gg},${bb},0.15)`);
+        grad.addColorStop(0, `rgba(${rr},${gg},${bb},0.26)`);
+        grad.addColorStop(0.45, `rgba(${rr},${gg},${bb},0.12)`);
         grad.addColorStop(1, `rgba(${rr},${gg},${bb},0)`);
         ctx.fillStyle = grad;
         ctx.beginPath();

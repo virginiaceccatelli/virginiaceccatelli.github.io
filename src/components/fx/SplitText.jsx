@@ -63,7 +63,7 @@ export default function SplitText({
         <span
           key={li}
           aria-hidden="true"
-          style={{ display: "block", overflow: "hidden", padding: "0.08em 0.05em", margin: "-0.08em -0.05em" }}
+          style={{ display: "block", overflow: "hidden", padding: "0.05em 0.06em 0.26em", margin: "-0.05em -0.06em -0.26em" }}
         >
           {line.split("").map((ch, ci) => (
             <span

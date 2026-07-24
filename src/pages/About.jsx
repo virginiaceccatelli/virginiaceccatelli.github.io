@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import SplitText from "../components/fx/SplitText";
-import Parallax from "../components/fx/Parallax";
 
 function Reveal({ children, delay = 0 }) {
   const ref = useRef(null);
@@ -17,8 +16,9 @@ const achievements = [
   "Computer Science Major, Economics Minor — McGill University",
   "Distinction, top 25% — McGill University",
   "Dean's List, top 10% — IE University Madrid",
-  "Former Vice President — Girls Who Code McGill",
-  "Former Researcher — Andalus Committee New York",
+  "Former Researcher at Mila - Quebec AI Institute",
+  "Currently AI Security Researcher at UCL S2Lab",
+  "Currently AI Security Intern at WIIT — The Premium Cloud",
 ];
 
 const courses = [
@@ -32,10 +32,24 @@ const courses = [
 ];
 
 const bio = [
-  "I'm a McGill University Computer Science alum with a strong interest in AI safety, systems security, and cybersecurity policy. Originally trained in International Relations at IE University, I developed a deep interest in the societal dimensions of technology, particularly how global events intersect with cybersecurity threats.",
-  "This curiosity led me to pivot and complete a BA in Computer Science with a Minor in Economics at McGill, where I explored the technical underpinnings of machine learning, networks, compiler design, and systems programming.",
-  "My research has moved between technical security and policy questions: I studied ransomware activity around elections, developed a vision-based ground segmentation pipeline for autonomous indoor navigation, and led multilingual speech safety work at MILA; including SpeechJBB, an audio code-switching jailbreak benchmark published at EMNLP 2026, and the dataset underpinning VoxSumm, built in collaboration with Google DeepMind.",
-  "Currently, I'm an AI Security Researcher with UCL S2Lab, developing trajectory-based probes for LLM uncertainty estimation and a program-analysis framework that traces binding, data flow, and security taint through code models, verified with causal interventions like activation patching. I'm also an AI Security Intern at WIIT — The Premium Cloud, building an agentic purple-teaming loop that continuously red-teams AI agents and autonomously hardens them.",
+  "I am a computer scientist working on the safety and security of machine learning systems, and on the policy questions that surround them. My research interests lie in understanding modern language models' failures under adversarial pressure as well as native safety issues, and how those failures can be measured and governed.",
+  "I came to computer science from international relations. I began a degree in IR at IE University, where I grew interested in the societal dimensions of technology and, in particular, in how geopolitical events intersect with cybersecurity. That interest led me to transfer to McGill University and complete a BA in Computer Science with a minor in Economics; studying machine learning, computer networks, compiler design, and systems programming, ultimately graduating with Distinction.",
+  "My work moves between the technical and the political. On the technical side, I led SpeechJBB, the first audio code-switching jailbreak benchmark for evaluating the safety of large audio language models, and built the dataset underpinning VoxSumm, a multilingual corpus for spoken-news summarization and translation. On the policy side, I have written on U.S.–Africa cybersecurity partnerships under China's Digital Silk Road and on the geopolitics of the Iranian–Russian military drone trade.",
+  "I am currently an AI Security Researcher at UCL's Systems Security Lab (S2Lab), where I am leading a program-analysis framework that traces binding, data flow, control dependence, and security taint through code models to understand how semantic information is represented internally. It probes whether code property graph information is represented in model latent space, how these representations degrade under obfuscations and long context and whether they are causally used; verified with causal interventions such as activation patching. Alongside this, I am an AI Security intern at WIIT, building an agentic purple-teaming loop that continuously red-teams AI agents and autonomously hardens them.",
+];
+
+const positions = [
+  { role: "AI Security Researcher", org: "UCL S2Lab" },
+  { role: "AI Security Intern", org: "WIIT — The Premium Cloud" },
+  { role: "Prev. AI Safety Researcher", org: "Mila — Québec AI Institute" },
+];
+
+const interests = [
+  "Safety of multilingual & multimodal LLMs",
+  "Interpretability of code models",
+  "LLM uncertainty estimation",
+  "Agentic red-teaming",
+  "Cybersecurity policy & geopolitics",
 ];
 
 export default function About() {
@@ -69,14 +83,21 @@ export default function About() {
           </div>
           <div style={{ padding: "5rem 0 5rem 3rem", display: "flex", flexDirection: "column", justifyContent: "center" }}>
             <Reveal>
-              <Parallax strength={9} scale={1.14} style={{ aspectRatio: "3/4", marginBottom: "3rem", maxWidth: "380px" }}>
-                <img src="/first.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-              </Parallax>
+              <p className="kicker" style={{ marginBottom: "1.5rem" }}>Current</p>
+              {positions.map((p, i) => (
+                <div key={p.role} style={{ borderTop: "1px solid rgba(26,26,26,0.1)", padding: "1.25rem 0" }}>
+                  <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.3rem, 2.4vw, 1.7rem)", fontWeight: 300, color: "#1a1a1a", margin: "0 0 0.15rem 0", lineHeight: 1.15 }}>{p.role}</p>
+                  <p className="kicker" style={{ color: "#7c7068" }}>{p.org}</p>
+                </div>
+              ))}
             </Reveal>
-            <Reveal delay={0.1}>
-              <Parallax strength={9} scale={1.14} style={{ aspectRatio: "4/3", maxWidth: "380px" }}>
-                <img src="/second.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-              </Parallax>
+            <Reveal delay={0.12}>
+              <p className="kicker" style={{ margin: "3rem 0 1.5rem" }}>Research Interests</p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+                {interests.map(t => (
+                  <span key={t} style={{ fontFamily: "'Faustina', serif", fontSize: "0.8rem", border: "1px solid rgba(26,26,26,0.18)", padding: "0.4rem 0.8rem", color: "#3a3530" }}>{t}</span>
+                ))}
+              </div>
             </Reveal>
           </div>
         </div>

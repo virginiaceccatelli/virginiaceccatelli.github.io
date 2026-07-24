@@ -4,8 +4,6 @@ import { motion, useInView } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitText from "../components/fx/SplitText";
-import Parallax from "../components/fx/Parallax";
-import Marquee from "../components/fx/Marquee";
 import Magnet from "../components/fx/Magnet";
 import HorizontalScroll from "../components/fx/HorizontalScroll";
 
@@ -63,7 +61,7 @@ function ExploreTile({ dest, delay }) {
 
 const focusAreas = [
   { num: "01", area: "AI Safety & Security", sub: "Multilingual speech-safety evaluation, jailbreak benchmarks, agentic red-teaming and hardening" },
-  { num: "02", area: "Interpretability & Program Analysis", sub: "Trajectory-based uncertainty probes, tracing data flow and security taint in code models, activation patching" },
+  { num: "02", area: "Interpretability", sub: "Trajectory-based uncertainty probes, tracing data flow and security taint in code models, activation patching" },
   { num: "03", area: "Cybersecurity Policy", sub: "U.S.–Africa partnerships, Digital Silk Road dynamics, global north-south collaboration" },
 ];
 
@@ -102,16 +100,16 @@ export default function Home() {
     <div style={{ background: "transparent" }}>
 
       {/* HERO */}
-      <section ref={heroRef} style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 2rem 4.5rem", maxWidth: "1440px", margin: "0 auto", position: "relative" }}>
+      <section ref={heroRef} style={{ minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "0 2rem 3rem", maxWidth: "1440px", margin: "0 auto", position: "relative" }}>
         <div ref={heroInnerRef}>
           <SplitText
-            text={"Virginia\nCeccatelli"}
+            text={"Virginia Ceccatelli"}
             tag="h1"
             trigger="load"
             delay={0.15}
-            stagger={0.045}
-            duration={1.4}
-            style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(5.5rem, 17vw, 20rem)", fontWeight: 300, lineHeight: 0.86, letterSpacing: "-0.02em", color: "#1a1a1a", margin: 0 }}
+            stagger={0.04}
+            duration={1.3}
+            style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.8rem, 7vw, 6rem)", fontWeight: 300, lineHeight: 0.95, letterSpacing: "-0.015em", color: "#1a1a1a", margin: 0 }}
           />
 
           <motion.div
@@ -121,7 +119,7 @@ export default function Home() {
             style={{ marginTop: "2.5rem", display: "flex", flexWrap: "wrap", gap: "1.5rem 3rem", alignItems: "center" }}
           >
             <span className="kicker">AI Safety · AI Security · Cybersecurity Policy</span>
-            <span className="kicker" style={{ color: "rgba(124,112,104,0.5)" }}>McGill CS · UCL S2Lab · MILA</span>
+            <span className="kicker" style={{ color: "rgba(124,112,104,0.5)" }}>McGill CS · UCL S2Lab · Mila</span>
           </motion.div>
         </div>
 
@@ -136,30 +134,18 @@ export default function Home() {
         </motion.span>
       </section>
 
-      {/* Marquee band — reacts to scroll velocity */}
-      <div style={{ borderTop: "1px solid rgba(26,26,26,0.1)", borderBottom: "1px solid rgba(26,26,26,0.1)", padding: "1.1rem 0" }}>
-        <Marquee
-          text="AI Safety · AI Security · Cybersecurity Policy"
-          style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.4rem, 2.6vw, 2.2rem)", fontWeight: 300, color: "rgba(26,26,26,0.55)", letterSpacing: "0.02em" }}
-        />
-      </div>
+      <div style={{ borderTop: "1px solid rgba(26,26,26,0.1)" }} />
 
       {/* INTRO */}
       <section style={{ maxWidth: "1440px", margin: "0 auto", padding: "7rem 2rem", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "4rem", alignItems: "start" }}>
         <Reveal>
           <p className="kicker" style={{ marginBottom: "1.5rem" }}>Profile</p>
-          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.7rem, 3.2vw, 2.6rem)", fontWeight: 300, lineHeight: 1.28, color: "#1a1a1a", margin: "0 0 2rem 0", maxWidth: "520px" }}>
-            McGill Computer Science alum working at the intersection of AI safety, AI security, and cybersecurity policy.
+          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.6rem, 3vw, 2.4rem)", fontWeight: 300, lineHeight: 1.3, color: "#1a1a1a", margin: "0 0 2rem 0", maxWidth: "560px" }}>
+            Computer scientist working at the intersection of AI safety, AI security, and cybersecurity policy — with a focus on the safety of multilingual and multimodal language models, interpretability of code models, and the governance of emerging cyber threats.
           </p>
           <Link to="/about" className="kicker link-underline" style={{ color: "#1a1a1a", textDecoration: "none" }}>
             Full profile →
           </Link>
-        </Reveal>
-
-        <Reveal delay={0.12}>
-          <Parallax strength={9} scale={1.14} style={{ aspectRatio: "3/4", maxWidth: "360px" }}>
-            <img src="/foto.png" alt="Virginia Ceccatelli" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-          </Parallax>
         </Reveal>
 
         <Reveal delay={0.08}>
@@ -168,7 +154,7 @@ export default function Home() {
               { label: "Currently at", value: "UCL S2Lab · WIIT Premium Cloud" },
               { label: "Based in", value: "London, UK" },
               { label: "Education", value: "McGill University — CS + Economics, 3.8 GPA" },
-              { label: "Prev. research", value: "MILA Québec AI Institute" },
+              { label: "Prev. research", value: "Mila Québec AI Institute" },
               { label: "Contact", value: EMAIL, href: `mailto:${EMAIL}` },
             ].map(item => (
               <div key={item.label} style={{ borderTop: "1px solid rgba(26,26,26,0.1)", padding: "1.5rem 0" }}>
@@ -257,8 +243,8 @@ function IntroPanel() {
     <div style={{ ...PANEL_STYLE, justifyContent: "center" }}>
       <div style={PANEL_INNER}>
         <p className="kicker" style={{ marginBottom: "2rem" }}>Areas of Focus</p>
-        <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.4rem, 6vw, 5rem)", fontWeight: 300, lineHeight: 1.06, color: "#1a1a1a", margin: "0 0 2.5rem 0", maxWidth: "16ch" }}>
-          The things that interest me, excite me, and that I want to explore further.
+        <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(2.2rem, 5vw, 4rem)", fontWeight: 300, lineHeight: 1.1, color: "#1a1a1a", margin: "0 0 2.5rem 0", maxWidth: "20ch" }}>
+          Three research directions.
         </p>
         <p className="kicker" style={{ display: "flex", alignItems: "center", gap: "0.75rem", color: "rgba(26,26,26,0.4)" }}>
           <span style={{ display: "inline-block", width: "42px", height: "1px", background: "currentColor" }} />
