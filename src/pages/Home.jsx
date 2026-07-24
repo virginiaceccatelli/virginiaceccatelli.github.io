@@ -141,7 +141,7 @@ export default function Home() {
         <Reveal>
           <p className="kicker" style={{ marginBottom: "1.5rem" }}>Profile</p>
           <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.6rem, 3vw, 2.4rem)", fontWeight: 300, lineHeight: 1.3, color: "#1a1a1a", margin: "0 0 2rem 0", maxWidth: "560px" }}>
-            Computer scientist working at the intersection of AI safety, AI security, and cybersecurity policy — with a focus on the safety of multilingual and multimodal language models, interpretability of code models, and the governance of emerging cyber threats.
+            Computer scientist working at the intersection of AI safety, AI security, and cybersecurity policy research, with a focus on the safety of language models, interpretability of code models, and the governance of emerging cyber threats.
           </p>
           <Link to="/about" className="kicker link-underline" style={{ color: "#1a1a1a", textDecoration: "none" }}>
             Full profile →
@@ -153,7 +153,7 @@ export default function Home() {
             {[
               { label: "Currently at", value: "UCL S2Lab · WIIT Premium Cloud" },
               { label: "Based in", value: "London, UK" },
-              { label: "Education", value: "McGill University — CS + Economics, 3.8 GPA" },
+              { label: "Education", value: "McGill University: CS + Economics, 3.8 GPA" },
               { label: "Prev. research", value: "Mila Québec AI Institute" },
               { label: "Contact", value: EMAIL, href: `mailto:${EMAIL}` },
             ].map(item => (
