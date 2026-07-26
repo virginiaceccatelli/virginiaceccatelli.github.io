@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getLenis } from "./fx/lenisInstance";
-import GradientField from "./fx/GradientField";
+import { themeFor, WORDMARK } from "../theme";
 
 const RESUME_PATH = "/resume.pdf";
 const GITHUB = "https://github.com/virginiaceccatelli";
@@ -11,23 +11,23 @@ const SCHOLAR = "https://scholar.google.com/citations?user=kk8BWhAAAAAJ&hl=en";
 const EMAIL = "virginia.ceccatelli@mail.mcgill.ca";
 
 const NAV = [
-  { path: "/about",      label: "About"      },
+  { path: "/about",      label: "About Me"   },
   { path: "/experience", label: "Experience" },
-  { path: "/projects",   label: "Projects"   },
+  { path: "/projects",   label: "Works"      },
   { path: "/writing",    label: "Writing"    },
 ];
 
 const SOCIAL = [
-  { label: "GitHub",         href: GITHUB },
-  { label: "Google Scholar", href: SCHOLAR },
-  { label: "LinkedIn",       href: LINKEDIN },
-  { label: EMAIL,            href: `mailto:${EMAIL}` },
+  { label: "GitHub",   href: GITHUB },
+  { label: "Scholar",  href: SCHOLAR },
+  { label: "LinkedIn", href: LINKEDIN },
+  { label: "Email",    href: `mailto:${EMAIL}` },
 ];
 
 function Hamburger({ open }) {
   const bar = (extra) => ({
     display: "block", width: "22px", height: "1.5px",
-    background: "#1a1a1a",
+    background: "var(--ink)",
     transition: "transform 0.3s ease, opacity 0.3s ease",
     ...extra,
   });
@@ -42,22 +42,29 @@ function Hamburger({ open }) {
 
 export default function Layout({ children }) {
   const location = useLocation();
-  const [scrolled,   setScrolled]   = useState(false);
-  const [menuOpen,   setMenuOpen]   = useState(false);
-  const [isMobile,   setIsMobile]   = useState(() => window.innerWidth < 768);
-  const fieldRef = useRef(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 860);
+  const progressRef = useRef(null);
+
+  const theme = themeFor(location.pathname);
+  const isHome = location.pathname === "/";
+
+  // The whole document flips palette per route; everything downstream reads
+  // the CSS variables, including the grain overlay and the custom cursor.
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+  }, [theme]);
 
   useEffect(() => {
-    const onResize = () => setIsMobile(window.innerWidth < 768);
+    const onResize = () => setIsMobile(window.innerWidth < 860);
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  const progressRef = useRef(null);
-
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 60);
+      setScrolled(window.scrollY > 40);
       const max = document.documentElement.scrollHeight - window.innerHeight;
       const p = max > 0 ? window.scrollY / max : 0;
       if (progressRef.current) progressRef.current.style.transform = `scaleX(${p})`;
@@ -76,164 +83,159 @@ export default function Layout({ children }) {
   }, [menuOpen]);
 
   const closeMenu = () => setMenuOpen(false);
-  const isActive  = (path) => location.pathname === path;
-
-  const navBg = scrolled || menuOpen
-    ? "rgba(250,248,244,0.95)"
-    : "transparent";
-  const navBorder = scrolled || menuOpen
-    ? "1px solid rgba(26,26,26,0.08)"
-    : "1px solid transparent";
-  const navBlur = scrolled || menuOpen ? "blur(18px)" : "none";
+  const isActive = (path) => location.pathname === path;
 
   return (
-    <div
-      style={{ minHeight: "100vh", background: "transparent", color: "#1a1a1a" }}
-      onClick={() => fieldRef.current?.shuffle()}
-    >
-      {/* Living gradient field — replaces the old static blobs */}
-      <GradientField ref={fieldRef} />
+    <div style={{ minHeight: "100vh", background: "var(--paper)", color: "var(--ink)", transition: "background-color 0.7s cubic-bezier(0.16,1,0.3,1)" }}>
 
-      {/* Nav */}
+      {/* Header: page name hard left in bold caps, underlined mono links hard right.
+          Once scrolled it takes on the page's own paper colour so it stays
+          readable when a red band or panel passes underneath it. */}
       <header style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 300,
-        height: "56px", display: "flex", alignItems: "center", padding: "0 1.5rem",
-        transition: "background 0.5s ease, border-color 0.5s ease",
-        background: navBg, borderBottom: navBorder,
-        backdropFilter: navBlur, WebkitBackdropFilter: navBlur,
+        padding: scrolled ? "1rem clamp(1.25rem, 3vw, 2.5rem)" : "1.6rem clamp(1.25rem, 3vw, 2.5rem)",
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        gap: "1.5rem",
+        background: scrolled || menuOpen ? "var(--paper)" : "transparent",
+        borderBottom: `1px solid ${scrolled && !menuOpen ? "var(--rule)" : "transparent"}`,
+        transition: "background-color 0.4s ease, border-color 0.4s ease, padding 0.4s ease",
       }}>
-        <div style={{
-          maxWidth: "1440px", margin: "0 auto", width: "100%",
-          display: "flex", alignItems: "center", justifyContent: "space-between",
-        }}>
-          {/* Brand */}
-          <Link to="/"
-            style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.35rem", fontWeight: 400, letterSpacing: "0.06em", color: "#1a1a1a", textDecoration: "none", transition: "opacity 0.25s" }}
-            onMouseEnter={e => (e.currentTarget.style.opacity = "0.45")}
-            onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
-            VC
-          </Link>
+        <Link
+          to="/"
+          className="display"
+          style={{
+            fontSize: "clamp(1.05rem, 1.7vw, 1.4rem)", fontWeight: 700,
+            letterSpacing: "-0.01em", textTransform: "uppercase",
+            color: "var(--ink)", textDecoration: "none", lineHeight: 1,
+            transition: "opacity 0.25s",
+          }}
+          onMouseEnter={e => (e.currentTarget.style.opacity = "0.5")}
+          onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
+        >
+          {WORDMARK}
+        </Link>
 
-          {/* Desktop nav */}
-          {!isMobile && (
-            <nav style={{ display: "flex", gap: "2.5rem", alignItems: "center" }}>
-              {NAV.map(item => (
-                <NavLink key={item.path} to={item.path} active={isActive(item.path)}>
-                  {item.label}
-                </NavLink>
-              ))}
-              <a href={RESUME_PATH} download="Virginia_Ceccatelli_CV.pdf"
-                className="kicker link-underline"
-                style={{ color: "#7c7068", transition: "color 0.2s" }}
-                onMouseEnter={e => (e.currentTarget.style.color = "#1a1a1a")}
-                onMouseLeave={e => (e.currentTarget.style.color = "#7c7068")}>
-                CV
-              </a>
-            </nav>
-          )}
+        {!isMobile && (
+          <nav style={{ display: "flex", gap: "clamp(1.25rem, 2.5vw, 2.25rem)", alignItems: "center" }}>
+            {NAV.filter(item => !isActive(item.path)).map(item => (
+              <Link key={item.path} to={item.path} className="u-link" style={{ fontSize: "0.66rem" }}>
+                {item.label}
+              </Link>
+            ))}
+            {!isHome && (
+              <Link to="/" className="u-link" style={{ fontSize: "0.66rem" }}>Home</Link>
+            )}
+            <a href={RESUME_PATH} download="Virginia_Ceccatelli_CV.pdf" className="u-link" style={{ fontSize: "0.66rem" }}>
+              CV
+            </a>
+          </nav>
+        )}
 
-          {/* Hamburger — mobile only */}
-          {isMobile && (
-            <button
-              onClick={e => { e.stopPropagation(); setMenuOpen(o => !o); }}
-              aria-label={menuOpen ? "Close menu" : "Open menu"}
-              style={{ background: "none", border: "none", cursor: "pointer", padding: "8px", lineHeight: 0 }}
-            >
-              <Hamburger open={menuOpen} />
-            </button>
-          )}
-        </div>
+        {isMobile && (
+          <button
+            onClick={() => setMenuOpen(o => !o)}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            style={{ background: "none", border: "none", cursor: "pointer", padding: "8px", lineHeight: 0 }}
+          >
+            <Hamburger open={menuOpen} />
+          </button>
+        )}
       </header>
 
       {/* Scroll progress hairline */}
       <div
         ref={progressRef}
         style={{
-          position: "fixed", top: "56px", left: 0, right: 0, zIndex: 301,
-          height: "1px", background: "#1a1a1a",
+          position: "fixed", top: 0, left: 0, right: 0, zIndex: 301,
+          height: "2px", background: "var(--accent)",
           transform: "scaleX(0)", transformOrigin: "left",
           pointerEvents: "none",
         }}
       />
 
-      {/* Mobile dropdown */}
+      {/* Mobile menu */}
       <AnimatePresence>
         {menuOpen && isMobile && (
-          <>
-            {/* Backdrop */}
-            <motion.div key="backdrop"
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              onClick={e => { e.stopPropagation(); closeMenu(); }}
-              style={{ position: "fixed", inset: 0, zIndex: 295, background: "rgba(0,0,0,0.06)" }}
-            />
-
-            {/* Dropdown panel */}
-            <motion.div key="dropdown"
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-              style={{
-                position: "fixed", top: "56px", left: 0, right: 0, zIndex: 296,
-                background: "rgba(250,248,244,0.97)",
-                backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)",
-                borderBottom: "1px solid rgba(26,26,26,0.1)",
-              }}
-            >
-              {NAV.map(item => (
-                <Link key={item.path} to={item.path}
-                  onClick={e => { e.stopPropagation(); closeMenu(); }}
+          <motion.div
+            key="menu"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              position: "fixed", inset: 0, zIndex: 299,
+              background: "var(--paper)",
+              display: "flex", flexDirection: "column", justifyContent: "center",
+              padding: "0 clamp(1.25rem, 6vw, 3rem)",
+            }}
+          >
+            {[{ path: "/", label: "Home" }, ...NAV].map((item, i) => (
+              <motion.div
+                key={item.path}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.06 + i * 0.05, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <Link
+                  to={item.path}
+                  onClick={closeMenu}
+                  className="display"
                   style={{
-                    display: "flex", alignItems: "center", justifyContent: "space-between",
-                    padding: "0.9rem 1.5rem",
-                    fontFamily: "'Faustina', serif", fontSize: "0.68rem",
-                    letterSpacing: "0.2em", textTransform: "uppercase",
-                    color: isActive(item.path) ? "#1a1a1a" : "#7c7068",
-                    textDecoration: "none",
-                    borderBottom: "1px solid rgba(26,26,26,0.06)",
-                  }}>
+                    display: "block", padding: "0.5rem 0",
+                    fontSize: "clamp(2.2rem, 11vw, 3.5rem)", fontWeight: 700,
+                    textTransform: "uppercase", textDecoration: "none",
+                    color: isActive(item.path) ? "var(--accent)" : "var(--ink)",
+                  }}
+                >
                   {item.label}
-                  {isActive(item.path) && (
-                    <span style={{ width: "4px", height: "4px", borderRadius: "50%", background: "#1a1a1a" }} />
-                  )}
                 </Link>
-              ))}
-              <a href={RESUME_PATH} download="Virginia_Ceccatelli_CV.pdf"
-                onClick={e => { e.stopPropagation(); closeMenu(); }}
-                style={{
-                  display: "block", padding: "0.9rem 1.5rem",
-                  fontFamily: "'Faustina', serif", fontSize: "0.68rem",
-                  letterSpacing: "0.2em", textTransform: "uppercase",
-                  color: "#7c7068", textDecoration: "none",
-                }}>
-                CV — Download
-              </a>
-            </motion.div>
-          </>
+              </motion.div>
+            ))}
+            <motion.a
+              href={RESUME_PATH}
+              download="Virginia_Ceccatelli_CV.pdf"
+              onClick={closeMenu}
+              className="u-link"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.4 }}
+              style={{ marginTop: "2.5rem", fontSize: "0.7rem" }}
+            >
+              CV — Download
+            </motion.a>
+          </motion.div>
         )}
       </AnimatePresence>
 
       {/* Content */}
-      <motion.main key={location.pathname}
-        initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-        transition={{ duration: 0.45, ease: "easeOut" }}
-        style={{ position: "relative", zIndex: 1 }}>
+      <motion.main
+        key={location.pathname}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        style={{ position: "relative", zIndex: 1 }}
+      >
         {children}
       </motion.main>
 
-      {/* Footer */}
-      <footer style={{ borderTop: "1px solid rgba(26,26,26,0.1)", padding: "2.5rem 2rem", marginTop: "8rem", position: "relative", zIndex: 1 }}>
-        <div style={{ maxWidth: "1440px", margin: "0 auto", display: "flex", flexWrap: "wrap", gap: "1.5rem", justifyContent: "space-between", alignItems: "center" }}>
-          <span className="kicker">© {new Date().getFullYear()} Virginia Ceccatelli</span>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "2rem" }}>
+      {/* Footer — tiny, low, and out of the way, as in the reference */}
+      <footer style={{ padding: "2rem clamp(1.25rem, 3vw, 2.5rem)", position: "relative", zIndex: 1 }}>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem 2rem", justifyContent: "space-between", alignItems: "center" }}>
+          <span className="mono" style={{ fontSize: "0.6rem" }}>
+            © {new Date().getFullYear()} Virginia Ceccatelli · All rights reserved
+          </span>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "1.5rem" }}>
             {SOCIAL.map(link => (
-              <a key={link.href} href={link.href}
-                target={link.href.startsWith("mailto") ? undefined : "_blank"} rel="noreferrer"
-                className="kicker link-underline"
-                style={{ color: "#7c7068", textDecoration: "none", transition: "color 0.2s" }}
-                onMouseEnter={e => (e.currentTarget.style.color = "#1a1a1a")}
-                onMouseLeave={e => (e.currentTarget.style.color = "#7c7068")}>
+              <a
+                key={link.href}
+                href={link.href}
+                target={link.href.startsWith("mailto") ? undefined : "_blank"}
+                rel="noreferrer"
+                className="mono link-underline"
+                style={{ fontSize: "0.6rem", color: "var(--muted)", transition: "color 0.2s" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "var(--ink)")}
+                onMouseLeave={e => (e.currentTarget.style.color = "var(--muted)")}
+              >
                 {link.label}
               </a>
             ))}
@@ -241,16 +243,5 @@ export default function Layout({ children }) {
         </div>
       </footer>
     </div>
-  );
-}
-
-function NavLink({ to, active, children }) {
-  return (
-    <Link to={to} className="kicker link-underline"
-      style={{ color: active ? "#1a1a1a" : "#7c7068", textDecoration: "none", borderBottom: active ? "1px solid #1a1a1a" : "1px solid transparent", paddingBottom: "2px", transition: "color 0.2s, border-color 0.2s" }}
-      onMouseEnter={e => { if (!active) e.currentTarget.style.color = "#1a1a1a"; }}
-      onMouseLeave={e => { if (!active) e.currentTarget.style.color = "#7c7068"; }}>
-      {children}
-    </Link>
   );
 }

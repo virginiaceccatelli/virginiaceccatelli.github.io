@@ -1,6 +1,10 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import SplitText from "../components/fx/SplitText";
+import PageHeader, { PAD } from "../components/PageHeader";
+import Reveal from "../components/fx/Reveal";
+import Doodle from "../components/fx/Doodle";
+import { getLenis } from "../components/fx/lenisInstance";
+import useMedia from "../hooks/useMedia";
 
 const GITHUB = "https://github.com/virginiaceccatelli";
 
@@ -11,6 +15,7 @@ const projects = [
   {
     num: "01",
     title: "SpeechJBB: Code-Switched Speech Safety Evaluation",
+    short: "SpeechJBB",
     status: "EMNLP 2026 · Mila",
     tags: ["AI Safety", "LALMs", "Speech", "Code-Switching"],
     body: [
@@ -23,22 +28,24 @@ const projects = [
       { label: "View code", href: "https://github.com/virginiaceccatelli/MILA_safety" },
     ],
   },
-  // {
-  //   num: "02",
-  //   title: "VoxSumm: Multilingual Corpus for Summarization & Translation",
-  //   status: "Submitted, ACL ARR 2027 · Mila",
-  //   tags: ["Dataset", "Speech", "Summarization", "Translation"],
-  //   body: [
-  //     "VoxSumm is a multilingual corpus for jointly summarizing and translating long-form spoken news in low-resource languages, built in collaboration with Google DeepMind. It pairs long spoken-news recordings with reference summaries and translations, so that speech and language models can be trained and evaluated on a harder, more realistic task than the usual benchmarks allow — condensing and translating speech at length, rather than transcribing short, clean, English-only clips.",
-  //     "The corpus is designed around languages that current speech systems serve poorly, making it a resource for measuring how well models generalize beyond high-resource settings. Built with Y. Jeon, M. Maltais, M. Ma, and D. I. Adelani.",
-  //   ],
-  //   links: [
-  //     { label: "View dataset", href: "https://huggingface.co/datasets/McGill-NLP/speech-translation-and-summarization" },
-  //   ],
-  // },
+  {
+    num: "02",
+    title: "VoxSumm: Multilingual Corpus for Summarization & Translation",
+    short: "VoxSumm",
+    status: "Submitting, ACL ARR 2027 · Mila",
+    tags: ["Dataset", "Speech", "Summarization", "Translation"],
+    body: [
+      "VoxSumm is a multilingual corpus for jointly summarizing and translating long-form spoken news in low-resource languages, built in collaboration with Google DeepMind. It pairs long spoken-news recordings with reference summaries and translations, so that speech and language models can be trained and evaluated on a harder, more realistic task than the usual benchmarks allow — condensing and translating speech at length, rather than transcribing short, clean, English-only clips.",
+      "The corpus is designed around languages that current speech systems serve poorly, making it a resource for measuring how well models generalize beyond high-resource settings. Built with Y. Jeon, M. Maltais, M. Ma, and D. I. Adelani.",
+    ],
+    links: [
+      { label: "View dataset", href: "https://huggingface.co/datasets/McGill-NLP/speech-translation-and-summarization" },
+    ],
+  },
   {
     num: "03",
     title: "Semantic Flow: Tracing Semantic State in Code Models",
+    short: "Semantic Flow",
     status: "Ongoing · UCL S2Lab",
     tags: ["Interpretability", "Program Analysis", "Code Models"],
     body: [
@@ -51,6 +58,7 @@ const projects = [
   {
     num: "04",
     title: "Robotic Ground Segmentation & Motion Decision",
+    short: "Ground Segmentation",
     status: "McGill Prometheus Lab · 2025",
     tags: ["Computer Vision", "U-Net", "MobileNetV2", "Robotics"],
     body: [
@@ -65,6 +73,7 @@ const projects = [
   {
     num: "05",
     title: "Building and Optimizing a Compiler: Source to MIPS",
+    short: "Compiler → MIPS",
     status: "COMP 520 · McGill · 2026",
     tags: ["Compilers", "Parsing", "Code Generation", "MIPS"],
     body: [
@@ -76,6 +85,7 @@ const projects = [
   {
     num: "06",
     title: "Link-State Routing Protocol Simulation",
+    short: "Link-State Routing",
     status: "COMP 535 · McGill · 2026",
     tags: ["Networking", "Distributed Systems", "Java", "Dijkstra"],
     body: [
@@ -89,6 +99,7 @@ const projects = [
   {
     num: "07",
     title: "Reliable Multicast File Transfer",
+    short: "Multicast Transfer",
     status: "COMP 535 · McGill · 2026",
     tags: ["Networking", "Multicast", "C", "Reliability"],
     body: [
@@ -102,6 +113,7 @@ const projects = [
   {
     num: "08",
     title: "Cisco SOHO Network Simulation",
+    short: "Cisco SOHO Network",
     status: "2024",
     tags: ["Cisco", "Subnetting", "VLANs", "Routing"],
     body: [
@@ -114,98 +126,141 @@ const projects = [
   },
 ];
 
-function Reveal({ children, delay = 0 }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px 0px" });
-  return (
-    <motion.div ref={ref} initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay }}>
-      {children}
-    </motion.div>
-  );
-}
+/* Hand-set indents so the index reads as a drifting column rather than a table. */
+const INDENTS = [0, 24, 10, 36, 4, 28, 14];
 
 export default function Projects() {
-  return (
-    <div style={{ background: "transparent", paddingTop: "56px" }}>
-      <div style={{ maxWidth: "1440px", margin: "0 auto", padding: "0 2rem" }}>
+  const wide = useMedia("(min-width: 860px)");
 
-        <div style={{ padding: "6rem 0 5rem", borderBottom: "1px solid rgba(26,26,26,0.1)" }}>
-          <Reveal><p className="kicker" style={{ marginBottom: "1.5rem" }}>Selected Work</p></Reveal>
-          <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: "2rem" }}>
-            <SplitText
-              text="Projects"
-              tag="h1"
-              trigger="load"
-              delay={0.1}
-              stagger={0.045}
-              duration={1.3}
-              style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(3.5rem, 11vw, 10rem)", fontWeight: 300, lineHeight: 0.9, letterSpacing: "-0.02em", color: "#1a1a1a", margin: 0 }}
-            />
-            <Reveal delay={0.15}>
-              <a href={GITHUB} target="_blank" rel="noreferrer" className="kicker link-underline" style={{ color: "#7c7068", textDecoration: "none", transition: "color 0.2s" }} onMouseEnter={e => (e.currentTarget.style.color = "#1a1a1a")} onMouseLeave={e => (e.currentTarget.style.color = "#7c7068")}>
+  const jumpTo = (num) => {
+    const el = document.getElementById(`project-${num}`);
+    if (!el) return;
+    const lenis = getLenis();
+    if (lenis) lenis.scrollTo(el, { offset: -90 });
+    else el.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+    <div>
+      <PageHeader
+        label="Selected Work"
+        title="Works"
+        size="clamp(3.5rem, 15vw, 13rem)"
+      />
+
+      {/* INDEX — drifting list of titles, with one photograph alongside */}
+      <section style={{ borderTop: "1px solid var(--rule)", padding: `clamp(3rem, 7vh, 5rem) ${PAD}` }}>
+        <div style={{ display: "grid", gridTemplateColumns: wide ? "1.55fr 1fr" : "1fr", gap: "clamp(3rem, 6vh, 5rem) clamp(2.5rem, 5vw, 5rem)", alignItems: "start" }}>
+          <div>
+            <Reveal><p className="mono" style={{ marginBottom: "clamp(2rem, 5vh, 3.5rem)" }}>Index</p></Reveal>
+            {projects.map((p, i) => (
+              <Reveal key={p.num} delay={Math.min(i * 0.05, 0.3)} y={14}>
+                <button
+                  onClick={() => jumpTo(p.num)}
+                  style={{
+                    display: "block", width: "100%", textAlign: "left",
+                    background: "none", border: "none", padding: "0.7rem 0",
+                    marginLeft: wide ? `${INDENTS[i % INDENTS.length]}%` : 0,
+                    cursor: "pointer",
+                  }}
+                >
+                  <span style={{ display: "flex", alignItems: "baseline", gap: "clamp(0.75rem, 2vw, 1.75rem)", flexWrap: "wrap" }}>
+                    <span className="mono" style={{ fontSize: "0.58rem" }}>{p.num}</span>
+                    <span
+                      className="mono-lg"
+                      style={{
+                        color: "var(--ink)",
+                        textDecoration: "underline",
+                        textDecorationColor: "var(--accent)",
+                        textUnderlineOffset: "5px",
+                        textDecorationThickness: "1px",
+                      }}
+                    >
+                      {p.short}
+                    </span>
+                    <span className="mono" style={{ fontSize: "0.56rem" }}>{p.status}</span>
+                  </span>
+                </button>
+              </Reveal>
+            ))}
+
+            <Reveal delay={0.2}>
+              <a href={GITHUB} target="_blank" rel="noreferrer" className="u-link" style={{ display: "inline-block", marginTop: "2.5rem", fontSize: "0.66rem" }}>
                 See more on GitHub →
               </a>
             </Reveal>
+
+            {/* fills the column the photograph leaves standing next to it */}
+          </div>
+
+          {/* Her laptop drawing, standing in for a photograph */}
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Doodle art="computer" width={wide ? "min(30vw, 420px)" : "min(72vw, 300px)"} parallax={7} />
           </div>
         </div>
+      </section>
 
-        <div>
-          {projects.map((project, i) => <ProjectEntry key={project.num} project={project} delay={Math.min(i * 0.05, 0.2)} />)}
-          <div style={{ height: "1px", background: "rgba(26,26,26,0.1)" }} />
-        </div>
-
-        <div style={{ height: "5rem" }} />
+      {/* FULL ENTRIES */}
+      <div>
+        {projects.map((project, i) => (
+          <ProjectEntry key={project.num} project={project} delay={Math.min(i * 0.04, 0.16)} wide={wide} />
+        ))}
       </div>
+
+      <div style={{ borderTop: "1px solid var(--rule)", height: "clamp(2rem, 5vh, 4rem)" }} />
     </div>
   );
 }
 
-function ProjectEntry({ project, delay }) {
+function ProjectEntry({ project, delay, wide }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-40px 0px" });
+
   return (
-    <motion.div
+    <motion.section
+      id={`project-${project.num}`}
       ref={ref}
       initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay }}
-      style={{ borderTop: "1px solid rgba(26,26,26,0.1)", padding: "3.5rem 0", display: "grid", gridTemplateColumns: "minmax(0, 1fr)", gap: "0" }}
+      style={{ borderTop: "1px solid var(--rule)", padding: `clamp(2.5rem, 6vh, 4rem) ${PAD}`, scrollMarginTop: "90px" }}
     >
-      <div style={{ display: "grid", gridTemplateColumns: "56px 1fr", gap: "2rem", alignItems: "start" }}>
-        <span className="kicker" style={{ paddingTop: "0.55rem" }}>{project.num}</span>
+      <div style={{ display: "grid", gridTemplateColumns: wide ? "auto 1fr" : "1fr", gap: wide ? "clamp(1.5rem, 3vw, 3.5rem)" : "1.25rem", alignItems: "start" }}>
+        <span className="mono" style={{ paddingTop: "0.5rem", fontSize: "0.6rem" }}>{project.num}</span>
+
         <div style={{ minWidth: 0 }}>
           <div style={{ display: "flex", flexWrap: "wrap", alignItems: "baseline", justifyContent: "space-between", gap: "0.75rem 2rem" }}>
-            <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(1.6rem, 3.4vw, 2.7rem)", fontWeight: 300, lineHeight: 1.1, color: "#1a1a1a", margin: 0, maxWidth: "22ch" }}>{project.title}</h2>
-            <span className="kicker" style={{ flexShrink: 0 }}>{project.status}</span>
+            <h2
+              className="display"
+              style={{ fontSize: "clamp(1.5rem, 3.4vw, 2.8rem)", fontWeight: 700, textTransform: "uppercase", lineHeight: 1.02, letterSpacing: "-0.03em", margin: 0, maxWidth: "24ch" }}
+            >
+              {project.title}
+            </h2>
+            <span className="mono" style={{ flexShrink: 0, fontSize: "0.6rem" }}>{project.status}</span>
           </div>
 
           {project.body.length > 0 && (
-            <div style={{ margin: "1.75rem 0 0", maxWidth: "72ch" }}>
+            <div style={{ margin: "1.75rem 0 0", maxWidth: "74ch" }}>
               {project.body.map((para, i) => (
-                <p key={i} style={{ fontFamily: "'Faustina', serif", fontSize: "clamp(0.98rem, 1.4vw, 1.08rem)", lineHeight: 1.8, color: "#3a3530", margin: "0 0 1.1rem 0" }}>{para}</p>
+                <p key={i} className="body-text" style={{ color: "var(--muted)", margin: "0 0 1.1rem 0" }}>{para}</p>
               ))}
             </div>
           )}
 
-          {project.figure && (
-            <figure style={{ margin: "2rem 0 0", maxWidth: project.figure.images?.length > 1 ? "960px" : "760px" }}>
-              {project.figure.images ? (
-                <div style={{ display: "grid", gridTemplateColumns: project.figure.images.length > 1 ? "repeat(auto-fit, minmax(280px, 1fr))" : "1fr", gap: "0.75rem" }}>
-                  {project.figure.images.map(src => (
-                    <img key={src} src={src} alt={project.figure.caption} loading="lazy" style={{ width: "100%", height: "auto", display: "block", border: "1px solid rgba(26,26,26,0.18)", background: "#faf8f4" }} />
-                  ))}
-                </div>
-              ) : (
-                <div style={{
-                  border: "1px solid rgba(26,26,26,0.18)",
-                  aspectRatio: "16 / 8",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  background: "rgba(26,26,26,0.015)",
-                }}>
-                  <span className="kicker" style={{ color: "rgba(26,26,26,0.32)" }}>{project.figure.label} — to be added</span>
-                </div>
-              )}
-              <figcaption style={{ fontFamily: "'Faustina', serif", fontSize: "0.82rem", fontStyle: "italic", lineHeight: 1.6, color: "#7c7068", margin: "0.85rem 0 0", maxWidth: "70ch" }}>
+          {project.figure?.images && (
+            <figure style={{ margin: "2rem 0 0", maxWidth: project.figure.images.length > 1 ? "1000px" : "780px" }}>
+              <div style={{ display: "grid", gridTemplateColumns: project.figure.images.length > 1 ? "repeat(auto-fit, minmax(280px, 1fr))" : "1fr", gap: "0.75rem" }}>
+                {project.figure.images.map(src => (
+                  <img
+                    key={src}
+                    src={src}
+                    alt={project.figure.caption}
+                    loading="lazy"
+                    style={{ width: "100%", height: "auto", display: "block", border: "1px solid var(--rule)" }}
+                  />
+                ))}
+              </div>
+              <figcaption className="mono" style={{ margin: "0.9rem 0 0", fontSize: "0.56rem", lineHeight: 1.8, maxWidth: "80ch", textTransform: "none", letterSpacing: "0.04em" }}>
                 {project.figure.caption}
               </figcaption>
             </figure>
@@ -213,14 +268,14 @@ function ProjectEntry({ project, delay }) {
 
           <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", margin: "1.75rem 0 0" }}>
             {project.tags.map(tag => (
-              <span key={tag} style={{ fontFamily: "'Faustina', serif", fontSize: "0.68rem", letterSpacing: "0.1em", textTransform: "uppercase", border: "1px solid rgba(26,26,26,0.18)", padding: "0.3rem 0.65rem", color: "#7c7068" }}>{tag}</span>
+              <span key={tag} className="mono" style={{ border: "1px solid var(--rule)", padding: "0.35rem 0.7rem", fontSize: "0.56rem" }}>{tag}</span>
             ))}
           </div>
 
-          {project.links?.length > 0 && (
+          {project.links.length > 0 && (
             <div style={{ display: "flex", flexWrap: "wrap", gap: "2rem", margin: "1.75rem 0 0" }}>
               {project.links.map(l => (
-                <a key={l.href} href={l.href} target="_blank" rel="noreferrer" className="kicker link-underline" style={{ color: "#1a1a1a", textDecoration: "none" }}>
+                <a key={l.href} href={l.href} target="_blank" rel="noreferrer" className="u-link" style={{ fontSize: "0.64rem" }}>
                   {l.label} →
                 </a>
               ))}
@@ -228,6 +283,6 @@ function ProjectEntry({ project, delay }) {
           )}
         </div>
       </div>
-    </motion.div>
+    </motion.section>
   );
 }

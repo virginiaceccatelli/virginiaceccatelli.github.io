@@ -4,15 +4,15 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["'Faustina'", "ui-serif", "Georgia", "serif"],
-        display: ["'Cormorant Garamond'", "'Faustina'", "ui-serif", "Georgia", "serif"],
+        sans: ["'Archivo'", "'Helvetica Neue'", "Helvetica", "Arial", "sans-serif"],
+        display: ["'Archivo'", "'Helvetica Neue'", "Helvetica", "Arial", "sans-serif"],
+        mono: ["'JetBrains Mono'", "ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
       },
       colors: {
-        cream: "#f4f1ea",
-        ink: "#1a1a1a",
-        muted: "#7c7068",
-        warm: "#9b7c5c",
-        placeholder: "#e4dfd5",
+        cream: "#f2eee5",
+        ink: "#191512",
+        maroon: "#9c3a31",
+        muted: "rgba(25,21,18,0.56)",
       },
       borderRadius: {
         DEFAULT: "0",
