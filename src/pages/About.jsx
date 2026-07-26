@@ -56,18 +56,21 @@ export default function About() {
         intro="Computer scientist working on the safety and security of machine learning systems, and on the policy questions that increasingly surround them."
       />
 
-      <Doodle
-        art="petals"
-        width={wide ? "18vw" : "120vw"}
-        parallax={5}
-        reveal={false}
-        style={{
-          position: "absolute",
-          top: wide ? "12vh" : "11vh",
-          right: PAD,
-          zIndex: 1,
-        }}
-      />
+      {/* desktop only — on a phone it would crowd the title block */}
+      {wide && (
+        <Doodle
+          art="petals"
+          width="18vw"
+          parallax={5}
+          reveal={false}
+          style={{
+            position: "absolute",
+            top: "12vh",
+            right: PAD,
+            zIndex: 1,
+          }}
+        />
+      )}
 
       {/* CURRENT — mono grid, as on the reference education block */}
       <section style={{ borderTop: "1px solid var(--rule)", padding: `clamp(3rem, 7vh, 5rem) ${PAD}` }}>
