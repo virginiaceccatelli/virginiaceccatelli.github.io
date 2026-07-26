@@ -128,7 +128,7 @@ export default function Home() {
             className="mono"
             style={{ margin: "2.5rem 0 0", maxWidth: "50ch", lineHeight: 2, fontSize: "0.62rem" }}
           >
-            AI Safety · AI Security · Cybersecurity Policy<br />
+            AI Safety · AI Security · Governance<br />
             McGill CS · UCL S2Lab · Mila
           </motion.p>
         </div>
