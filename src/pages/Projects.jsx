@@ -25,7 +25,7 @@ const projects = [
     figure: { images: ["/mila.png"], caption: "Jailbreak success rate across large audio language models (rows) and monolingual and code-switched language conditions (columns)." },
     links: [
       { label: "Read paper", href: "https://arxiv.org/abs/2606.06037" },
-      { label: "View code", href: "https://github.com/virginiaceccatelli/MILA_safety" },
+      { label: "View code", href: "https://github.com/virginiaceccatelli/speechJBB" },
     ],
   },
   {
