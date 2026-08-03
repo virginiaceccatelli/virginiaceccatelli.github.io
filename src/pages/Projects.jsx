@@ -30,13 +30,15 @@ const projects = [
   },
   {
     num: "02",
-    title: "VoxSumm: Multilingual Corpus for Summarization & Translation",
-    short: "VoxSumm",
-    status: "Submitting, ACL ARR 2027 · Mila",
+    // Real name is "VoxSumm"; renamed to "PolySpeech" temporarily while the paper is under ACL review.
+    title: "Multilingual Corpus for Summarization & Translation",
+    short: "PolySpeech",
+    status: "ACL ARR 2027 · Mila",
     tags: ["Dataset", "Speech", "Summarization", "Translation"],
     body: [
-      "VoxSumm is a multilingual corpus for jointly summarizing and translating long-form spoken news in low-resource languages, built in collaboration with Google DeepMind. It pairs long spoken-news recordings with reference summaries and translations, so that speech and language models can be trained and evaluated on a harder, more realistic task than the usual benchmarks allow.",
-      "The corpus is designed around languages that current speech systems serve poorly, making it a resource for measuring how well models generalize beyond high-resource settings. Built with Y. Jeon, M. Maltais, M. Ma, and D. I. Adelani.",
+      "This project formalizes joint speech summarization and translation (JSumT): generating a concise, faithful summary in a target language directly from a long spoken document in a source language, rather than treating summarization and translation as separate steps. Built in collaboration with Google DeepMind, it is the first multilingual benchmark for this task, comprising 10,045 BBC article-summary pairs across 24 languages and roughly 703 hours of synthesized speech, with audio quality validated through ASR-based character error rate, NISQA naturalness scoring, and human listening evaluations.",
+      "Evaluating Gemini, Gemma, and Qwen across zero-shot, few-shot, and chain-of-thought prompting revealed consistent patterns: Gemini is the most consistent model across languages and prompting strategies, few-shot prompting most reliably benefits stronger models, and all three models improve with the source language's resource availability. Generating an English summary from non-English speech is consistently easier than the reverse direction, since models can condense content in their dominant pretraining language before the comparatively short task of translating the summary.",
+      "A further ablation compares task ordering: translating an entire spoken document before summarizing it, versus summarizing first and translating the summary. The former compounds instruction-following failures, models more often drop the summary or hallucinate after sustained non-English generation, establishing summarize-then-translate as the more reliable pipeline.",
     ],
     links: [
       { label: "View dataset", href: "https://huggingface.co/datasets/McGill-NLP/speech-translation-and-summarization" },
