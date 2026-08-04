@@ -5,7 +5,7 @@ import Reveal from "../components/fx/Reveal";
 import Doodle from "../components/fx/Doodle";
 import useMedia from "../hooks/useMedia";
 
-// Note: "PolySpeech" below is a temporary stand-in for "VoxSumm" while the paper is under ACL review.
+// Note: the corpus below is "VoxSumm," left unnamed here while the paper is under ACL review.
 const work = [
   { title: "AI Security Intern", company: "WIIT — The Premium Cloud", location: "Düsseldorf, Germany", period: "July 2026 – Current", bullets: ["Collaborating with WIIT AI Engineers to build an agentic purple-teaming loop that continuously red-teams AI agents and autonomously hardens them.", "Spearheading an automated attacker with a defined taxonomy (prompt injection, tool-parameter manipulation, and goal hijacking) alongside safety pillars such as bias and misinformation.", "Producing an evaluation harness to quantify detection, bypass, and false-positive rates across attack vectors."], tags: ["AI Security", "Red-Teaming", "Agentic Systems"] },
   { title: "AI Security Researcher", company: "UCL S2Lab — Prof. Lorenzo Cavallaro", location: "London, UK (Remote)", period: "June 2026 – Current", bullets: ["Co-developed and validated a taxonomy of internal LLM uncertainty signals, introducing trajectory-based probes that improved uncertainty estimation.", "Built a framework to trace binding, data flow, control dependence, and security taint flow in code models by aligning model activations with code property graphs.", "Verifying causal use of semantic representations via activation patching, and stress-testing robustness under semantics-preserving transformations across 5 obfuscation levels."], tags: ["AI Security", "Interpretability", "Program Analysis"] },

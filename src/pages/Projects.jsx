@@ -30,9 +30,9 @@ const projects = [
   },
   {
     num: "02",
-    // Real name is "VoxSumm"; renamed to "PolySpeech" temporarily while the paper is under ACL review.
+    // Real name is "VoxSumm"; kept as "Preprint" temporarily while the paper is under ACL review.
     title: "Multilingual Corpus for Summarization & Translation",
-    short: "PolySpeech",
+    short: "Preprint",
     status: "ACL ARR 2027 · Mila",
     tags: ["Dataset", "Speech", "Summarization", "Translation"],
     body: [

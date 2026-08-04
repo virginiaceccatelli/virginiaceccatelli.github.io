@@ -21,7 +21,7 @@ const courses = [
   "Operating Systems",
 ];
 
-// Note: "PolySpeech" below is a temporary stand-in for "VoxSumm" while the paper is under ACL review.
+// Note: the corpus below is "VoxSumm," left unnamed here while the paper is under ACL review.
 const bio = [
   "I am a computer scientist working on the safety and security of machine learning systems, and on the policy questions that surround them. My research interests lie in understanding modern language models' failures under adversarial pressure as well as native safety issues, and how those failures can be measured and governed.",
   "I came to computer science from international relations. I began a degree in IR at IE University, where I grew interested in the societal dimensions of technology and, in particular, in how geopolitical events intersect with cybersecurity. That interest led me to transfer to McGill University and complete a BA in Computer Science with a minor in Economics; studying machine learning, computer networks, compiler design, and systems programming, ultimately graduating with Distinction.",
