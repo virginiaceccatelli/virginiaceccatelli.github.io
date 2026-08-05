@@ -30,22 +30,6 @@ const projects = [
   },
   {
     num: "02",
-    // Real name is "VoxSumm"; kept as "Preprint" temporarily while the paper is under ACL review.
-    title: "Multilingual Corpus for Summarization & Translation",
-    short: "Preprint",
-    status: "ACL ARR 2027 · Mila",
-    tags: ["Dataset", "Speech", "Summarization", "Translation"],
-    body: [
-      "This project formalizes joint speech summarization and translation (JSumT): generating a concise, faithful summary in a target language directly from a long spoken document in a source language, rather than treating summarization and translation as separate steps. Built in collaboration with Google DeepMind, it is the first multilingual benchmark for this task, comprising 10,045 BBC article-summary pairs across 24 languages and roughly 703 hours of synthesized speech, with audio quality validated through ASR-based character error rate, NISQA naturalness scoring, and human listening evaluations.",
-      "Evaluating Gemini, Gemma, and Qwen across zero-shot, few-shot, and chain-of-thought prompting revealed consistent patterns: Gemini is the most consistent model across languages and prompting strategies, few-shot prompting most reliably benefits stronger models, and all three models improve with the source language's resource availability. Generating an English summary from non-English speech is consistently easier than the reverse direction, since models can condense content in their dominant pretraining language before the comparatively short task of translating the summary.",
-      "A further ablation compares task ordering: translating an entire spoken document before summarizing it, versus summarizing first and translating the summary. The former compounds instruction-following failures, models more often drop the summary or hallucinate after sustained non-English generation, establishing summarize-then-translate as the more reliable pipeline.",
-    ],
-    links: [
-      { label: "View dataset", href: "https://huggingface.co/datasets/McGill-NLP/speech-translation-and-summarization" },
-    ],
-  },
-  {
-    num: "03",
     title: "Semantic Flow: Tracing Semantic State in Code Models",
     short: "Semantic Flow",
     status: "Ongoing · UCL S2Lab",
@@ -58,7 +42,7 @@ const projects = [
     ],
   },
   {
-    num: "04",
+    num: "03",
     title: "Robotic Ground Segmentation & Motion Decision",
     short: "Ground Segmentation",
     status: "McGill Prometheus Lab · 2025",
@@ -73,7 +57,7 @@ const projects = [
     ],
   },
   {
-    num: "05",
+    num: "04",
     title: "Building and Optimizing a Compiler: Source to MIPS",
     short: "Compiler → MIPS",
     status: "COMP 520 · McGill · 2026",
@@ -85,7 +69,7 @@ const projects = [
     links: [],
   },
   {
-    num: "06",
+    num: "05",
     title: "Link-State Routing Protocol Simulation",
     short: "Link-State Routing",
     status: "COMP 535 · McGill · 2026",
@@ -99,7 +83,7 @@ const projects = [
     ],
   },
   {
-    num: "07",
+    num: "06",
     title: "Reliable Multicast File Transfer",
     short: "Multicast Transfer",
     status: "COMP 535 · McGill · 2026",
@@ -113,7 +97,7 @@ const projects = [
     ],
   },
   {
-    num: "08",
+    num: "07",
     title: "Cisco SOHO Network Simulation",
     short: "Cisco SOHO Network",
     status: "2024",
