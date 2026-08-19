@@ -8,9 +8,8 @@ import useMedia from "../hooks/useMedia";
 
 const GITHUB = "https://github.com/virginiaceccatelli";
 
-// Projects are sourced from public repositories and published work. Entries
-// without a public source are intentionally omitted; per request, Semantic
-// Flow is listed without description while the work is ongoing.
+// Projects are sourced from public repositories, published work, and selected
+// ongoing research. Private work is listed without a repository link.
 const projects = [
   {
     num: "01",
@@ -30,19 +29,32 @@ const projects = [
   },
   {
     num: "02",
-    title: "Semantic Flow: Tracing Semantic State in Code Models",
-    short: "Semantic Flow",
-    status: "Ongoing · UCL S2Lab",
-    tags: ["Interpretability", "Program Analysis", "Code Models"],
+    title: "VoxSumm: Multilingual Spoken-News Summarization and Translation",
+    short: "VoxSumm",
+    status: "Under review at EACL · 2026",
+    tags: ["Speech", "Multilingual NLP", "Summarization", "Translation"],
     body: [
-      "Semantic Flow asks whether code language models internally represent the meaning of a program, namely which definition a name refers to, where a value flows, what controls its execution, and whether it is tainted, or only its surface text. To test this, it generates Python programs whose semantic structure is known exactly by construction, builds corresponding code property graphs, runs a frozen code model over them and trains low-capacity linear probes on the saved hidden states to check whether relations like binding, data flow, control dependence, and security taint are linearly decodable. The appropriate controls are also implemented to rule out shortcuts from surface form alone. It further studies how that internal structure holds up as context grows and as code is rewritten while its meaning is held fixed, and whether the model causally relies on these representations, using activation patching.",
+      "VoxSumm introduces joint speech summarization and translation (JSumT): generating a concise, faithful summary in a target language directly from a long spoken document in a source language. It is the first multilingual and cross-lingual benchmark for this task, pairing 10,045 BBC news articles and summaries across 24 languages with approximately 703 hours of speech.",
+      "Evaluations of representative speech-language models reveal substantial variation across models and generation settings: Gemini 3.1 Pro is the most consistent, summarization into English generally outperforms generation into non-English languages, and translating a full document before summarizing compounds instruction-following failures. Co-authored with Yejin Jeon, Marie Maltais, Min Ma, and David Ifeoluwa Adelani.",
     ],
     links: [
-      { label: "View repository", href: "https://github.com/virginiaceccatelli/semantic-flow" },
+      { label: "Read paper", href: "https://arxiv.org/abs/2608.10359" },
     ],
   },
   {
     num: "03",
+    title: "Semantic Flow: Tracing Semantic State in Code Models",
+    short: "Semantic Flow",
+    status: "Ongoing · UCL S2Lab",
+    tags: ["Mechanistic Interpretability", "Program Analysis", "Code Models", "AI Security"],
+    body: [
+      "Semantic Flow asks whether code language models build internal representations of program meaning rather than merely tracking lexical and syntactic regularities. It generates controlled Python programs with exact ground truth for variable binding, definition-use relations, control dependence, and source-to-sink security flow, then aligns those relations to model activations. Context-matched counterfactuals hold token position, surrounding text, and distance constant while flipping the semantic answer, pinning the surface-only baseline to chance by construction.",
+      "The latest results show that binding and definition-use structure emerge over the first transformer blocks, peak in the middle layers, survive long inert context and identifier renaming, and degrade when competing bindings or flattened control flow make the underlying program structure harder. More importantly, a rank-1 causal interchange can transport which definition is in scope across counterfactual programs, including a held-out arm where token- or answer-direction explanations predict the opposite change. A parallel source-to-sink audit finds that models can decode whether untrusted data reaches a sensitive sink across three code-model families, while exposing where semantics-preserving obfuscation causes that signal to fail.",
+    ],
+    links: [],
+  },
+  {
+    num: "04",
     title: "Robotic Ground Segmentation & Motion Decision",
     short: "Ground Segmentation",
     status: "McGill Prometheus Lab · 2025",
@@ -57,7 +69,7 @@ const projects = [
     ],
   },
   {
-    num: "04",
+    num: "05",
     title: "Building and Optimizing a Compiler: Source to MIPS",
     short: "Compiler → MIPS",
     status: "COMP 520 · McGill · 2026",
@@ -69,7 +81,7 @@ const projects = [
     links: [],
   },
   {
-    num: "05",
+    num: "06",
     title: "Link-State Routing Protocol Simulation",
     short: "Link-State Routing",
     status: "COMP 535 · McGill · 2026",
@@ -83,7 +95,7 @@ const projects = [
     ],
   },
   {
-    num: "06",
+    num: "07",
     title: "Reliable Multicast File Transfer",
     short: "Multicast Transfer",
     status: "COMP 535 · McGill · 2026",
@@ -97,7 +109,7 @@ const projects = [
     ],
   },
   {
-    num: "07",
+    num: "08",
     title: "Cisco SOHO Network Simulation",
     short: "Cisco SOHO Network",
     status: "2024",
