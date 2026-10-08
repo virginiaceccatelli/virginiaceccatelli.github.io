@@ -29,9 +29,27 @@ const projects = [
   },
   {
     num: "02",
+    title: "U-Space: Uncovering When and Why Uncertainty Arises in Language Models",
+    short: "U-Space",
+    status: "Preprint · UCL S2Lab · 2026",
+    role: "Co-author",
+    tags: ["Mechanistic Interpretability", "Uncertainty Quantification", "Reasoning Models", "Activation Steering"],
+    body: [
+      "U-Space is a low-dimensional subspace of a language model's residual stream that makes its evolving uncertainty measurable and interpretable. Small sets of anchor words expressing doubt and certainty are pulled back from the vocabulary into the residual stream through the J-Lens, and their contrasts form an orthonormal basis spanning four sources of uncertainty: ambiguity, incompleteness, conflicting evidence, and general uncertainty. The U-Lens projects every reasoning token onto this basis, producing a token-by-category map of where uncertainty arises and what form it takes, with no correctness labels, repeated generations, or training.",
+      "Combined with mean predictive entropy into a single trace-level score, the U-Lens outperforms established uncertainty estimators across three reasoning models and four benchmarks, both in standard and length-controlled evaluation, and transfers more reliably across benchmarks than supervised probes. Steering along the basis directions makes models hesitate and lose confidence even on trivial questions, evidence that these representations shape behaviour rather than merely correlate with it. Co-authored with Tobias Braun, Nils Loose, Alexander Herzog, Marcus Rohrbach, Thomas Eisenbarth, and Lorenzo Cavallaro.",
+    ],
+    figure: { images: ["/uspace-fig.png"], caption: "U-Space construction and U-Lens readout: (a) uncertainty and certainty anchors are pulled into the residual stream and orthogonalized into the U-Space basis; (b) each reasoning token is projected onto this basis, giving a token-by-category uncertainty map; (c) the end-of-thinking alignment is combined with mean predictive entropy into a trace-level score." },
+    links: [
+      { label: "Read paper", href: "https://arxiv.org/abs/2610.09087" },
+      { label: "View code", href: "https://github.com/TobiasBrx/U-Space" },
+    ],
+  },
+  {
+    num: "03",
     title: "VoxSumm: Multilingual Spoken-News Summarization and Translation",
     short: "VoxSumm",
     status: "Under review at EACL · 2026",
+    role: "Co-author",
     tags: ["Speech", "Multilingual NLP", "Summarization", "Translation"],
     body: [
       "VoxSumm introduces joint speech summarization and translation (JSumT): generating a concise, faithful summary in a target language directly from a long spoken document in a source language. It is the first multilingual and cross-lingual benchmark for this task, pairing 10,045 BBC news articles and summaries across 24 languages with approximately 703 hours of speech.",
@@ -42,19 +60,19 @@ const projects = [
     ],
   },
   {
-    num: "03",
-    title: "Semantic Flow: Tracing Semantic State in Code Models",
+    num: "04",
+    title: "Semantic Flow: Do Code Models Use What They Compute?",
     short: "Semantic Flow",
     status: "Ongoing · UCL S2Lab",
-    tags: ["Mechanistic Interpretability", "Program Analysis", "Code Models", "AI Security"],
+    tags: ["Mechanistic Interpretability", "Code Models", "Program Execution", "Activation Steering"],
     body: [
-      "Semantic Flow asks whether code language models build internal representations of program meaning rather than merely tracking lexical and syntactic regularities. It generates controlled Python programs with exact ground truth for variable binding, definition-use relations, control dependence, and source-to-sink security flow, then aligns those relations to model activations. Context-matched counterfactuals hold token position, surrounding text, and distance constant while flipping the semantic answer, pinning the surface-only baseline to chance by construction.",
-      "The latest results show that binding and definition-use structure emerge over the first transformer blocks, peak in the middle layers, survive long inert context and identifier renaming, and degrade when competing bindings or flattened control flow make the underlying program structure harder. More importantly, a rank-1 causal interchange can transport which definition is in scope across counterfactual programs, including a held-out arm where token- or answer-direction explanations predict the opposite change. A parallel source-to-sink audit finds that models can decode whether untrusted data reaches a sensitive sink across three code-model families, while exposing where semantics-preserving obfuscation causes that signal to fail.",
+      "Semantic Flow separates two questions about code language models: whether a fact about a program is represented in the hidden state, and whether the model's answer actually uses it. For variable binding both hold: probes reach 0.98 accuracy, and a rank-1 causal intervention (Distributed Alignment Search) installs the binding on every held-out case. The current work asks the same question of an execution fact on real code. From MBPP, HumanEval and CruxEval, it builds about 740 pairs of token-identical programs per model that differ only in one input literal, chosen and verified by execution so that the same if statement takes the other branch and the output changes.",
+      "Across DeepSeek-Coder 1.3B and 6.7B and StarCoder2 3B, a direction learned only on synthetic programs reads which branch will run directly from the state at the if, rising from 0.60 to 0.75 pair accuracy with scale, while every control stays at chance. Yet the models' predicted outputs follow the branch that actually runs only at chance: about nine in ten pairs receive the same branch for both inputs, and the outcome is computed just as strongly when the answer ignores it. Steering shows the state is still causally connected to the answer. Pushing it toward the true branch repairs 13 to 22% of wrong-branch answers in the smaller models, while in DeepSeek 6.7B that leverage moves to the answer position, which repairs 44%. Unlike binding, the branch outcome is computed but largely bypassed.",
     ],
     links: [],
   },
   {
-    num: "04",
+    num: "05",
     title: "Robotic Ground Segmentation & Motion Decision",
     short: "Ground Segmentation",
     status: "McGill Prometheus Lab · 2025",
@@ -69,7 +87,7 @@ const projects = [
     ],
   },
   {
-    num: "05",
+    num: "06",
     title: "Building and Optimizing a Compiler: Source to MIPS",
     short: "Compiler → MIPS",
     status: "COMP 520 · McGill · 2026",
@@ -81,7 +99,7 @@ const projects = [
     links: [],
   },
   {
-    num: "06",
+    num: "07",
     title: "Link-State Routing Protocol Simulation",
     short: "Link-State Routing",
     status: "COMP 535 · McGill · 2026",
@@ -95,7 +113,7 @@ const projects = [
     ],
   },
   {
-    num: "07",
+    num: "08",
     title: "Reliable Multicast File Transfer",
     short: "Multicast Transfer",
     status: "COMP 535 · McGill · 2026",
@@ -109,7 +127,7 @@ const projects = [
     ],
   },
   {
-    num: "08",
+    num: "09",
     title: "Cisco SOHO Network Simulation",
     short: "Cisco SOHO Network",
     status: "2024",
@@ -177,6 +195,7 @@ export default function Projects() {
                       {p.short}
                     </span>
                     <span className="mono" style={{ fontSize: "0.56rem" }}>{p.status}</span>
+                    {p.role && <span className="mono" style={{ fontSize: "0.56rem", color: "var(--accent)" }}>{p.role}</span>}
                   </span>
                 </button>
               </Reveal>
@@ -234,7 +253,10 @@ function ProjectEntry({ project, delay, wide }) {
             >
               {project.title}
             </h2>
-            <span className="mono" style={{ flexShrink: 0, fontSize: "0.6rem" }}>{project.status}</span>
+            <span style={{ display: "flex", flexDirection: "column", alignItems: wide ? "flex-end" : "flex-start", gap: "0.4rem", flexShrink: 0 }}>
+              <span className="mono" style={{ fontSize: "0.6rem" }}>{project.status}</span>
+              {project.role && <span className="mono" style={{ fontSize: "0.6rem", color: "var(--accent)" }}>{project.role}</span>}
+            </span>
           </div>
 
           {project.body.length > 0 && (

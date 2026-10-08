@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
  * its children — the classic award-site move. On narrow/touch/reduced-motion
  * viewports it degrades to a normal vertical stack (renders children as-is).
  */
-export default function HorizontalScroll({ children, className = "", style = {} }) {
+export default function HorizontalScroll({ children, className = "", style = {}, height = "100vh" }) {
   const sectionRef = useRef(null);
   const trackRef = useRef(null);
   const [enabled, setEnabled] = useState(true);
@@ -34,7 +34,8 @@ export default function HorizontalScroll({ children, className = "", style = {} 
 
       ScrollTrigger.create({
         trigger: section,
-        start: "top top",
+        // a band shorter than the viewport pins centred rather than at the top
+        start: height === "100vh" ? "top top" : "center center",
         end: () => "+=" + getScrollAmount(),
         pin: true,
         anticipatePin: 1,
@@ -45,7 +46,7 @@ export default function HorizontalScroll({ children, className = "", style = {} 
     }, section);
 
     return () => ctx.revert();
-  }, [children]);
+  }, [children, height]);
 
   if (!enabled) {
     // vertical fallback: lay panels out stacked
@@ -60,7 +61,7 @@ export default function HorizontalScroll({ children, className = "", style = {} 
     <section ref={sectionRef} className={className} style={{ overflow: "hidden", ...style }}>
       <div
         ref={trackRef}
-        style={{ display: "flex", flexWrap: "nowrap", willChange: "transform", height: "100vh" }}
+        style={{ display: "flex", flexWrap: "nowrap", willChange: "transform", height }}
       >
         {children}
       </div>

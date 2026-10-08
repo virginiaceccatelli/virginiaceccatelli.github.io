@@ -2,36 +2,13 @@ import PageHeader, { PAD } from "../components/PageHeader";
 import Reveal from "../components/fx/Reveal";
 import Doodle from "../components/fx/Doodle";
 import useMedia from "../hooks/useMedia";
-
-const achievements = [
-  "Computer Science Major, Economics Minor — McGill University",
-  "Distinction, top 25% — McGill University",
-  "Currently AI Security Intern at WIIT — The Premium Cloud",
-  "Currently AI Security Researcher at UCL S2Lab",
-  "Former Researcher at Mila - Quebec AI Institute",
-  "Former Policy Researcher at Andalus Committee - Columbia University",
-  "Dean's List, top 10% — IE University Madrid",
-];
-
-const courses = [
-  "Applied Machine Learning (Graduate)",
-  "Computer Networks (Graduate)",
-  "Compiler Design (Graduate)",
-  "Probability & Statistics",
-  "Operating Systems",
-];
+import ExperienceSections from "./Experience";
 
 const bio = [
   "I am a computer scientist working on the safety and security of machine learning systems, and on the policy questions that surround them. My research interests lie in understanding modern language models' failures under adversarial pressure as well as native safety issues, and how those failures can be measured and governed.",
   "I came to computer science from international relations. I began a degree in IR at IE University, where I grew interested in the societal dimensions of technology and, in particular, in how geopolitical events intersect with cybersecurity. That interest led me to transfer to McGill University and complete a BA in Computer Science with a minor in Economics; studying machine learning, computer networks, compiler design, and systems programming, ultimately graduating with Distinction.",
   "My work moves between the technical and the political. On the technical side, I led SpeechJBB, the first audio code-switching jailbreak benchmark for evaluating the safety of large audio language models. On the policy side, I have written on U.S.–Africa cybersecurity partnerships to strengthen Sub-Saharan African technological sovereignty and on the geopolitics of the Iranian–Russian military drone trade.",
-  "I am currently an AI Security Researcher at UCL's Systems Security Lab (S2Lab), where I am leading a program-analysis framework that traces binding, data flow, control dependence, and security taint through code models to understand how semantic information is represented internally. It probes whether code property graph information is represented in model latent space, how these representations degrade under obfuscations and long context and whether they are causally used; verified with causal interventions such as activation patching. Alongside this, I am an AI Security intern at WIIT, building an agentic purple-teaming loop that continuously red-teams AI agents and autonomously hardens them.",
-];
-
-const positions = [
-  { role: "AI Security Researcher", org: "UCL S2Lab", when: "Current" },
-  { role: "AI Security Intern", org: "WIIT — The Premium Cloud", when: "Current" },
-  { role: "Prev. AI Safety Researcher", org: "Mila — Québec AI Institute", when: "2026" },
+  "I am currently an AI Security Researcher at UCL's Systems Security Lab (S2Lab), where my work centres on mechanistic interpretability for uncertainty and code. I co-authored U-Space, a training-free method that traces where and why uncertainty arises in a language model's reasoning, token by token, and extended it to reward hacking and error concealment. I am also studying whether code models use the program facts they represent: on real code, they compute which branch an if statement will take, yet their predicted outputs largely ignore it. Alongside this, I am an AI Security Intern at WIIT, where I am designing a secure multi-tenant platform for serving LLMs and building an adversarial evaluation harness for LLM-based and agentic systems.",
 ];
 
 const interests = [
@@ -72,27 +49,6 @@ export default function About() {
         />
       )}
 
-      {/* CURRENT — mono grid, as on the reference education block */}
-      <section style={{ borderTop: "1px solid var(--rule)", padding: `clamp(3rem, 7vh, 5rem) ${PAD}` }}>
-        <Reveal><p className="mono" style={{ marginBottom: "2.5rem" }}>Current</p></Reveal>
-        <div style={{ display: "grid", gridTemplateColumns: wide ? "repeat(3, 1fr)" : "1fr", gap: "2.5rem clamp(2rem, 4vw, 4rem)" }}>
-          {positions.map((p, i) => (
-            <Reveal key={p.role} delay={i * 0.07}>
-              <div style={{ borderTop: "1px solid var(--rule)", paddingTop: "1.25rem" }}>
-                <p className="mono" style={{ margin: "0 0 0.9rem", fontSize: "0.6rem" }}>{p.when}</p>
-                <p
-                  className="display"
-                  style={{ fontSize: "clamp(1.2rem, 2.2vw, 1.75rem)", fontWeight: 700, textTransform: "uppercase", lineHeight: 1.05, margin: "0 0 0.5rem" }}
-                >
-                  {p.role}
-                </p>
-                <p className="mono" style={{ margin: 0, fontSize: "0.62rem" }}>{p.org}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
       {/* BACKGROUND — two columns of running text, with a big drawing alongside */}
       <section style={{ borderTop: "1px solid var(--rule)", padding: `clamp(3rem, 7vh, 5rem) ${PAD}` }}>
         <Reveal><p className="mono" style={{ marginBottom: "2.5rem" }}>Background</p></Reveal>
@@ -123,41 +79,7 @@ export default function About() {
         </Reveal>
       </section>
 
-      {/* AT A GLANCE + ACADEMIC */}
-      <section style={{ borderTop: "1px solid var(--rule)", padding: `clamp(3rem, 7vh, 5rem) ${PAD}` }}>
-        <div style={{ display: "grid", gridTemplateColumns: wide ? "1fr 1fr" : "1fr", gap: "clamp(3rem, 6vh, 4.5rem) clamp(2.5rem, 5vw, 5rem)" }}>
-          <div>
-            <Reveal><p className="mono" style={{ marginBottom: "2.5rem" }}>At a Glance</p></Reveal>
-            {achievements.map((item, i) => (
-              <Reveal key={i} delay={i * 0.05}>
-                <div style={{ display: "flex", gap: "1.25rem", alignItems: "flex-start", borderTop: "1px solid var(--rule)", padding: "1rem 0" }}>
-                  <span className="mono" style={{ flexShrink: 0, paddingTop: "2px", fontSize: "0.6rem" }}>{String(i + 1).padStart(2, "0")}</span>
-                  <p style={{ fontSize: "0.93rem", lineHeight: 1.55, color: "var(--ink)", margin: 0 }}>{item}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <div>
-            <Reveal><p className="mono" style={{ marginBottom: "1rem" }}>Academic Achievements</p></Reveal>
-            <Reveal delay={0.06}>
-              <p className="display" style={{ fontSize: "clamp(4.5rem, 12vw, 9rem)", fontWeight: 800, lineHeight: 0.85, letterSpacing: "-0.05em", margin: "0 0 1rem 0" }}>
-                3.8
-              </p>
-              <p className="mono" style={{ marginBottom: "3rem", fontSize: "0.62rem" }}>GPA · McGill University · Distinction</p>
-            </Reveal>
-            <Reveal delay={0.1}><p className="mono" style={{ marginBottom: "1.5rem" }}>Course Highlights</p></Reveal>
-            {courses.map((course, i) => (
-              <Reveal key={i} delay={0.1 + i * 0.035}>
-                <div style={{ borderTop: "1px solid var(--rule)", padding: "0.8rem 0", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1rem" }}>
-                  <span style={{ fontSize: "0.9rem", color: "var(--ink)" }}>{course}</span>
-                  <span className="mono" style={{ fontSize: "0.58rem", flexShrink: 0 }}>{String(i + 1).padStart(2, "0")}</span>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ExperienceSections />
 
       {/* LANGUAGES — set big, as a closing statement */}
       <section style={{ borderTop: "1px solid var(--rule)", padding: `clamp(3rem, 7vh, 5rem) ${PAD} clamp(4rem, 9vh, 6rem)` }}>
@@ -175,6 +97,10 @@ export default function About() {
             ))}
           </div>
         </Reveal>
+
+        <div style={{ display: "flex", justifyContent: "center", marginTop: "clamp(3rem, 8vh, 6rem)" }}>
+          <Doodle art="starfish" width={wide ? "min(20vw, 260px)" : "min(56vw, 220px)"} parallax={9} />
+        </div>
       </section>
     </div>
   );

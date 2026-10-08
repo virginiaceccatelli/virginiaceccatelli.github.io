@@ -23,13 +23,12 @@ const PAD = "clamp(1.25rem, 3vw, 2.5rem)";
 
 const focusAreas = [
   { num: "01", area: "AI Safety & Security", sub: "Multilingual speech-safety evaluation, jailbreak benchmarks, agentic red-teaming and hardening" },
-  { num: "02", area: "Interpretability & Alignment", sub: "Trajectory-based uncertainty probes, tracing data flow and security taint in code models, activation patching" },
+  { num: "02", area: "Interpretability & Alignment", sub: "Token-level uncertainty in reasoning models, whether code models use the program facts they compute, causal interventions and steering" },
   { num: "03", area: "Cybersecurity Policy", sub: "U.S.–Africa partnerships, Digital Silk Road dynamics, global north-south collaboration" },
 ];
 
 const destinations = [
-  { label: "About Me",   path: "/about",      sub: "Background & profile" },
-  { label: "Experience", path: "/experience", sub: "Work & education" },
+  { label: "About Me",   path: "/about",      sub: "Background, experience & education" },
   { label: "Works",      path: "/projects",   sub: "Selected projects" },
   { label: "Writing",    path: "/writing",    sub: "Papers & articles" },
 ];
@@ -38,7 +37,7 @@ const facts = [
   { label: "Currently at", value: "UCL S2Lab · WIIT Premium Cloud" },
   { label: "Based in", value: "London, UK" },
   { label: "Education", value: "McGill University: CS + Economics, 3.8 GPA" },
-  { label: "Prev. research", value: "Mila — Québec AI Institute" },
+  { label: "Prev. research", value: "Mila Québec AI Institute" },
 ];
 
 const contacts = [
@@ -203,7 +202,7 @@ export default function Home() {
       </section>
 
       {/* ───────── AREAS OF FOCUS — pinned horizontal, on red paper ───────── */}
-      <HorizontalScroll className="theme-maroon" style={{ background: "var(--paper)" }}>
+      <HorizontalScroll height="70vh" className="theme-maroon" style={{ background: "var(--paper)" }}>
         <IntroPanel />
         {focusAreas.map((area, i) => (
           <FocusPanel key={area.num} area={area} index={i} total={focusAreas.length} />
@@ -363,11 +362,11 @@ const PANEL_STYLE = {
   // so a visible scrollbar can't push the panels into horizontal overflow
   width: "100%",
   minWidth: "100%",
-  minHeight: "78vh",
+  minHeight: "56vh",
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
-  padding: "clamp(3rem, 8vh, 7rem) clamp(1.5rem, 7vw, 8rem)",
+  padding: "clamp(2rem, 5vh, 4rem) clamp(1.5rem, 7vw, 8rem)",
   borderRight: "1px solid var(--rule)",
   boxSizing: "border-box",
 };
@@ -406,7 +405,7 @@ function FocusPanel({ area, index, total }) {
         <span
           className="display"
           style={{
-            fontSize: "clamp(4rem, 13vw, 12rem)", fontWeight: 800, lineHeight: 0.78,
+            fontSize: "clamp(3.5rem, 10vw, 9rem)", fontWeight: 800, lineHeight: 0.78,
             letterSpacing: "-0.05em",
             color: "var(--ink)",
             opacity: hovered ? 0.38 : 0.18,

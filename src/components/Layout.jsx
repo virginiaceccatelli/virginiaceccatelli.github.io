@@ -12,7 +12,6 @@ const EMAIL = "virginia.ceccatelli@mail.mcgill.ca";
 
 const NAV = [
   { path: "/about",      label: "About Me"   },
-  { path: "/experience", label: "Experience" },
   { path: "/projects",   label: "Works"      },
   { path: "/writing",    label: "Writing"    },
 ];

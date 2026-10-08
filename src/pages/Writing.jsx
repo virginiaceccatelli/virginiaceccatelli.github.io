@@ -62,17 +62,11 @@ export default function Writing() {
               </Reveal>
             ))}
 
-            {/* desktop only — on a phone the cat drawing below carries the page */}
-            {wide && (
-              <div style={{ marginTop: "clamp(2.5rem, 6vh, 4rem)" }}>
-                <Doodle art="figures" width="min(18vw, 190px)" parallax={7} rotate={-6} />
-              </div>
-            )}
           </div>
 
           {/* Her cat-on-a-book drawing, standing in for a photograph */}
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <Doodle art="book" width={wide ? "min(17vw, 300px)" : "min(62vw, 260px)"} parallax={8} />
+            <Doodle art="book" width={wide ? "min(13vw, 230px)" : "min(50vw, 210px)"} parallax={8} />
           </div>
         </div>
       </section>

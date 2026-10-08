@@ -1,13 +1,12 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import PageHeader, { PAD } from "../components/PageHeader";
+import { PAD } from "../components/PageHeader";
 import Reveal from "../components/fx/Reveal";
-import Doodle from "../components/fx/Doodle";
 import useMedia from "../hooks/useMedia";
 
 const work = [
-  { title: "AI Security Intern", company: "WIIT — The Premium Cloud", location: "Düsseldorf, Germany", period: "July 2026 – Current", bullets: ["Collaborating with WIIT AI Engineers to build an agentic purple-teaming loop that continuously red-teams AI agents and autonomously hardens them.", "Spearheading an automated attacker with a defined taxonomy (prompt injection, tool-parameter manipulation, and goal hijacking) alongside safety pillars such as bias and misinformation.", "Producing an evaluation harness to quantify detection, bypass, and false-positive rates across attack vectors."], tags: ["AI Security", "Red-Teaming", "Agentic Systems"] },
-  { title: "AI Security Researcher", company: "UCL S2Lab — Prof. Lorenzo Cavallaro", location: "London, UK (Remote)", period: "June 2026 – Current", bullets: ["Co-developed and validated a taxonomy of internal LLM uncertainty signals, introducing trajectory-based probes that improved uncertainty estimation.", "Built a framework to trace binding, data flow, control dependence, and security taint flow in code models by aligning model activations with code property graphs.", "Verifying causal use of semantic representations via activation patching, and stress-testing robustness under semantics-preserving transformations across 5 obfuscation levels."], tags: ["AI Security", "Interpretability", "Program Analysis"] },
+  { title: "Cloud Engineer Intern", company: "WIIT — The Premium Cloud", location: "Düsseldorf, Germany", period: "July 2026 – Current", bullets: ["Designing and building a secure, multi-tenant LLM-as-a-Service platform on OpenStack, with per-model vLLM serving behind an Envoy AI Gateway and GPU isolation through PCI passthrough, laid out so it can later migrate to Kubernetes.", "Building an adversarial evaluation harness for LLM-based and agentic systems that covers model, tool, and agent attack surfaces mapped to OWASP and MITRE ATLAS, and using it to run a proof-of-concept validation of an external provider's security controls.", "Wrote a technical report on the risks of hosting open-weight and open-source AI models, and on how to mitigate them."], tags: ["AI Security", "Red-Teaming", "Agentic Systems"] },
+  { title: "AI Security Researcher", company: "UCL S2Lab — Prof. Lorenzo Cavallaro", location: "London, UK (Remote)", period: "June 2026 – Current", bullets: ["Ran experiments evaluating uncertainty signals through structural, representational, distributional, and semantic observation lenses, supporting a formal taxonomy for mechanistic uncertainty quantification.", "Contributed to U-Space, a training-free method that maps unembedding directions for doubt and certainty into the residual stream to trace uncertainty token by token, and extended its experiments to reward hacking and error concealment.", "Investigating whether code models use the program facts they compute: on real programs from three models, the branch an if will take is linearly readable at the if, yet predicted outputs follow it only at chance; tested causally with Distributed Alignment Search and activation steering."], tags: ["AI Security", "Interpretability", "Program Analysis"] },
   { title: "AI Safety Researcher", company: "Mila Québec AI Institute — Prof. David Adelani", location: "Montréal, Canada", period: "January 2026 – August 2026", bullets: ["Led SpeechJBB, the first audio-based code-switching jailbreak dataset for multilingual speech-safety evaluation, exposing weaknesses in SOTA LALM safety alignment; published at EMNLP 2026 (Main Conference).", "Identified that non-English code-switching increased mean jailbreak success by 28% and reduced refusal by 14.4% relative to monolingual speech; introduced a pseudo-word obfuscation attack increasing jailbreak success by 34%."], tags: ["AI Safety", "LALMs", "Code-Switching", "Dataset Creation"] },
   { title: "Cyber-Policy Researcher", company: "Andalus Committee — New York Office", location: "New York, USA", period: "July 2025 – July 2026", bullets: ["Authored a policy paper on developing U.S.–Africa cybersecurity partnerships within the emerging Digital Silk Road.", "Explored opportunities for Global North–South collaboration on cybersecurity and emerging technologies."], tags: ["Research", "Policy", "Cybersecurity"] },
   { title: "Vice President", company: "Girls Who Code McGill", location: "Montréal, Canada", period: "August 2024 – May 2026", bullets: ["Directed internal operations for McGill's Girls Who Code chapter.", "Developed a Python curriculum and taught weekly classes at Sacred Heart High School (Montreal)."], tags: ["Teaching", "Python", "Mentoring"] },
@@ -17,7 +16,7 @@ const work = [
 ];
 
 const education = [
-  { institution: "McGill University", degree: "BA — Computer Science (Major), Economics (Minor)", location: "Montréal, Canada", period: "2024 – 2026", gpa: "3.8 GPA · Graduated with Distinction (top 25%)", highlights: ["Applied Machine Learning (Graduate)", "Computer Networks (Graduate)", "Compiler Design (Graduate)", "Operating Systems"] },
+  { institution: "McGill University", degree: "BA — Computer Science (Major), Economics (Minor)", location: "Montréal, Canada", period: "2024 – 2026", gpa: "3.8 GPA · Graduated with Distinction (top 25%)", highlights: ["Applied Machine Learning (Graduate)", "Computer Networks (Graduate)", "Compiler Design (Graduate)", "Probability & Statistics", "Operating Systems"] },
   { institution: "IE University", degree: "BSc — International Relations (transferred after Year 2)", location: "Madrid, Spain", period: "2022 – 2024", gpa: "9.0/10 · Dean's List (top 10%)", highlights: ["Comparative Politics", "International Law", "Quantitative Methods", "International Political Economy", "Foreign Aid"] },
 ];
 
@@ -45,20 +44,16 @@ const skills = {
   ],
 };
 
-export default function Experience() {
+// The CV half of the About Me page: work, education, certifications, skills.
+export default function ExperienceSections() {
   const wide = useMedia("(min-width: 860px)");
 
   return (
-    <div>
-      <PageHeader
-        label="Archive / Skills"
-        title="Experience"
-        size="clamp(2.6rem, 11.5vw, 11rem)"
-      />
+    <>
 
       {/* WORK — rows that open on click */}
       <section style={{ borderTop: "1px solid var(--rule)", padding: `clamp(3rem, 6vh, 4.5rem) 0` }}>
-        <Reveal><p className="mono" style={{ padding: `0 ${PAD}`, marginBottom: "2.5rem" }}>Work</p></Reveal>
+        <Reveal><p className="mono" style={{ padding: `0 ${PAD}`, marginBottom: "2.5rem" }}>Experience</p></Reveal>
         {work.map((item, i) => <WorkRow key={i} item={item} index={i} wide={wide} />)}
       </section>
 
@@ -110,7 +105,7 @@ export default function Experience() {
       </section>
 
       {/* SKILLS */}
-      <section style={{ borderTop: "1px solid var(--rule)", padding: `clamp(3rem, 6vh, 4.5rem) ${PAD} clamp(4rem, 8vh, 6rem)` }}>
+      <section style={{ borderTop: "1px solid var(--rule)", padding: `clamp(3rem, 6vh, 4.5rem) ${PAD}` }}>
         <Reveal><p className="mono" style={{ marginBottom: "2.5rem" }}>Technical Skills</p></Reveal>
         <div style={{ display: "grid", gridTemplateColumns: wide ? "repeat(3, 1fr)" : "1fr", gap: "2.5rem clamp(2rem, 4vw, 4rem)" }}>
           {Object.entries(skills).map(([group, items], gi) => (
@@ -128,11 +123,8 @@ export default function Experience() {
           ))}
         </div>
 
-        <div style={{ display: "flex", justifyContent: "center", marginTop: "clamp(3rem, 8vh, 6rem)" }}>
-          <Doodle art="starfish" width={wide ? "min(20vw, 260px)" : "min(56vw, 220px)"} parallax={9} />
-        </div>
       </section>
-    </div>
+    </>
   );
 }
 
