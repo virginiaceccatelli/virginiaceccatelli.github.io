@@ -31,7 +31,7 @@ const projects = [
     num: "02",
     title: "U-Space: Uncovering When and Why Uncertainty Arises in Language Models",
     short: "U-Space",
-    status: "Preprint · UCL S2Lab · 2026",
+    status: "Under Review at ICLR · UCL S2Lab · 2026",
     role: "Co-author",
     tags: ["Mechanistic Interpretability", "Uncertainty Quantification", "Reasoning Models", "Activation Steering"],
     body: [
