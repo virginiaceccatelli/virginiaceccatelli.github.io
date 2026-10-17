@@ -8,6 +8,16 @@ import useMedia from "../hooks/useMedia";
 const writings = [
   {
     num: "01",
+    title: "Uncertainty in the Verbalizable Workspace",
+    short: "Uncertainty in the Verbalizable Workspace",
+    year: "2026",
+    type: "LessWrong Article",
+    tags: ["AI", "Interpretability", "Uncertainty", "AI Safety"],
+    body: "How can we tell when a reasoning model is uncertain without asking it to report its confidence? This article introduces U-space, four interpretable directions in a model’s hidden states that track ambiguity, incompleteness, conflicting evidence, and general uncertainty. Combining this internal readout with predictive entropy yields the U-lens, a label-free, single-pass method for identifying answers likely to be wrong. Across three reasoning models and four benchmarks, it outperformed twelve baselines, including when comparing reasoning traces of similar length. Early experiments also explore whether similar readouts could support monitoring for reward hacking. Co-authored with Xiaoyu Liang and Tobias Braun. Published on LessWrong.",
+    link: "https://www.lesswrong.com/posts/hcpiLD8XjK7cqG6Lr/uncertainty-in-the-verbalizable-workspace-1",
+  },
+  {
+    num: "02",
     title: "Securing the Digital Frontier: U.S.–Sub-Saharan Africa Cybersecurity Partnerships in the Shadow of China's Digital Silk Road",
     short: "Securing the Digital Frontier",
     year: "2026",
@@ -17,7 +27,7 @@ const writings = [
     link: "https://65bead61-ada5-408e-9924-c7be6e498634.filesusr.com/ugd/d98a02_77af6c01d90f4c0f8e7df233cab6cd35.pdf",
   },
   {
-    num: "02",
+    num: "03",
     title: "Informal Allies: State–Cybercriminal Alignment in the Ransomware Ecosystem",
     short: "Informal Allies",
     year: "2025",
@@ -27,7 +37,7 @@ const writings = [
     link: "https://academic.oup.com/cybersecurity/article/11/1/tyaf037/8340911",
   },
   {
-    num: "03",
+    num: "04",
     title: "Sky Diplomacy: The Geopolitical Impact of the Proliferation of Iranian-Russian Military Drone Trade on Global Alliances and Security",
     short: "Sky Diplomacy",
     year: "2024",

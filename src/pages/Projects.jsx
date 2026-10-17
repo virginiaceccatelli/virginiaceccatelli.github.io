@@ -48,7 +48,7 @@ const projects = [
     num: "03",
     title: "VoxSumm: Multilingual Spoken-News Summarization and Translation",
     short: "VoxSumm",
-    status: "Under review at EACL · 2026",
+    status: "Under review at NAACL · 2026",
     role: "Co-author",
     tags: ["Speech", "Multilingual NLP", "Summarization", "Translation"],
     body: [
@@ -125,21 +125,7 @@ const projects = [
     links: [
       { label: "View code", href: "https://github.com/virginiaceccatelli/multicast-file-sharing" },
     ],
-  },
-  {
-    num: "09",
-    title: "Cisco SOHO Network Simulation",
-    short: "Cisco SOHO Network",
-    status: "2024",
-    tags: ["Cisco", "Subnetting", "VLANs", "Routing"],
-    body: [
-      "The design and configuration of a small-office / home-office network in Cisco Packet Tracer. A single ISP-assigned Class C block serves three departments, namely Admin/IT, Finance/HR, and Customer Service. These must each sit on their own isolated segment yet still be able to reach one another, all on one router and one switch.",
-      "The computed subnets are mapped onto separate VLANs so departments are logically isolated, each with its own wireless network, DHCP hands out addresses automatically to hosts, and inter-VLAN routing on the router lets the segments communicate where needed. This was an exercise in subnetting, VLAN configuration, and routing table management.",
-    ],
-    links: [
-      { label: "View code", href: "https://github.com/virginiaceccatelli/Cisco-Packet-Tracer-Projects" },
-    ],
-  },
+  }
 ];
 
 /* Hand-set indents so the index reads as a drifting column rather than a table. */
@@ -212,7 +198,7 @@ export default function Projects() {
 
           {/* Her laptop drawing, standing in for a photograph */}
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <Doodle art="computer" width={wide ? "min(30vw, 420px)" : "min(72vw, 300px)"} parallax={7} />
+            <Doodle art="computer" width={wide ? "min(80vw, 520px)" : "min(62vw, 200px)"} parallax={7} />
           </div>
         </div>
       </section>
