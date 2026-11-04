@@ -18,8 +18,8 @@ const projects = [
     status: "EMNLP 2026 · Mila",
     tags: ["AI Safety", "LALMs", "Speech", "Code-Switching"],
     body: [
-      "SpeechJBB is the first audio-based code-switching jailbreak benchmark for evaluating the safety alignment of large audio language models (LALMs). It asks a simple question with uncomfortable answers: do models that look well-aligned on monolingual, text-based prompts stay safe when the same harmful request is spoken as speech that mixes languages within a single utterance. This is a pattern that comes natural to multilingual speakers, yet is almost absent from safety training.",
-      "Across state-of-the-art LALMs, non-English code-switched speech raised mean jailbreak success by 28% and reduced refusals by 14.4% relative to monolingual speech. A further attack inserts phonologically plausible pseudo-words around sensitive terms; this natural-sounding obfuscation increased jailbreak success by an additional 34%. The findings show that alignment tuned largely on English text leaves systematic vulnerabilities in multilingual and spoken settings.",
+      "SpeechJBB is the first audio-based code-switching jailbreak benchmark for evaluating the safety alignment of large audio language models (LALMs). It asks whether models that look well-aligned on monolingual, text-based prompts stay safe when the same harmful request is spoken as speech that mixes languages within a single utterance (code-switching). This is a pattern that comes natural to multilingual speakers, yet is almost absent from safety training.",
+      "Across state-of-the-art LALMs, non-English code-switched speech raised mean jailbreak success by 28% and reduced refusals by 14.4% relative to monolingual speech. A further attack inserts phonologically plausible pseudo-words around sensitive terms; this obfuscation seeks to emulate meaningless phonemes or noise and increased jailbreak success by an additional 34%. The findings were compared to general spoken comprehension tasks to distinguish safety misalignment from general model weakness, yet showed that alignment tuned largely on English text leaves systematic vulnerabilities in multilingual and spoken settings.",
     ],
     figure: { images: ["/mila.png"], caption: "Jailbreak success rate across large audio language models (rows) and monolingual and code-switched language conditions (columns)." },
     links: [
@@ -35,7 +35,7 @@ const projects = [
     role: "Co-author",
     tags: ["Mechanistic Interpretability", "Uncertainty Quantification", "Reasoning Models", "Activation Steering"],
     body: [
-      "U-Space is a low-dimensional subspace of a language model's residual stream that makes its evolving uncertainty measurable and interpretable. Small sets of anchor words expressing doubt and certainty are pulled back from the vocabulary into the residual stream through the J-Lens, and their contrasts form an orthonormal basis spanning four sources of uncertainty: ambiguity, incompleteness, conflicting evidence, and general uncertainty. The U-Lens projects every reasoning token onto this basis, producing a token-by-category map of where uncertainty arises and what form it takes, with no correctness labels, repeated generations, or training.",
+      "U-Space is a low-dimensional subspace of a language model's residual stream that makes its evolving uncertainty measurable and interpretable. Small sets of anchor words expressing doubt and certainty are pulled back from the vocabulary into the residual stream through the J-Lens (Anthropic), and their contrasts form an orthonormal basis spanning four sources of uncertainty: ambiguity, incompleteness, conflicting evidence, and general uncertainty. The U-Lens projects every reasoning token onto this basis, producing a token-by-category map of where uncertainty arises and what form it takes, with no correctness labels, repeated generations, or training.",
       "Combined with mean predictive entropy into a single trace-level score, the U-Lens outperforms established uncertainty estimators across three reasoning models and four benchmarks, both in standard and length-controlled evaluation, and transfers more reliably across benchmarks than supervised probes. Steering along the basis directions makes models hesitate and lose confidence even on trivial questions, evidence that these representations shape behaviour rather than merely correlate with it. Co-authored with Tobias Braun, Nils Loose, Alexander Herzog, Marcus Rohrbach, Thomas Eisenbarth, and Lorenzo Cavallaro.",
     ],
     figure: { images: ["/uspace-fig.png"], caption: "U-Space construction and U-Lens readout: (a) uncertainty and certainty anchors are pulled into the residual stream and orthogonalized into the U-Space basis; (b) each reasoning token is projected onto this basis, giving a token-by-category uncertainty map; (c) the end-of-thinking alignment is combined with mean predictive entropy into a trace-level score." },
@@ -52,24 +52,12 @@ const projects = [
     role: "Co-author",
     tags: ["Speech", "Multilingual NLP", "Summarization", "Translation"],
     body: [
-      "VoxSumm introduces joint speech summarization and translation (JSumT): generating a concise, faithful summary in a target language directly from a long spoken document in a source language. It is the first multilingual and cross-lingual benchmark for this task, pairing 10,045 BBC news articles and summaries across 24 languages with approximately 703 hours of speech.",
+      "VoxSumm introduces joint speech summarization and translation (JSumT) for low-resource languages: generating a concise, faithful summary in a target language directly from a long spoken document in a source language. It is the first multilingual and cross-lingual benchmark for this task, pairing 10,045 BBC news articles and summaries across 24 low-resource languages with approximately 703 hours of speech.",
       "Evaluations of representative speech-language models reveal substantial variation across models and generation settings: Gemini 3.1 Pro is the most consistent, summarization into English generally outperforms generation into non-English languages, and translating a full document before summarizing compounds instruction-following failures. Co-authored with Yejin Jeon, Marie Maltais, Min Ma, and David Ifeoluwa Adelani.",
     ],
     links: [
       { label: "Read paper", href: "https://arxiv.org/abs/2608.10359" },
     ],
-  },
-  {
-    num: "04",
-    title: "Semantic Flow: Do Code Models Use What They Compute?",
-    short: "Semantic Flow",
-    status: "Ongoing · UCL S2Lab",
-    tags: ["Mechanistic Interpretability", "Code Models", "Program Execution", "Activation Steering"],
-    body: [
-      "Semantic Flow separates two questions about code language models: whether a fact about a program is represented in the hidden state, and whether the model's answer actually uses it. For variable binding both hold: probes reach 0.98 accuracy, and a rank-1 causal intervention (Distributed Alignment Search) installs the binding on every held-out case. The current work asks the same question of an execution fact on real code. From MBPP, HumanEval and CruxEval, it builds about 740 pairs of token-identical programs per model that differ only in one input literal, chosen and verified by execution so that the same if statement takes the other branch and the output changes.",
-      "Across DeepSeek-Coder 1.3B and 6.7B and StarCoder2 3B, a direction learned only on synthetic programs reads which branch will run directly from the state at the if, rising from 0.60 to 0.75 pair accuracy with scale, while every control stays at chance. Yet the models' predicted outputs follow the branch that actually runs only at chance: about nine in ten pairs receive the same branch for both inputs, and the outcome is computed just as strongly when the answer ignores it. Steering shows the state is still causally connected to the answer. Pushing it toward the true branch repairs 13 to 22% of wrong-branch answers in the smaller models, while in DeepSeek 6.7B that leverage moves to the answer position, which repairs 44%. Unlike binding, the branch outcome is computed but largely bypassed.",
-    ],
-    links: [],
   },
   {
     num: "05",
