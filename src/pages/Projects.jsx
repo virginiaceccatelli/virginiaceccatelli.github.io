@@ -21,7 +21,7 @@ const projects = [
       "SpeechJBB is the first audio-based code-switching jailbreak benchmark for evaluating the safety alignment of large audio language models (LALMs). It asks whether models that look well-aligned on monolingual, text-based prompts stay safe when the same harmful request is spoken as speech that mixes languages within a single utterance (code-switching). This is a pattern that comes natural to multilingual speakers, yet is almost absent from safety training.",
       "Across state-of-the-art LALMs, non-English code-switched speech raised mean jailbreak success by 28% and reduced refusals by 14.4% relative to monolingual speech. A further attack inserts phonologically plausible pseudo-words around sensitive terms; this obfuscation seeks to emulate meaningless phonemes or noise and increased jailbreak success by an additional 34%. The findings were compared to general spoken comprehension tasks to distinguish safety misalignment from general model weakness, yet showed that alignment tuned largely on English text leaves systematic vulnerabilities in multilingual and spoken settings.",
     ],
-    figure: { images: ["/mila.png"], caption: "Jailbreak success rate across large audio language models (rows) and monolingual and code-switched language conditions (columns)." },
+    figure: { images: ["/mila.png"], maxWidth: "560px", caption: "Jailbreak success rate across large audio language models (rows) and monolingual and code-switched language conditions (columns)." },
     links: [
       { label: "Read paper", href: "https://arxiv.org/abs/2606.06037" },
       { label: "View code", href: "https://github.com/virginiaceccatelli/speechJBB" },
@@ -46,21 +46,6 @@ const projects = [
   },
   {
     num: "03",
-    title: "VoxSumm: Multilingual Spoken-News Summarization and Translation",
-    short: "VoxSumm",
-    status: "Under review at NAACL · 2026",
-    role: "Co-author",
-    tags: ["Speech", "Multilingual NLP", "Summarization", "Translation"],
-    body: [
-      "VoxSumm introduces joint speech summarization and translation (JSumT) for low-resource languages: generating a concise, faithful summary in a target language directly from a long spoken document in a source language. It is the first multilingual and cross-lingual benchmark for this task, pairing 10,045 BBC news articles and summaries across 24 low-resource languages with approximately 703 hours of speech.",
-      "Evaluations of representative speech-language models reveal substantial variation across models and generation settings: Gemini 3.1 Pro is the most consistent, summarization into English generally outperforms generation into non-English languages, and translating a full document before summarizing compounds instruction-following failures. Co-authored with Yejin Jeon, Marie Maltais, Min Ma, and David Ifeoluwa Adelani.",
-    ],
-    links: [
-      { label: "Read paper", href: "https://arxiv.org/abs/2608.10359" },
-    ],
-  },
-  {
-    num: "04",
     title: "Where Is Uncertainty Observed? A Mechanistic Understanding of Uncertainty Quantification in LLMs",
     short: "Where Is Uncertainty Observed?",
     status: "Under Review at TMLR · UCL S2Lab · 2026",
@@ -73,6 +58,21 @@ const projects = [
     figure: { images: ["/uncertainty.png"], caption: "The four lenses applied to two queries. For the math query, the sampled answers agree on a wrong answer, so semantic uncertainty is low, but the hidden state lies near the uncertain direction. For the opinion query, the token distribution spreads over many phrasings, but the answers share one stance. A coloured frame marks the suited lens." },
     links: [
       { label: "Read paper", href: "https://arxiv.org/abs/2611.15735" },
+    ],
+  },
+  {
+    num: "04",
+    title: "VoxSumm: Multilingual Spoken-News Summarization and Translation",
+    short: "VoxSumm",
+    status: "Under review at NAACL · 2026",
+    role: "Co-author",
+    tags: ["Speech", "Multilingual NLP", "Summarization", "Translation"],
+    body: [
+      "VoxSumm introduces joint speech summarization and translation (JSumT) for low-resource languages: generating a concise, faithful summary in a target language directly from a long spoken document in a source language. It is the first multilingual and cross-lingual benchmark for this task, pairing 10,045 BBC news articles and summaries across 24 low-resource languages with approximately 703 hours of speech.",
+      "Evaluations of representative speech-language models reveal substantial variation across models and generation settings: Gemini 3.1 Pro is the most consistent, summarization into English generally outperforms generation into non-English languages, and translating a full document before summarizing compounds instruction-following failures. Co-authored with Yejin Jeon, Marie Maltais, Min Ma, and David Ifeoluwa Adelani.",
+    ],
+    links: [
+      { label: "Read paper", href: "https://arxiv.org/abs/2608.10359" },
     ],
   },
   {
@@ -258,7 +258,7 @@ function ProjectEntry({ project, delay, wide }) {
           )}
 
           {project.figure?.images && (
-            <figure style={{ margin: "2rem 0 0", maxWidth: project.figure.images.length > 1 ? "1000px" : "780px" }}>
+            <figure style={{ margin: "2rem 0 0", maxWidth: project.figure.maxWidth ?? (project.figure.images.length > 1 ? "1000px" : "780px") }}>
               <div style={{ display: "grid", gridTemplateColumns: project.figure.images.length > 1 ? "repeat(auto-fit, minmax(280px, 1fr))" : "1fr", gap: "0.75rem" }}>
                 {project.figure.images.map(src => (
                   <img
