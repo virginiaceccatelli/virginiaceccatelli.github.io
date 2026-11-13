@@ -60,6 +60,22 @@ const projects = [
     ],
   },
   {
+    num: "04",
+    title: "Where Is Uncertainty Observed? A Mechanistic Understanding of Uncertainty Quantification in LLMs",
+    short: "Where Is Uncertainty Observed?",
+    status: "Under Review at TMLR · UCL S2Lab · 2026",
+    role: "Co-author",
+    tags: ["Uncertainty Quantification", "Mechanistic Interpretability", "Survey", "LLM Evaluation"],
+    body: [
+      "A survey and framework that asks where in a language model's computation uncertainty is observed. Existing taxonomies organize uncertainty quantification (UQ) methods by the source of uncertainty or by the estimation mechanism; this work adds the observation point as its own axis, because it determines whether an estimator has access to enough information to recover a given target. Drawing on mechanistic interpretability, it defines four observation lenses on the residual stream: the structural lens reads component updates, the representational lens reads hidden states, the distributional lens reads token probabilities, and the semantical lens reads distributions over meanings. Each outer observation is a function of the inner ones and discards some information, so the lenses form a hierarchy: the lens decides whether an estimator is sufficient for a target, while what it resamples and the auxiliary structure it relies on decide how efficient it is.",
+      "The survey classifies 159 papers along these axes and separates evaluation targets (correctness, grounding, underspecification, faithfulness), criteria, and metrics. Most hidden-state and component-level methods turn out to be surrogates trained against output-level labels, and 146 of the 159 papers target correctness. A proof-of-concept experiment on three open-weight models and three QA benchmarks finds that the correctness signal a probe can decode mostly decreases from the structural lens outward, with small gains over sampled semantic features, and that established estimators use only part of the signal available at their lens. Co-authored with Xiaoyu Liang, Aliai Eusebi, Tobias Braun, Nils Loose, Carlo Malagnino, and Lorenzo Cavallaro.",
+    ],
+    figure: { images: ["/uncertainty.png"], caption: "The four lenses applied to two queries. For the math query, the sampled answers agree on a wrong answer, so semantic uncertainty is low, but the hidden state lies near the uncertain direction. For the opinion query, the token distribution spreads over many phrasings, but the answers share one stance. A coloured frame marks the suited lens." },
+    links: [
+      { label: "Read paper", href: "https://arxiv.org/abs/2611.15735" },
+    ],
+  },
+  {
     num: "05",
     title: "Robotic Ground Segmentation & Motion Decision",
     short: "Ground Segmentation",
