@@ -1,16 +1,13 @@
 import { Link } from "react-router-dom";
-import { useState, useRef, useLayoutEffect } from "react";
+import { useRef, useLayoutEffect } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitText from "../components/fx/SplitText";
 import Magnet from "../components/fx/Magnet";
-import Marquee from "../components/fx/Marquee";
-import HorizontalScroll from "../components/fx/HorizontalScroll";
 import Doodle from "../components/fx/Doodle";
 import Reveal from "../components/fx/Reveal";
 import useMedia from "../hooks/useMedia";
-import { COLORS } from "../theme";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,29 +18,15 @@ const EMAIL = "virginia.ceccatelli@mail.mcgill.ca";
 
 const PAD = "clamp(1.25rem, 3vw, 2.5rem)";
 
-const focusAreas = [
-  { num: "01", area: "AI Safety & Security", sub: "Multilingual speech-safety evaluation, jailbreak benchmarks, agentic red-teaming and hardening" },
-  { num: "02", area: "Interpretability & Alignment", sub: "Token-level uncertainty in reasoning models, whether code models use the program facts they compute, causal interventions and steering" },
-  { num: "03", area: "Cybersecurity Policy", sub: "U.S.–Africa partnerships, Digital Silk Road dynamics, global north-south collaboration" },
-];
-
-const destinations = [
-  { label: "About Me",   path: "/about",      sub: "Background, experience & education" },
-  { label: "Works",      path: "/projects",   sub: "Selected projects" },
-  { label: "Writing",    path: "/writing",    sub: "Papers & articles" },
-];
-
 const facts = [
-  { label: "Currently at", value: "UCL S2Lab · WIIT Premium Cloud" },
-  { label: "Based in", value: "London, UK" },
-  { label: "Education", value: "McGill University: CS + Economics, 3.8 GPA" },
-  { label: "Prev. research", value: "Mila Québec AI Institute" },
+  { label: "Currently at", value: "UCL Systems Security Research Lab,  WIIT Premium Cloud" },
+  { label: "Education", value: "McGill University Computer Science, 3.8 GPA" },
 ];
 
 const contacts = [
-  { label: "LinkedIn", href: LINKEDIN },
   { label: "GitHub", href: GITHUB },
   { label: "Scholar", href: SCHOLAR },
+  { label: "LinkedIn", href: LINKEDIN },
   { label: "Email", href: `mailto:${EMAIL}` },
 ];
 
@@ -81,7 +64,7 @@ export default function Home() {
         {/* Her own drawing, huge, bleeding off the right edge */}
         <Doodle
           art="stars"
-          width={wide ? "48vw" : "108vw"}
+          width={wide ? "35vw" : "90vw"}
           opacity={wide ? 1 : 0.16}
           parallax={6}
           reveal={false}
@@ -119,17 +102,6 @@ export default function Home() {
             <Link to="/projects" className="u-link" style={{ fontSize: "0.7rem" }}>Works</Link>
             <Link to="/writing" className="u-link" style={{ fontSize: "0.7rem" }}>Writing</Link>
           </motion.div>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.9, delay: 1.3 }}
-            className="mono"
-            style={{ margin: "2.5rem 0 0", maxWidth: "50ch", lineHeight: 2, fontSize: "0.62rem" }}
-          >
-            AI Safety · AI Security · Governance<br />
-            McGill CS · UCL S2Lab · Mila
-          </motion.p>
         </div>
 
         <motion.span
@@ -139,46 +111,19 @@ export default function Home() {
           className="mono"
           style={{ position: "absolute", bottom: "3rem", right: PAD, writingMode: "vertical-lr", fontSize: "0.6rem", zIndex: 1 }}
         >
-          Scroll ↓
+          Scroll
         </motion.span>
       </section>
-
-      {/* ─────────────────── MAROON MARQUEE BAND ─────────────────── */}
-      <div className="theme-maroon" style={{ background: "var(--paper)", padding: "clamp(1.25rem, 2.5vw, 2rem) 0", overflow: "hidden" }}>
-        <Marquee
-          text="Safety & Security · Alignment · Governance · Cybersecurity Policy"
-          baseSpeed={0.7}
-          style={{
-            fontFamily: "'Archivo', sans-serif", fontWeight: 700,
-            fontSize: "clamp(1.6rem, 4vw, 3.4rem)", letterSpacing: "-0.02em",
-            textTransform: "uppercase", color: "var(--ink)",
-          }}
-        />
-      </div>
 
       {/* ───────────────────────── PROFILE ───────────────────────── */}
       <section style={{ padding: `clamp(5rem, 11vh, 9rem) ${PAD}` }}>
         <div style={{ display: "grid", gridTemplateColumns: wide ? "1.35fr 1fr" : "1fr", gap: wide ? "clamp(3rem, 6vw, 7rem)" : "3.5rem", alignItems: "start" }}>
           <div>
-            <Reveal>
-              <p className="mono" style={{ marginBottom: "2rem" }}>01 — Profile</p>
-            </Reveal>
-            <Reveal delay={0.06}>
-              <p
-                className="display"
-                style={{
-                  fontSize: "clamp(1.35rem, 2.55vw, 2.35rem)", fontWeight: 600,
-                  lineHeight: 1.16, letterSpacing: "-0.022em", margin: "0 0 2.5rem 0",
-                  maxWidth: "30ch",
-                }}
-              >
-                Computer scientist working at the intersection of AI safety, AI security, and cybersecurity policy research.
-              </p>
-            </Reveal>
             <Reveal delay={0.12}>
               <p className="body-text" style={{ maxWidth: "56ch", color: "var(--muted)", margin: "0 0 2.5rem 0" }}>
+                I'm a recent computer science graduate working at the intersection of AI safety, AI security, and cybersecurity policy research.
                 With a focus on the safety of language models, interpretability of code models, and the governance of
-                emerging cyber threats.
+                emerging cyber threats, I want to evaluate the risks of AI systems and help design safer, more robust and more responsible AI technologies.
               </p>
               <Link to="/about" className="u-link" style={{ fontSize: "0.68rem" }}>Full profile →</Link>
             </Reveal>
@@ -187,9 +132,9 @@ export default function Home() {
           <Reveal delay={0.1}>
             <div>
               {facts.map(item => (
-                <div key={item.label} style={{ borderTop: "1px solid var(--rule)", padding: "1.25rem 0", display: "grid", gridTemplateColumns: "1fr", gap: "0.5rem" }}>
+                <div key={item.label} style={{ borderTop: "1px solid var(--rule)", padding: "1.25rem 0"}}>
                   <p className="mono" style={{ margin: 0, fontSize: "0.6rem" }}>{item.label}</p>
-                  <p style={{ fontSize: "0.95rem", lineHeight: 1.45, margin: 0, color: "var(--ink)" }}>{item.value}</p>
+                  <p style={{ fontSize: "0.95rem", margin: 0, color: "var(--ink)" }}>{item.value}</p>
                 </div>
               ))}
               <div style={{ borderTop: "1px solid var(--rule)", padding: "1.25rem 0" }}>
@@ -198,26 +143,6 @@ export default function Home() {
               </div>
             </div>
           </Reveal>
-        </div>
-      </section>
-
-      {/* ───────── AREAS OF FOCUS — pinned horizontal, on red paper ───────── */}
-      <HorizontalScroll height="70vh" className="theme-maroon" style={{ background: "var(--paper)" }}>
-        <IntroPanel />
-        {focusAreas.map((area, i) => (
-          <FocusPanel key={area.num} area={area} index={i} total={focusAreas.length} />
-        ))}
-      </HorizontalScroll>
-
-      {/* ───────────────────────── INDEX ───────────────────────── */}
-      <section style={{ padding: `clamp(5rem, 10vh, 8rem) 0 clamp(3rem, 6vh, 5rem)` }}>
-        <Reveal>
-          <p className="mono" style={{ padding: `0 ${PAD}`, marginBottom: "3rem" }}>02 — Index</p>
-        </Reveal>
-        <div style={{ borderTop: "1px solid var(--rule)" }}>
-          {destinations.map((dest, i) => (
-            <IndexRow key={dest.path} dest={dest} index={i} delay={i * 0.05} />
-          ))}
         </div>
       </section>
 
@@ -245,9 +170,6 @@ export default function Home() {
           )}
 
           <div style={{ textAlign: "center" }}>
-            <Reveal>
-              <p className="mono" style={{ marginBottom: "2rem" }}>03 — Contacts</p>
-            </Reveal>
             <Reveal delay={0.06}>
               <p
                 className="display"
@@ -288,154 +210,6 @@ export default function Home() {
           />
         </div>
       </section>
-    </div>
-  );
-}
-
-/* ── Index rows: the whole row floods with red on hover ── */
-const EASE = "cubic-bezier(0.16,1,0.3,1)";
-
-function IndexRow({ dest, index, delay }) {
-  const [hovered, setHovered] = useState(false);
-  const wide = useMedia("(min-width: 860px)");
-
-  // Explicit colours rather than a theme swap: background and type have to
-  // cross-fade together, so both ends of the fade must stay resolvable.
-  const fg = hovered ? COLORS.cream : COLORS.ink;
-  const dim = hovered ? "rgba(244,239,230,0.66)" : "rgba(25,21,18,0.56)";
-  const swap = `color 0.5s ${EASE}`;
-
-  return (
-    <Reveal delay={delay} y={16}>
-      <Link
-        to={dest.path}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        style={{
-          display: "flex", alignItems: "center", justifyContent: "space-between",
-          gap: "1.5rem", textDecoration: "none",
-          padding: `clamp(1.5rem, 3.5vh, 2.6rem) ${PAD}`,
-          borderBottom: "1px solid var(--rule)",
-          background: hovered ? COLORS.maroon : "transparent",
-          transition: `background-color 0.5s ${EASE}`,
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "flex-start", gap: wide ? "clamp(1.5rem, 4vw, 4rem)" : "1rem", minWidth: 0 }}>
-          <span className="mono" style={{ flexShrink: 0, fontSize: "0.62rem", paddingTop: "0.5rem", color: dim, transition: swap }}>
-            {String(index + 1).padStart(2, "0")}
-          </span>
-          <h3
-            className="display"
-            style={{
-              fontSize: "clamp(1.9rem, 5.5vw, 4.2rem)", fontWeight: 700,
-              textTransform: "uppercase", letterSpacing: "-0.03em", margin: 0,
-              color: fg,
-              transform: hovered ? "translateX(0.6rem)" : "none",
-              transition: `transform 0.5s ${EASE}, ${swap}`,
-            }}
-          >
-            {dest.label}
-          </h3>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "clamp(1rem, 3vw, 3rem)", flexShrink: 0 }}>
-          {wide && <span className="mono" style={{ fontSize: "0.62rem", color: dim, transition: swap }}>{dest.sub}</span>}
-          <span
-            className="display"
-            style={{
-              fontSize: "1.4rem", color: fg,
-              transform: hovered ? "translateX(0.5rem)" : "none",
-              transition: `transform 0.5s ${EASE}, ${swap}`,
-            }}
-          >
-            →
-          </span>
-        </div>
-      </Link>
-    </Reveal>
-  );
-}
-
-/* ── Panels for the pinned horizontal run ── */
-const PANEL_STYLE = {
-  flexShrink: 0,
-  // 100% of the flex container (the viewport-wide section) rather than 100vw,
-  // so a visible scrollbar can't push the panels into horizontal overflow
-  width: "100%",
-  minWidth: "100%",
-  minHeight: "56vh",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "space-between",
-  padding: "clamp(2rem, 5vh, 4rem) clamp(1.5rem, 7vw, 8rem)",
-  borderRight: "1px solid var(--rule)",
-  boxSizing: "border-box",
-};
-
-const PANEL_INNER = { width: "100%", maxWidth: "1100px", margin: "0 auto" };
-
-function IntroPanel() {
-  return (
-    <div style={{ ...PANEL_STYLE, justifyContent: "center" }}>
-      <div style={PANEL_INNER}>
-        <p className="mono" style={{ marginBottom: "2rem" }}>Areas of Focus</p>
-        <p
-          className="display"
-          style={{
-            fontSize: "clamp(2.2rem, 6vw, 5rem)", fontWeight: 700,
-            textTransform: "uppercase", letterSpacing: "-0.035em",
-            lineHeight: 0.95, margin: "0 0 2.5rem 0", maxWidth: "16ch",
-          }}
-        >
-          Three research directions.
-        </p>
-        <p className="mono" style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-          <span style={{ display: "inline-block", width: "42px", height: "1px", background: "currentColor" }} />
-          Scroll to move across
-        </p>
-      </div>
-    </div>
-  );
-}
-
-function FocusPanel({ area, index, total }) {
-  const [hovered, setHovered] = useState(false);
-  return (
-    <div onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} style={PANEL_STYLE}>
-      <div style={{ ...PANEL_INNER, display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-        <span
-          className="display"
-          style={{
-            fontSize: "clamp(3.5rem, 10vw, 9rem)", fontWeight: 800, lineHeight: 0.78,
-            letterSpacing: "-0.05em",
-            color: "var(--ink)",
-            opacity: hovered ? 0.38 : 0.18,
-            transition: "opacity 0.6s ease",
-          }}
-        >
-          {area.num}
-        </span>
-        <span className="mono" style={{ paddingTop: "0.75rem" }}>
-          {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
-        </span>
-      </div>
-
-      <div style={PANEL_INNER}>
-        <h3
-          className="display"
-          style={{
-            fontSize: "clamp(2.1rem, 6vw, 5.2rem)", fontWeight: 700,
-            textTransform: "uppercase", letterSpacing: "-0.035em",
-            lineHeight: 0.98, margin: "0 0 1.75rem 0", maxWidth: "17ch",
-            transform: hovered ? "translateX(0.75rem)" : "none",
-            transition: "transform 0.6s cubic-bezier(0.16,1,0.3,1)",
-          }}
-        >
-          {area.area}
-        </h3>
-        <p className="body-text" style={{ color: "var(--muted)", margin: 0, maxWidth: "48ch" }}>
-          {area.sub}
-        </p>
-      </div>
     </div>
   );
 }

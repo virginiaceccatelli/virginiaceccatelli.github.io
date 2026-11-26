@@ -6,9 +6,9 @@ import ExperienceSections from "./Experience";
 
 const bio = [
   "I am a computer scientist working on the safety and security of machine learning systems, and on the policy questions that surround them. My research interests lie in understanding modern language models' failures under adversarial pressure as well as native safety issues, and how those failures can be measured and governed.",
-  "I came to computer science from international relations. I began a degree in IR at IE University, where I grew interested in the societal dimensions of technology and, in particular, in how geopolitical events intersect with cybersecurity. That interest led me to transfer to McGill University and complete a BA in Computer Science with a minor in Economics; studying machine learning, computer networks, compiler design, and systems programming, ultimately graduating with Distinction.",
-  "My work moves between the technical and the political. On the technical side, I led SpeechJBB, the first audio code-switching jailbreak benchmark for evaluating the safety of large audio language models. I am currently an AI Security Researcher at UCL's Systems Security Lab (S2Lab), where my work centres on mechanistic interpretability for uncertainty and code. I co-authored U-Space, a training-free method that traces where and why uncertainty arises in a language model's reasoning, token by token. Alongside this, I am an AI Security Intern at WIIT, where I am designing a secure multi-tenant platform for serving LLMs and building an adversarial evaluation harness for LLM-based and agentic systems.",
-  "On the policy side, I have written on U.S.–Africa cybersecurity partnerships to strengthen Sub-Saharan African technological sovereignty, as well as on the geopolitics of the Iranian–Russian military drone trade.",
+  "I came to computer science from the social sciences. I began a degree in international relations at IE University, where I grew interested in the societal dimensions of technology and, in particular, in how geopolitical events intersect with cybersecurity. That interest led me to transfer to McGill University and complete a BA in Computer Science with a minor in Economics; studying machine learning, computer networks, compiler design, and systems programming, ultimately graduating with Distinction.",
+  "On the technical side, I led SpeechJBB, the first audio code-switching jailbreak benchmark for evaluating the safety of large audio language models. Currently, I am an AI Security Researcher at UCL's Systems Security Research Lab (S2Lab), where my work leverages mechanistic interpretability for uncertainty quantification, the safety of agentic systems and code vulnerability discovery tasks. Alongside this research, I am an Intern at WIIT AG, where I am designing a secure multi-tenant platform for serving LLMs and building an adversarial evaluation harness for LLM-based and agentic systems.",
+  "On the policy side, I wrote a policy paper on U.S.–Africa cybersecurity partnerships to strengthen Sub-Saharan African technological sovereignty. Previously, I also conducted research on the widespread risks of Russian-Iranian military drone (UAV) cooperation, the consequences for the West, the ethical implications of such advanced military technologies and the role of international law in regulating them.",
 ];
 
 const interests = [
@@ -28,26 +28,10 @@ export default function About() {
   return (
     <div>
       <PageHeader
-        label="Profile / Background"
         title="About Me"
-        intro="Computer scientist working on the safety and security of machine learning systems, and on the policy questions that increasingly surround them."
+        size="clamp(2.4rem, 8vw, 7rem)"
       />
 
-      {/* desktop only — on a phone it would crowd the title block */}
-      {wide && (
-        <Doodle
-          art="petals"
-          width="18vw"
-          parallax={5}
-          reveal={false}
-          style={{
-            position: "absolute",
-            top: "12vh",
-            right: PAD,
-            zIndex: 1,
-          }}
-        />
-      )}
 
       {/* BACKGROUND — two columns of running text, with a big drawing alongside */}
       <section style={{ borderTop: "1px solid var(--rule)", padding: `clamp(3rem, 7vh, 5rem) ${PAD}` }}>
@@ -69,7 +53,7 @@ export default function About() {
 
       {/* RESEARCH INTERESTS */}
       <section style={{ borderTop: "1px solid var(--rule)", padding: `clamp(3rem, 7vh, 5rem) ${PAD}` }}>
-        <Reveal><p className="mono" style={{ marginBottom: "2rem" }}>General Interests</p></Reveal>
+        <Reveal><p className="mono" style={{ marginBottom: "2rem" }}>Personal Interests</p></Reveal>
         <Reveal delay={0.06}>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem" }}>
             {interests.map(t => (

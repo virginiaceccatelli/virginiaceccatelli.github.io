@@ -13,22 +13,6 @@ const GITHUB = "https://github.com/virginiaceccatelli";
 const projects = [
   {
     num: "01",
-    title: "SpeechJBB: Code-Switched Speech Safety Evaluation",
-    short: "SpeechJBB",
-    status: "EMNLP 2026 · Mila",
-    tags: ["AI Safety", "LALMs", "Speech", "Code-Switching"],
-    body: [
-      "SpeechJBB is the first audio-based code-switching jailbreak benchmark for evaluating the safety alignment of large audio language models (LALMs). It asks whether models that look well-aligned on monolingual, text-based prompts stay safe when the same harmful request is spoken as speech that mixes languages within a single utterance (code-switching). This is a pattern that comes natural to multilingual speakers, yet is almost absent from safety training.",
-      "Across state-of-the-art LALMs, non-English code-switched speech raised mean jailbreak success by 28% and reduced refusals by 14.4% relative to monolingual speech. A further attack inserts phonologically plausible pseudo-words around sensitive terms; this obfuscation seeks to emulate meaningless phonemes or noise and increased jailbreak success by an additional 34%. The findings were compared to general spoken comprehension tasks to distinguish safety misalignment from general model weakness, yet showed that alignment tuned largely on English text leaves systematic vulnerabilities in multilingual and spoken settings.",
-    ],
-    figure: { images: ["/mila.png"], maxWidth: "560px", caption: "Jailbreak success rate across large audio language models (rows) and monolingual and code-switched language conditions (columns)." },
-    links: [
-      { label: "Read paper", href: "https://arxiv.org/abs/2606.06037" },
-      { label: "View code", href: "https://github.com/virginiaceccatelli/speechJBB" },
-    ],
-  },
-  {
-    num: "02",
     title: "U-Space: Uncovering When and Why Uncertainty Arises in Language Models",
     short: "U-Space",
     status: "Under Review at ICLR · UCL S2Lab · 2026",
@@ -45,19 +29,36 @@ const projects = [
     ],
   },
   {
-    num: "03",
+    num: "02",
     title: "Where Is Uncertainty Observed? A Mechanistic Understanding of Uncertainty Quantification in LLMs",
     short: "Where Is Uncertainty Observed?",
     status: "Under Review at TMLR · UCL S2Lab · 2026",
     role: "Co-author",
     tags: ["Uncertainty Quantification", "Mechanistic Interpretability", "Survey", "LLM Evaluation"],
     body: [
-      "A survey and framework that asks where in a language model's computation uncertainty is observed. Existing taxonomies organize uncertainty quantification (UQ) methods by the source of uncertainty or by the estimation mechanism; this work adds the observation point as its own axis, because it determines whether an estimator has access to enough information to recover a given target. Drawing on mechanistic interpretability, it defines four observation lenses on the residual stream: the structural lens reads component updates, the representational lens reads hidden states, the distributional lens reads token probabilities, and the semantical lens reads distributions over meanings. Each outer observation is a function of the inner ones and discards some information, so the lenses form a hierarchy: the lens decides whether an estimator is sufficient for a target, while what it resamples and the auxiliary structure it relies on decide how efficient it is.",
+      "A survey and framework that asks where in a language model's computation uncertainty is observed. Existing taxonomies organize uncertainty quantification (UQ) methods by the source of uncertainty or by the estimation mechanism. This work adds the observation point as its own axis, because it determines whether an estimator has access to enough information to recover a given target. Drawing on mechanistic interpretability, it defines four observation lenses on the residual stream: the structural lens reads component updates, the representational lens reads hidden states, the distributional lens reads token probabilities, and the semantical lens reads distributions over meanings. Each outer observation is a function of the inner ones and discards some information, so the lenses form a hierarchy. The lens decides whether an estimator is sufficient for a target, while what it resamples and the auxiliary structure it relies on decide how efficient it is.",
       "The survey classifies 159 papers along these axes and separates evaluation targets (correctness, grounding, underspecification, faithfulness), criteria, and metrics. Most hidden-state and component-level methods turn out to be surrogates trained against output-level labels, and 146 of the 159 papers target correctness. A proof-of-concept experiment on three open-weight models and three QA benchmarks finds that the correctness signal a probe can decode mostly decreases from the structural lens outward, with small gains over sampled semantic features, and that established estimators use only part of the signal available at their lens. Co-authored with Xiaoyu Liang, Aliai Eusebi, Tobias Braun, Nils Loose, Carlo Malagnino, and Lorenzo Cavallaro.",
     ],
     figure: { images: ["/uncertainty.png"], caption: "The four lenses applied to two queries. For the math query, the sampled answers agree on a wrong answer, so semantic uncertainty is low, but the hidden state lies near the uncertain direction. For the opinion query, the token distribution spreads over many phrasings, but the answers share one stance. A coloured frame marks the suited lens." },
     links: [
       { label: "Read paper", href: "https://arxiv.org/abs/2611.15735" },
+    ],
+  },
+  {
+    num: "03",
+    title: "SpeechJBB: Code-Switched Speech Safety Evaluation",
+    short: "SpeechJBB",
+    status: "EMNLP 2026 · Mila",
+    role: "First Author",
+    tags: ["AI Safety", "LALMs", "Speech", "Code-Switching"],
+    body: [
+      "SpeechJBB is the first audio-based code-switching jailbreak benchmark for evaluating the safety alignment of large audio language models (LALMs). It asks whether models that look well-aligned on monolingual, text-based prompts stay safe when the same harmful request is spoken as speech that mixes languages within a single utterance (code-switching). This is a pattern that comes natural to multilingual speakers, yet is almost absent from safety training.",
+      "Across state-of-the-art LALMs, non-English code-switched speech raised mean jailbreak success by 28% and reduced refusals by 14.4% relative to monolingual speech. A further attack inserts phonologically plausible pseudo-words around sensitive terms; this obfuscation seeks to emulate meaningless phonemes or noise and increased jailbreak success by an additional 34%. The findings were compared to general spoken comprehension tasks to distinguish safety misalignment from general model weakness, yet showed that alignment tuned largely on English text leaves systematic vulnerabilities in multilingual and spoken settings.",
+    ],
+    figure: { images: ["/mila.png"], maxWidth: "560px", caption: "Jailbreak success rate across large audio language models (rows) and monolingual and code-switched language conditions (columns)." },
+    links: [
+      { label: "Read paper", href: "https://arxiv.org/abs/2606.06037" },
+      { label: "View code", href: "https://github.com/virginiaceccatelli/speechJBB" },
     ],
   },
   {
@@ -151,7 +152,7 @@ export default function Projects() {
       <PageHeader
         label="Selected Work"
         title="Works"
-        size="clamp(3.5rem, 15vw, 13rem)"
+        size="clamp(2.4rem, 8vw, 7rem)"
       />
 
       {/* INDEX — drifting list of titles, with one photograph alongside */}
