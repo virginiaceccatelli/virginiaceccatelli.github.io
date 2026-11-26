@@ -48,7 +48,7 @@ const projects = [
     num: "03",
     title: "SpeechJBB: Code-Switched Speech Safety Evaluation",
     short: "SpeechJBB",
-    status: "EMNLP 2026 · Mila",
+    status: "Findings of EMNLP 2026 · Mila",
     role: "First Author",
     tags: ["AI Safety", "LALMs", "Speech", "Code-Switching"],
     body: [
@@ -202,8 +202,8 @@ export default function Projects() {
           </div>
 
           {/* Her laptop drawing, standing in for a photograph */}
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <Doodle art="computer" width={wide ? "min(80vw, 520px)" : "min(62vw, 200px)"} parallax={7} />
+          <div style={{ display: "flex", justifyContent: "center", paddingTop: wide ? "clamp(9rem, 8vh, 5.5rem)" : 0 }}>
+            <Doodle art="computer" width={wide ? "min(50vw, 420px)" : "min(55vw, 170px)"} parallax={7} />
           </div>
         </div>
       </section>

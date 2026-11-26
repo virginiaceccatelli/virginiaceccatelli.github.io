@@ -18,11 +18,6 @@ const EMAIL = "virginia.ceccatelli@mail.mcgill.ca";
 
 const PAD = "clamp(1.25rem, 3vw, 2.5rem)";
 
-const facts = [
-  { label: "Currently at", value: "UCL Systems Security Research Lab,  WIIT Premium Cloud" },
-  { label: "Education", value: "McGill University Computer Science, 3.8 GPA" },
-];
-
 const contacts = [
   { label: "GitHub", href: GITHUB },
   { label: "Scholar", href: SCHOLAR },
@@ -117,32 +112,18 @@ export default function Home() {
 
       {/* ───────────────────────── PROFILE ───────────────────────── */}
       <section style={{ padding: `clamp(5rem, 11vh, 9rem) ${PAD}` }}>
-        <div style={{ display: "grid", gridTemplateColumns: wide ? "1.35fr 1fr" : "1fr", gap: wide ? "clamp(3rem, 6vw, 7rem)" : "3.5rem", alignItems: "start" }}>
+        <div>
           <div>
             <Reveal delay={0.12}>
-              <p className="body-text" style={{ maxWidth: "56ch", color: "var(--muted)", margin: "0 0 2.5rem 0" }}>
-                I'm a recent computer science graduate working at the intersection of AI safety, AI security, and cybersecurity policy research.
-                With a focus on the safety of language models, interpretability of code models, and the governance of
-                emerging cyber threats, I want to evaluate the risks of AI systems and help design safer, more robust and more responsible AI technologies.
+              <p className="body-text" style={{ color: "var(--muted)", margin: "0 0 2.5rem 0" }}>
+                I'm a recent computer science graduate working at the intersection of AI safety, AI security, and cybersecurity policy.
+                I want to evaluate the risks of AI systems and help design safer, more robust and more responsible AI technologies. 
+                A lot of my work is focused on leveraging interpretability tools to improve the transparency of AI systems and to understand their security implications.
+                A clearer understanding of their interpretability and explainability could reveal how they can be exploited by malicious actors, as well as how to defend against such attacks.
               </p>
               <Link to="/about" className="u-link" style={{ fontSize: "0.68rem" }}>Full profile →</Link>
             </Reveal>
           </div>
-
-          <Reveal delay={0.1}>
-            <div>
-              {facts.map(item => (
-                <div key={item.label} style={{ borderTop: "1px solid var(--rule)", padding: "1.25rem 0"}}>
-                  <p className="mono" style={{ margin: 0, fontSize: "0.6rem" }}>{item.label}</p>
-                  <p style={{ fontSize: "0.95rem", margin: 0, color: "var(--ink)" }}>{item.value}</p>
-                </div>
-              ))}
-              <div style={{ borderTop: "1px solid var(--rule)", padding: "1.25rem 0" }}>
-                <p className="mono" style={{ margin: "0 0 0.5rem", fontSize: "0.6rem" }}>Contact</p>
-                <a href={`mailto:${EMAIL}`} className="u-link" style={{ fontSize: "0.62rem", wordBreak: "break-word" }}>{EMAIL}</a>
-              </div>
-            </div>
-          </Reveal>
         </div>
       </section>
 

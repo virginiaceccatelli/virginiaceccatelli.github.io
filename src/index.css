@@ -47,11 +47,13 @@
     overflow: hidden;
   }
 
-  /* Custom cursor replaces the native one on precise pointers */
-  @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
-    html, body, a, button, [role='button'] {
-      cursor: none;
-    }
+  /* Custom cursor replaces the native one; Cursor.jsx adds this class when it is active */
+  html.custom-cursor,
+  html.custom-cursor body,
+  html.custom-cursor a,
+  html.custom-cursor button,
+  html.custom-cursor [role='button'] {
+    cursor: none;
   }
 
   body {
