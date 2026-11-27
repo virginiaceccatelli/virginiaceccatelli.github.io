@@ -1,5 +1,6 @@
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import PageHeader, { PAD } from "../components/PageHeader";
 import Reveal from "../components/fx/Reveal";
 import Doodle from "../components/fx/Doodle";
@@ -55,7 +56,7 @@ const projects = [
       "SpeechJBB is the first audio-based code-switching jailbreak benchmark for evaluating the safety alignment of large audio language models (LALMs). It asks whether models that look well-aligned on monolingual, text-based prompts stay safe when the same harmful request is spoken as speech that mixes languages within a single utterance (code-switching). This is a pattern that comes natural to multilingual speakers, yet is almost absent from safety training.",
       "Across state-of-the-art LALMs, non-English code-switched speech raised mean jailbreak success by 28% and reduced refusals by 14.4% relative to monolingual speech. A further attack inserts phonologically plausible pseudo-words around sensitive terms; this obfuscation seeks to emulate meaningless phonemes or noise and increased jailbreak success by an additional 34%. The findings were compared to general spoken comprehension tasks to distinguish safety misalignment from general model weakness, yet showed that alignment tuned largely on English text leaves systematic vulnerabilities in multilingual and spoken settings.",
     ],
-    figure: { images: ["/mila.png"], maxWidth: "560px", caption: "Jailbreak success rate across large audio language models (rows) and monolingual and code-switched language conditions (columns)." },
+    figure: { images: ["/mila.png"], maxWidth: "560px", caption: "Each Jailbreak Bench prompt is translated, recombined into code switched pairs, and optionally perturbed by the pseudo word probe; both variants are synthesized with XTTS and passed as speech input to each model." },
     links: [
       { label: "Read paper", href: "https://arxiv.org/abs/2606.06037" },
       { label: "View code", href: "https://github.com/virginiaceccatelli/speechJBB" },
@@ -86,7 +87,7 @@ const projects = [
       "A purely vision-based navigation pipeline that lets an indoor robot decide where to move from a single camera, with no depth sensor, LiDAR, or map. The core is a U-Net semantic-segmentation network with a lightweight MobileNetV2 encoder, trained on a custom, hand-labelled dataset (built with Labelme) to classify every pixel of an RGB frame as either traversable ground or obstacle. The MobileNetV2 backbone keeps the model small enough to run in real time on an ordinary laptop.",
       "On top of the segmentation mask sits a “laser-beam” decision layer: it splits the frame into vertical regions, scores each by how much clear ground it contains, and picks the safest region to head toward — emitting a concrete steering command (turn left, turn right, or go straight) as a heading in degrees. The model reaches 0.91 validation IoU, and the deployment checkpoint was deliberately chosen for reliable small-obstacle detection and well-calibrated confidence on ambiguous surfaces rather than for peak IoU, since a missed obstacle matters more than a slightly lower score. It runs on still images, recorded video, or a live webcam, and also renders a confidence heatmap marking the zones it judges most safely traversable.",
     ],
-    figure: { images: ["/vision1.png", "/vision2.png"], caption: "The system running on a live indoor scene: the model's traversability confidence heatmap (warm = judged safe to traverse), and the predicted ground-plane mask split into scored regions with the chosen steering direction drawn as a line — both resolving to a single heading (70°)." },
+    figure: { images: ["/vision1.png", "/vision2.png"], kind: "photo", caption: "The system running on a live indoor scene: the model's traversability confidence heatmap (warm = judged safe to traverse), and the predicted ground-plane mask split into scored regions with the chosen steering direction drawn as a line — both resolving to a single heading (70°)." },
     links: [
       { label: "View code", href: "https://github.com/virginiaceccatelli/vision_control" },
     ],
@@ -113,9 +114,7 @@ const projects = [
       "A from-scratch implementation of a link-state routing protocol in the style of OSPF, in which routers are separate processes that discover the network's topology and compute routes through it entirely on their own. Each router is launched independently and connects to its neighbours over TCP sockets; a HELLO handshake brings a link up to a two-way state, at which point the two routers consider themselves adjacent.",
       "Once adjacencies form, every router describes its local links in a Link-State Advertisement and floods it to the whole network. Each advertisement carries a sequence number, so a router accepts an update only if it is newer than what it already holds, and it re-floods to all neighbours except the one it heard from. By doing this, the fresh topology information propagate everywhere while old data is ignored and infinite loops are avoided. Each router assembles these advertisements into its own link-state database and runs Dijkstra's algorithm over it to compute, and report on demand, the shortest path and cumulative weight to any destination in the topology.",
     ],
-    links: [
-      { label: "View code", href: "https://github.com/virginiaceccatelli/computer-networks" },
-    ],
+    links: [],
   },
   {
     num: "08",
@@ -127,9 +126,7 @@ const projects = [
       "A system, written in C, for sending a file reliably to many receivers at once over IP multicast — the challenge being that multicast is inherently unreliable and connectionless, so there is no built-in guarantee that any given packet arrives. The sender breaks a file into numbered data chunks and streams them to the whole multicast group in a single transmission, rather than opening a separate connection to each receiver, so one send reaches an arbitrary number of listeners.",
       "A small protocol of five packet types is defined: file definition, data chunk, retransmission request, end-of-file, and retransmission-complete acknowledgement. Each receiver tracks which numbered chunks it has seen, detects gaps left by lost packets, and requests exactly those missing chunks. The sender re-multicasts them, and the end-of-file and acknowledgement packets let every receiver confirm it has reconstructed the complete file correctly before the transfer is considered done.",
     ],
-    links: [
-      { label: "View code", href: "https://github.com/virginiaceccatelli/multicast-file-sharing" },
-    ],
+    links: [],
   }
 ];
 
@@ -258,24 +255,7 @@ function ProjectEntry({ project, delay, wide }) {
             </div>
           )}
 
-          {project.figure?.images && (
-            <figure style={{ margin: "2rem 0 0", maxWidth: project.figure.maxWidth ?? (project.figure.images.length > 1 ? "1000px" : "780px") }}>
-              <div style={{ display: "grid", gridTemplateColumns: project.figure.images.length > 1 ? "repeat(auto-fit, minmax(280px, 1fr))" : "1fr", gap: "0.75rem" }}>
-                {project.figure.images.map(src => (
-                  <img
-                    key={src}
-                    src={src}
-                    alt={project.figure.caption}
-                    loading="lazy"
-                    style={{ width: "100%", height: "auto", display: "block", border: "1px solid var(--rule)" }}
-                  />
-                ))}
-              </div>
-              <figcaption className="mono" style={{ margin: "0.9rem 0 0", fontSize: "0.56rem", lineHeight: 1.8, maxWidth: "80ch", textTransform: "none", letterSpacing: "0.04em" }}>
-                {project.figure.caption}
-              </figcaption>
-            </figure>
-          )}
+          {project.figure?.images && <ProjectFigure figure={project.figure} />}
 
           <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", margin: "1.75rem 0 0" }}>
             {project.tags.map(tag => (
@@ -295,5 +275,75 @@ function ProjectEntry({ project, delay, wide }) {
         </div>
       </div>
     </motion.section>
+  );
+}
+
+/*
+ * Paper figures come out of matplotlib/TikZ on pure white, which reads as a
+ * hard white slab on the cream page. Diagrams are multiplied onto the paper so
+ * their white drops out and only the ink remains; photographs keep their own
+ * tones and are mounted like prints. Any figure opens full-size on click.
+ */
+function ProjectFigure({ figure }) {
+  const [open, setOpen] = useState(null);
+  const photo = figure.kind === "photo";
+  const multi = figure.images.length > 1;
+
+  useEffect(() => {
+    if (!open) return;
+    const lenis = getLenis();
+    lenis?.stop();
+    const onKey = (e) => e.key === "Escape" && setOpen(null);
+    window.addEventListener("keydown", onKey);
+    return () => { lenis?.start(); window.removeEventListener("keydown", onKey); };
+  }, [open]);
+
+  return (
+    <figure style={{ margin: "2.25rem 0 0", maxWidth: figure.maxWidth ?? (multi ? "1000px" : "820px") }}>
+      <div style={{ display: "grid", gridTemplateColumns: multi ? "repeat(auto-fit, minmax(280px, 1fr))" : "1fr", gap: photo ? "1rem" : "0.75rem" }}>
+        {figure.images.map((src, i) => (
+          <button
+            key={src}
+            onClick={() => setOpen(src)}
+            aria-label="View figure full size"
+            className="fig-frame"
+            data-kind={photo ? "photo" : "diagram"}
+          >
+            <img src={src} alt={figure.caption} loading="lazy" decoding="async" />
+            {multi && <span className="mono fig-tag">({String.fromCharCode(97 + i)})</span>}
+          </button>
+        ))}
+      </div>
+      <figcaption
+        className="mono"
+        style={{ margin: "1rem 0 0", paddingTop: "0.8rem", borderTop: "1px solid var(--rule)", fontSize: "0.56rem", lineHeight: 1.8, maxWidth: "80ch", textTransform: "none", letterSpacing: "0.04em" }}
+      >
+        <span style={{ color: "var(--accent)", textTransform: "uppercase", marginRight: "0.6em" }}>Fig.</span>
+        {figure.caption}
+      </figcaption>
+
+      {createPortal(<AnimatePresence>
+        {open && (
+          <motion.div
+            className="fig-lightbox"
+            onClick={() => setOpen(null)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <motion.img
+              src={open}
+              alt={figure.caption}
+              initial={{ scale: 0.97 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.97 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            />
+            <span className="mono" style={{ position: "absolute", top: "1.5rem", right: "1.75rem" }}>Close ✕</span>
+          </motion.div>
+        )}
+      </AnimatePresence>, document.body)}
+    </figure>
   );
 }

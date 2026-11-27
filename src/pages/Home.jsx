@@ -93,9 +93,9 @@ export default function Home() {
             transition={{ duration: 0.9, delay: 1.05 }}
             style={{ marginTop: "clamp(2rem, 5vh, 3.5rem)", display: "flex", flexWrap: "wrap", gap: "1.25rem 2.5rem", alignItems: "center" }}
           >
-            <Link to="/about" className="u-link" style={{ fontSize: "0.7rem" }}>About Me</Link>
+          {/*  <Link to="/about" className="u-link" style={{ fontSize: "0.7rem" }}>About Me</Link> 
             <Link to="/projects" className="u-link" style={{ fontSize: "0.7rem" }}>Works</Link>
-            <Link to="/writing" className="u-link" style={{ fontSize: "0.7rem" }}>Writing</Link>
+            <Link to="/writing" className="u-link" style={{ fontSize: "0.7rem" }}>Writing</Link>*/}
           </motion.div>
         </div>
 
@@ -118,8 +118,9 @@ export default function Home() {
               <p className="body-text" style={{ color: "var(--muted)", margin: "0 0 2.5rem 0" }}>
                 I'm a recent computer science graduate working at the intersection of AI safety, AI security, and cybersecurity policy.
                 I want to evaluate the risks of AI systems and help design safer, more robust and more responsible AI technologies. 
-                A lot of my work is focused on leveraging interpretability tools to improve the transparency of AI systems and to understand their security implications.
-                A clearer understanding of their interpretability and explainability could reveal how they can be exploited by malicious actors, as well as how to defend against such attacks.
+                A lot of my more recent work focuses on leveraging interpretability tools to improve the transparency of AI systems and to understand their security implications better.
+                I believe that a clearer view on the causes of model behaviours could help establish more effective safeguards, training processes or other interventions to prevent unintended consequences.
+                Understanding the security implications of AI systems is crucial to ensure that they are not misused or exploited in ways that could cause harm.
               </p>
               <Link to="/about" className="u-link" style={{ fontSize: "0.68rem" }}>Full profile →</Link>
             </Reveal>
